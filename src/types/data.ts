@@ -1,11 +1,11 @@
-export interface data {
-  comics: comics[]
+export interface data<T> {
+  comics: T
   current_page: number
   total_pages: number
 }
 
 export type comics = {
-  authors: string
+  authors: string | string[]
   followers: string
   genres: [
     {
@@ -14,7 +14,7 @@ export type comics = {
     }
   ]
   id: string
-  is_trending: true
+  is_trending: boolean
   lastest_chapters: [
     {
       id: number

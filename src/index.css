@@ -14,4 +14,24 @@ html {
     Helvetica,
     Arial,
     sans-serif;
+    user-select: none;
+}
+
+.swiper-pagination .swiper-pagination-bullet,
+.swiper-pagination-recommend .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  margin-right: 5px;
+  background: #d9d9d9;
+  opacity: 90;
+  cursor: pointer;
+}
+
+.swiper-pagination .swiper-pagination-bullet-active,
+.swiper-pagination-recommend .swiper-pagination-bullet-active {
+  width: 23px;
+  height: 10px;
+  border-radius: 5px;
+  background: #ff416b;
 }
