@@ -14,7 +14,8 @@ html {
     Helvetica,
     Arial,
     sans-serif;
-    user-select: none;
+  user-select: none;
+  scroll-behavior: smooth;
 }
 
 .swiper-pagination .swiper-pagination-bullet,

@@ -65,22 +65,47 @@ const Banner: React.FC = () => {
       <div className='flex-shrink-0'>
         <div className='grid grid-cols-6 gap-[10px]'>
           <div className='col-span-6 flex items-center gap-[10px]'>
-            <Link to={PATH.home}>
-              <img src={banner4} alt='' className='w-[336px] h-[185px] object-cover' />
+            <Link to={PATH.home} className='w-[336px] h-[185px] overflow-hidden'>
+              <div
+                className='bg-no-repeat bg-cover w-full h-full'
+                style={{
+                  backgroundImage: `url(${banner4})`
+                }}
+              />
             </Link>
-            <Link to={PATH.home}>
-              <img src={banner5} alt='' className='w-[336px] h-[185px] object-cover' />
+            <Link to={PATH.home} className='w-[336px] h-[185px] overflow-hidden'>
+              <div
+                className='bg-no-repeat bg-cover w-full h-full'
+                style={{
+                  backgroundImage: `url(${banner5})`
+                }}
+              />
             </Link>
           </div>
           <div className='col-span-6 flex items-center gap-[10px]'>
-            <Link to={PATH.home}>
-              <img src={banner6} alt='' className='w-[221px] h-[185px] object-cover' />
+            <Link to={PATH.home} className='w-[221px] h-[185px] overflow-hidden'>
+              <div
+                className='bg-no-repeat bg-cover w-full h-full'
+                style={{
+                  backgroundImage: `url(${banner6})`
+                }}
+              />
             </Link>
-            <Link to={PATH.home}>
-              <img src={banner7} alt='' className='w-[221px] h-[185px] object-cover' />
+            <Link to={PATH.home} className='w-[221px] h-[185px] overflow-hidden'>
+              <div
+                className='bg-no-repeat bg-cover w-full h-full'
+                style={{
+                  backgroundImage: `url(${banner7})`
+                }}
+              />
             </Link>
-            <Link to={PATH.home}>
-              <img src={banner8} alt='' className='w-[221px] h-[185px] object-cover' />
+            <Link to={PATH.home} className='w-[221px] h-[185px] overflow-hidden'>
+              <div
+                className='bg-no-repeat bg-cover w-full h-full'
+                style={{
+                  backgroundImage: `url(${banner8})`
+                }}
+              />
             </Link>
           </div>
         </div>

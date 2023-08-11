@@ -1,150 +1,80 @@
-import { comics } from '@/types/data'
+import PATH from '@/utils/path'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
-
+import { Link } from 'react-router-dom'
 interface Props {
-  comics: comics & { last_reading?: string; chapter_id?: number }
-  detail?: boolean
-  isHistory?: boolean
+  thumbnail: string
+  title: string
+  id: string
+  updated_at: string
+  chapter: string
+  description: string
 }
 
-const CardItem: React.FC<Props> = ({ comics, detail, isHistory }) => {
-  const navigate = useNavigate()
-  const {
-    authors,
-    followers,
-    id,
-    status,
-    thumbnail,
-    title,
-    total_comments,
-    total_views,
-    is_trending,
-    updated_at,
-    chapter_id,
-    last_reading
-  } = comics
-
-  const handleClickCard = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    type: 'detail' | 'delete' | 'continue'
-  ) => {
-    e.stopPropagation()
-    if (type === 'delete') {
-      // historyDeleteComic(id)
-      // emit('delete-comic', id)
-      return
-    }
-    if (type === 'continue') {
-      navigate(`/comic/${id}/${chapter_id}`)
-      return
-    }
-    navigate(`/comic/${id}`)
-  }
-
+const CardItem: React.FC<Props> = ({
+  id,
+  chapter,
+  thumbnail,
+  title,
+  updated_at,
+  description
+}: Props) => {
   return (
-    <div
-      className='overflow-hidden flex-shrink-0 rounded-md duration-500 relative group md:group-hover:shadow-md cursor-pointer'
-      onClick={(e) => handleClickCard(e, 'detail')}
-    >
-      <div className='flex gap-1 absolute font-semibold top-1 inset-x-1 z-10 text-xs text-white'>
-        <span className='bg-rose-500 py-0.5 px-2 rounded-md'>Hot</span>
-        <span className='bg-amber-500 py-0.5 px-2 rounded-md'>Up</span>
-        <span className='bg-sky-500 py-0.5 px-2 rounded-md'>End</span>
-      </div>
-      <div className='relative'>
-        <div className='absolute inset-0 flex items-center justify-center text-white bg-gray-200 duration-150'>
-          {/* <Icon className="line-md:loading-loop" size="48" /> */}
-        </div>
-        <img
-          src={thumbnail}
-          alt={title}
-          title={title}
-          className='w-full h-[275px] aspect-[2/3] object-cover scale-[1.01] group-hover:scale-105 duration-300 origin-bottom select-none'
-        />
-      </div>
-      <div className='absolute top-1/2 bottom-0 inset-x-0 flex flex-col justify-end px-2 sm:px-4 py-2 bg-gradient-to-b from-transparent to-black'>
-        <h5 className='font-bold leading-5 text-lg text-white text-shadow duration-200 line-clamp-2'>
-          <span title={title} className='no-underline'>
-            {title}
-          </span>
-        </h5>
-        <hr className='mt-3 mb-0.5 border-gray-500' />
-        <div>
-          <p className='text-sm text-gray-300 truncate font-semibold'>
-            {Array.isArray(authors) && <span>{authors.join(' | ')}</span>}
-            {authors === 'Updating' && (
-              <span className='flex items-center gap-1'>
-                {/* <Icon
-                  name="mdi:dots-circle"
-                  size="16"
-                  className="text-emerald-500"
-                /> */}
-                Updating
-              </span>
-            )}
-            {!Array.isArray(authors) && <span>{authors}</span>}
-          </p>
-          <div
-            className='hidden md:flex items-center gap-0.5 justify-center gap-x-2 gap-y-1 text-emerald-400 text-xs py-1 mt-0.5'
-            v-if='!isHistory'
-          >
-            <span className='flex items-center gap-1 bg-white/25 px-1 rounded'>
-              {/* <Icon name="carbon:view-filled" /> */}
-              {total_views}
-            </span>
-            <span className='flex items-center gap-1 bg-white/25 px-1 rounded'>
-              {/* <Icon name="ant-design:heart-outlined" /> */}
-              {followers}
-            </span>
-            <span className='flex items-center gap-1 bg-white/25 px-1 rounded'>
-              {/* <Icon name="mingcute:comment-fill" /> */}
-              {total_comments}
-            </span>
-          </div>
-          <div className='text-gray-300'>
-            <p className='text-sm font-semibold flex items-center gap-0.5 mb-1 text-fuchsia-400'>
-              {/* <Icon name="ph:read-cv-logo-fill" size="18" /> */}
-              {last_reading}
-            </p>
-            <div className='flex items-center gap-1 text-sm text-white'>
-              <button
-                className='bg-sky-500 w-full px-2 py-1 rounded-sm flex justify-center items-center gap-1'
-                onClick={(e) => handleClickCard(e, 'continue')}
+    <div className='relative'>
+      <div className='w-[167px] h-[220px] overflow-hidden group'>
+        <img src={thumbnail} title={title} alt={title} className='w-full h-full object-cover' />
+        <div className='absolute top-[-15px] left-[-30px] opacity-0 group-hover:opacity-100 scale-[0.73] group-hover:scale-100 transition-all duration-300 h-[299px] group-hover:h-[330px] z-[2] shadow-lg'>
+          <div className='w-[226px] min-h-[330px] bg-white'>
+            <Link to={PATH.home} title={title}>
+              <p
+                className='bg-cover bg-no-repeat w-[226px] h-[160px] bg-[center_30%]'
+                style={{
+                  backgroundImage: `url('${thumbnail}')`
+                }}
+              ></p>
+            </Link>
+            <div className='p-[10px]'>
+              <Link
+                to={PATH.home}
+                title={title}
+                className='hover:text-primary font-semibold text-base leading-5 block'
               >
-                {/* <Icon name="system-uicons:book-text" size="20" /> */}
-                Continue
-              </button>
-              <button
-                className='bg-rose-500 px-2 py-1 rounded-sm'
-                onClick={(e) => handleClickCard(e, 'delete')}
+                {title}
+              </Link>
+              <span className='text-sm text-gray-400'>{updated_at}</span>
+              <p className='text-sm mt-[2px] inline-block'>
+                <span className='mr-1'>Cập nhật:</span>
+                <Link to={PATH.home} className='text-primary'>
+                  {chapter}
+                </Link>
+              </p>
+              <p className='text-sm text-gray-400 line-clamp-2 h-10'>{description}</p>
+              <Link
+                to={PATH.home}
+                className='text-white text-sm bg-primary w-full h-[30px] mt-[10px] uppercase font-semibold flex items-center justify-center rounded text-center'
               >
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  strokeWidth={1.5}
-                  stroke='currentColor'
-                  className='w-5 h-5'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0'
-                  />
-                </svg>
-              </button>
+                Đọc Ngay
+              </Link>
             </div>
           </div>
         </div>
-        <span className='py-1' />
+      </div>
+      <div className='mt-2 flex flex-col'>
+        <Link
+          to={PATH.home}
+          title={title}
+          className='hover:text-primary font-semibold text-base leading-4 line-clamp-1'
+        >
+          {title}
+        </Link>
+        <span className='text-sm text-gray-400 mt-2'>{updated_at}</span>
+        <p className='inline-block text-sm truncate'>
+          <span className='mr-1'>Cập nhật:</span>
+          <Link to={PATH.home} className='text-primary whitespace-nowrap'>
+            {chapter}
+          </Link>
+        </p>
       </div>
     </div>
   )
 }
-
 export default CardItem
-
-// .group:hover .text-shadow {
-//   text-shadow: 0 0 6px #10b981;
-// }

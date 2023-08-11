@@ -15,19 +15,23 @@ export type comics = {
   ]
   id: string
   is_trending: boolean
-  lastest_chapters: [
-    {
-      id: number
-      name: string
-      updated_at: string
-    }
-  ]
+  last_chapter: {
+    id: number
+    name: string
+  }
   other_names: string[]
   short_description: string
   status: string
   thumbnail: string
   title: string
   total_comments: string
-  total_views: string
+  total_views: number
   updated_at: string
+}
+
+export type dataRecommend = Omit<comics, 'last_chapter'> & {
+  lastest_chapter: {
+    id: number
+    name: string
+  }
 }

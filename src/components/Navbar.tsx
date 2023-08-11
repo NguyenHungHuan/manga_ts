@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
               to={PATH.home}
               className='uppercase font-semibold text-sm hover:text-primary px-1 py-4'
             >
-              Đề xuất
+              Mới cập nhật
             </Link>
           </li>
           <li>
@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
               to={PATH.home}
               className='uppercase font-semibold text-sm hover:text-primary px-1 py-4'
             >
-              Mới cập nhật
+              Đề xuất
             </Link>
           </li>
           <li>

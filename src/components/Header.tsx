@@ -2,7 +2,6 @@ import React from 'react'
 import { Button, Navbar } from '.'
 import { Link, useMatch } from 'react-router-dom'
 import PATH from '@/utils/path'
-import logo from '@/assets/img/logo_mangabz.png'
 import SearchBar from './SearchBar'
 
 const Header: React.FC = () => {
@@ -12,7 +11,7 @@ const Header: React.FC = () => {
         <div className='flex items-center justify-between h-full'>
           <div className='flex items-center'>
             <Link to={PATH.home}>
-              <img src={logo} alt='logo' className='w-auto h-[50px] object-contain' />
+              <h1 className='font-bold text-3xl text-primary'>VComics</h1>
             </Link>
             <div className='flex items-center gap-4 ml-6 mt-1'>
               <Link
