@@ -10,7 +10,7 @@ import {
 import React from 'react'
 import { useQuery } from 'react-query'
 import { comics, dataRecommend } from '@/types/data'
-import { Link } from 'react-router-dom'
+import { Link, createSearchParams } from 'react-router-dom'
 import iconRecommend from '@/assets/img/icon-recommend.png'
 import iconRecentUpdate from '@/assets/img/icon-recentUpdate.png'
 import iconPopular from '@/assets/img/icon-popular.png'
@@ -20,38 +20,38 @@ import PATH from '@/utils/path'
 
 const Home: React.FC = () => {
   const { data: dataRecentUpdated } = useQuery({
-    queryKey: ['recent-updated-comics'],
-    queryFn: () => comicApis.getRecentUpdate(),
+    queryKey: [PATH.recent, { page: '1' }],
+    queryFn: () => comicApis.getComicsByUrl(PATH.recent, { page: '1' }),
+    keepPreviousData: true,
+    staleTime: 3 * 60 * 1000
+  })
+  const { data: dataPopular } = useQuery({
+    queryKey: [PATH.popular, { page: '1' }],
+    queryFn: () => comicApis.getComicsByUrl(PATH.popular, { page: '1' }),
+    keepPreviousData: true,
+    staleTime: 3 * 60 * 1000
+  })
+  const { data: dataCompleted } = useQuery({
+    queryKey: [PATH.completed, { page: '1' }],
+    queryFn: () => comicApis.getComicsByUrl(PATH.completed, { page: '1' }),
+    keepPreviousData: true,
+    staleTime: 3 * 60 * 1000
+  })
+  const { data: dataBoy } = useQuery({
+    queryKey: [PATH.boy, { page: '1' }],
+    queryFn: () => comicApis.getComicsByUrl(PATH.boy, { page: '1' }),
+    keepPreviousData: true,
+    staleTime: 3 * 60 * 1000
+  })
+  const { data: dataGirl } = useQuery({
+    queryKey: [PATH.girl, { page: '1' }],
+    queryFn: () => comicApis.getComicsByUrl(PATH.girl, { page: '1' }),
     keepPreviousData: true,
     staleTime: 3 * 60 * 1000
   })
   const { data: dataRecommend } = useQuery({
     queryKey: ['recommend-comics'],
     queryFn: () => comicApis.getRecommend(),
-    staleTime: 3 * 60 * 1000
-  })
-  const { data: dataPopular } = useQuery({
-    queryKey: ['trending-comics'],
-    queryFn: () => comicApis.getTrending(),
-    keepPreviousData: true,
-    staleTime: 3 * 60 * 1000
-  })
-  const { data: dataCompleted } = useQuery({
-    queryKey: ['completed-comics'],
-    queryFn: () => comicApis.getCompleted(),
-    keepPreviousData: true,
-    staleTime: 3 * 60 * 1000
-  })
-  const { data: dataBoy } = useQuery({
-    queryKey: ['boy-comics'],
-    queryFn: () => comicApis.getBoy(),
-    keepPreviousData: true,
-    staleTime: 3 * 60 * 1000
-  })
-  const { data: dataGirl } = useQuery({
-    queryKey: ['girl-comics'],
-    queryFn: () => comicApis.getGirl(),
-    keepPreviousData: true,
     staleTime: 3 * 60 * 1000
   })
   const dataRecentUpdatedComics = dataRecentUpdated?.data.comics
@@ -65,18 +65,18 @@ const Home: React.FC = () => {
     <div className='container'>
       <Banner />
       <section className='mt-10'>
-        {titleComicsPreview(iconRecentUpdate, 'Mới cập nhật', PATH.home)}
+        {titleComicsPreview(iconRecentUpdate, 'Mới cập nhật', PATH.recent)}
         <RecentUpdateComics data={dataRecentUpdatedComics as comics[]} />
       </section>
       <section className='mt-16'>
         <TopPreviewComics />
       </section>
       <section className='mt-10'>
-        {titleComicsPreview(iconRecommend, 'Đề xuất', PATH.home)}
+        {titleComicsPreview(iconRecommend, 'Đề xuất', '', false)}
         <RecommendComics data={dataRecommendComics as dataRecommend[]} />
       </section>
       <section className='mt-16'>
-        {titleComicsPreview(iconPopular, 'Nổi bật', PATH.home)}
+        {titleComicsPreview(iconPopular, 'Nổi bật', PATH.popular)}
         <SlidePreviewComics data={dataPopularComics as comics[]} />
       </section>
       <section className='mt-10'>
@@ -101,7 +101,12 @@ const Home: React.FC = () => {
             </h2>
           </div>
           <Link
-            to={PATH.home}
+            to={{
+              pathname: PATH.completed,
+              search: createSearchParams({
+                page: '1'
+              }).toString()
+            }}
             className='flex items-center gap-1 text-sm text-black hover:text-primary'
           >
             <span>Tất cả</span>
@@ -120,11 +125,11 @@ const Home: React.FC = () => {
         <CompletedPreviewComics data={dataCompletedComics as comics[]} />
       </section>
       <section className='mt-16'>
-        {titleComicsPreview(iconBoy, 'con trai', PATH.home)}
+        {titleComicsPreview(iconBoy, 'con trai', PATH.boy)}
         <SlidePreviewComics data={dataBoyComics as comics[]} />
       </section>
       <section className='mt-10'>
-        {titleComicsPreview(iconGirl, 'con gái', PATH.home)}
+        {titleComicsPreview(iconGirl, 'con gái', PATH.girl)}
         <SlidePreviewComics data={dataGirlComics as comics[]} />
       </section>
     </div>
@@ -132,26 +137,38 @@ const Home: React.FC = () => {
 }
 export default Home
 
-const titleComicsPreview = (img: string, title: string, link: string) => {
+const titleComicsPreview = (img: string, title: string, link?: string, showMore?: boolean) => {
+  const isShowMore = showMore === undefined ? true : false
+
   return (
     <div className='flex items-end justify-between'>
       <div className='flex items-center gap-4'>
         <img src={img} alt='Icon' className='w-auto h-[32px]' />
         <h2 className='capitalize font-semibold mt-1 text-[28px] text-black leading-5'>{title}</h2>
       </div>
-      <Link to={link} className='flex items-center gap-1 text-sm text-black hover:text-primary'>
-        <span>Tất cả</span>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          fill='none'
-          viewBox='0 0 24 24'
-          strokeWidth={1.5}
-          stroke='currentColor'
-          className='w-4 h-4'
+      {isShowMore && (
+        <Link
+          to={{
+            pathname: link,
+            search: createSearchParams({
+              page: '1'
+            }).toString()
+          }}
+          className='flex items-center gap-1 text-sm text-black hover:text-primary'
         >
-          <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
-        </svg>
-      </Link>
+          <span>Tất cả</span>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.5}
+            stroke='currentColor'
+            className='w-4 h-4'
+          >
+            <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
+          </svg>
+        </Link>
+      )}
     </div>
   )
 }

@@ -18,6 +18,26 @@ html {
   scroll-behavior: smooth;
 }
 
+strong {
+  font-size: unset;
+  font-weight: unset;
+}
+
+/* remove common styles pagination swiper */
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: unset !important;
+  top: unset !important;
+  left: unset !important;
+  width: unset !important;
+}
+
+#swiper-banner-pagination {
+  bottom: 2px !important;
+}
+
 .swiper-pagination .swiper-pagination-bullet,
 .swiper-pagination-recommend .swiper-pagination-bullet {
   width: 10px;

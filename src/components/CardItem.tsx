@@ -1,6 +1,7 @@
 import PATH from '@/utils/path'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import imgError from '@/assets/img/img-error.png'
 interface Props {
   thumbnail: string
   title: string
@@ -20,15 +21,24 @@ const CardItem: React.FC<Props> = ({
 }: Props) => {
   return (
     <div className='relative'>
-      <div className='w-[167px] h-[220px] overflow-hidden group'>
-        <img src={thumbnail} title={title} alt={title} className='w-full h-full object-cover' />
-        <div className='absolute top-[-15px] left-[-30px] opacity-0 group-hover:opacity-100 scale-[0.73] group-hover:scale-100 transition-all duration-300 h-[299px] group-hover:h-[330px] z-[2] shadow-lg'>
+      <div className='w-full h-[220px] overflow-hidden group'>
+        <img
+          src={thumbnail}
+          title={title}
+          alt={title}
+          className='w-full h-full object-cover'
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null
+            currentTarget.src = imgError
+          }}
+        />
+        <div className='absolute top-[-15px] left-[-30px] opacity-0 group-hover:opacity-100 scale-[0.73] group-hover:scale-100 transition-all duration-300 h-[299px] group-hover:h-[330px] z-[2] shadow-2xl'>
           <div className='w-[226px] min-h-[330px] bg-white'>
             <Link to={PATH.home} title={title}>
               <p
                 className='bg-cover bg-no-repeat w-[226px] h-[160px] bg-[center_30%]'
                 style={{
-                  backgroundImage: `url('${thumbnail}')`
+                  backgroundImage: `url('${thumbnail}'), url('${imgError}')`
                 }}
               ></p>
             </Link>
@@ -40,7 +50,7 @@ const CardItem: React.FC<Props> = ({
               >
                 {title}
               </Link>
-              <span className='text-sm text-gray-400'>{updated_at}</span>
+              <span className='text-sm text-gray-400 block'>{updated_at}</span>
               <p className='text-sm mt-[2px] inline-block'>
                 <span className='mr-1'>Cập nhật:</span>
                 <Link to={PATH.home} className='text-primary'>

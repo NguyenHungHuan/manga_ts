@@ -60,7 +60,10 @@ const Banner: React.FC = () => {
             </Link>
           </SwiperSlide>
         </Swiper>
-        <div className='swiper-pagination right-0 bottom-[2px]' />
+        <div
+          id='swiper-banner-pagination'
+          className='swiper-pagination right-0 bottom-[2px_!important]'
+        />
       </div>
       <div className='flex-shrink-0'>
         <div className='grid grid-cols-6 gap-[10px]'>

@@ -2,6 +2,7 @@ export interface data<T> {
   comics: T
   current_page: number
   total_pages: number
+  status: number
 }
 
 export type comics = {
