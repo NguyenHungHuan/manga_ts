@@ -1,18 +1,21 @@
+import { paramOption } from '@/apis/comicApis'
 import classNames from 'classnames'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 
 interface Props {
   totalPage: number
   page: number
+  queryConfig: paramOption
 }
 
-const MiniPagination = ({ totalPage, page }: Props) => {
+const MiniPagination = ({ totalPage, page, queryConfig }: Props) => {
   const navigate = useNavigate()
 
   const nextPage = () => {
     if (page < totalPage) {
       navigate({
         search: createSearchParams({
+          ...queryConfig,
           page: (page + 1).toString()
         }).toString()
       })
@@ -22,6 +25,7 @@ const MiniPagination = ({ totalPage, page }: Props) => {
     if (page > 1) {
       navigate({
         search: createSearchParams({
+          ...queryConfig,
           page: (page - 1).toString()
         }).toString()
       })

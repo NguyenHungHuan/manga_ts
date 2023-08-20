@@ -7,14 +7,13 @@ import banner6 from '@/assets/img/banner6.jpg'
 import banner7 from '@/assets/img/banner7.jpg'
 import banner8 from '@/assets/img/banner8.jpg'
 import PATH from '@/utils/path'
-import React from 'react'
 import { Link } from 'react-router-dom'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { Autoplay, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-const Banner: React.FC = () => {
+const Banner = () => {
   return (
     <div className='flex gap-[10px]'>
       <div className='w-[510px] relative'>

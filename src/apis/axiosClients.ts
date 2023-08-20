@@ -1,7 +1,12 @@
 import axios from 'axios'
 
-const axiosClients = axios.create({
+export const axiosClients = axios.create({
   baseURL: 'https://comics-api.vercel.app',
+  timeout: 10000000
+})
+
+export const axiosClients2 = axios.create({
+  baseURL: 'http://localhost:8080',
   timeout: 10000000
 })
 
@@ -22,5 +27,3 @@ axiosClients.interceptors.response.use(
     return Promise.reject(error)
   }
 )
-
-export default axiosClients

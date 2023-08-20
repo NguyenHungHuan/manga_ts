@@ -1,6 +1,6 @@
 import PATH from '@/utils/path'
 
-const useTitle = (pathname: string) => {
+export default function useTitle(pathname: string) {
   switch (pathname) {
     case PATH.boy:
       return 'con trai'
@@ -16,5 +16,3 @@ const useTitle = (pathname: string) => {
       return ''
   }
 }
-
-export default useTitle

@@ -1,8 +1,5 @@
-import PATH from '@/utils/path'
-import { Link } from 'react-router-dom'
-import { comics, dataRecommend } from '@/types/data'
-import { CardItem } from '.'
-
+import { dataRecommend } from '@/types/data'
+import { CardItem } from '..'
 interface Props {
   data: dataRecommend[]
 }
@@ -28,5 +25,4 @@ const RecommendComics = ({ data }: Props) => {
     </div>
   )
 }
-
 export default RecommendComics

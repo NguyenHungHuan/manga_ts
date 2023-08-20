@@ -1,5 +1,4 @@
 import PATH from '@/utils/path'
-import React from 'react'
 import { Link } from 'react-router-dom'
 import imgError from '@/assets/img/img-error.png'
 interface Props {
@@ -11,14 +10,7 @@ interface Props {
   description: string
 }
 
-const CardItem: React.FC<Props> = ({
-  id,
-  chapter,
-  thumbnail,
-  title,
-  updated_at,
-  description
-}: Props) => {
+const CardItem = ({ id, chapter, thumbnail, title, updated_at, description }: Props) => {
   return (
     <div className='relative'>
       <div className='w-full h-[220px] overflow-hidden group'>
@@ -34,7 +26,7 @@ const CardItem: React.FC<Props> = ({
         />
         <div className='absolute top-[-15px] left-[-30px] opacity-0 group-hover:opacity-100 scale-[0.73] group-hover:scale-100 transition-all duration-300 h-[299px] group-hover:h-[330px] z-[2] shadow-2xl'>
           <div className='w-[226px] min-h-[330px] bg-white'>
-            <Link to={PATH.home} title={title}>
+            <Link to={`${PATH.comics}/${id}`} title={title}>
               <p
                 className='bg-cover bg-no-repeat w-[226px] h-[160px] bg-[center_30%]'
                 style={{
@@ -44,7 +36,7 @@ const CardItem: React.FC<Props> = ({
             </Link>
             <div className='p-[10px]'>
               <Link
-                to={PATH.home}
+                to={`${PATH.comics}/${id}`}
                 title={title}
                 className='hover:text-primary font-semibold text-base leading-5 block'
               >
@@ -70,7 +62,7 @@ const CardItem: React.FC<Props> = ({
       </div>
       <div className='mt-2 flex flex-col'>
         <Link
-          to={PATH.home}
+          to={`${PATH.comics}/${id}`}
           title={title}
           className='hover:text-primary font-semibold text-base leading-4 line-clamp-1'
         >

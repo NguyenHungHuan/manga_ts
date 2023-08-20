@@ -1,13 +1,15 @@
-import React from 'react'
-import { Button, Navbar } from '.'
-import { Link, useMatch } from 'react-router-dom'
+import { Button } from '.'
+import { Link, createSearchParams, useLocation, useMatch } from 'react-router-dom'
 import PATH from '@/utils/path'
-import SearchBar from './SearchBar'
+import { useMemo } from 'react'
 
-const Header: React.FC = () => {
+const Header = () => {
+  const { pathname } = useLocation()
+  const isMatchTop = useMemo(() => pathname.includes('/top'), [pathname])
+
   return (
-    <header className='bg-white text-black'>
-      <div className='container h-[64px]'>
+    <header className='bg-white text-black sticky top-0 z-20 shadow'>
+      <div className='container h-[74px]'>
         <div className='flex items-center justify-between h-full'>
           <div className='flex items-center'>
             <Link to={PATH.home}>
@@ -23,7 +25,13 @@ const Header: React.FC = () => {
                 Trang chủ
               </Link>
               <Link
-                to={PATH.home}
+                to={{
+                  pathname: PATH.genres,
+                  search: createSearchParams({
+                    type: 'all',
+                    page: '1'
+                  }).toString()
+                }}
                 className={`hover:text-primary text-lg capitalize ${
                   useMatch(PATH.genres) && ' text-primary'
                 }`}
@@ -31,7 +39,13 @@ const Header: React.FC = () => {
                 Thể loại
               </Link>
               <Link
-                to={PATH.home}
+                to={{
+                  pathname: PATH.new,
+                  search: createSearchParams({
+                    status: 'all',
+                    page: '1'
+                  }).toString()
+                }}
                 className={`hover:text-primary text-lg capitalize ${
                   useMatch(PATH.new) && ' text-primary'
                 }`}
@@ -39,10 +53,14 @@ const Header: React.FC = () => {
                 mới
               </Link>
               <Link
-                to={PATH.home}
-                className={`hover:text-primary text-lg capitalize ${
-                  useMatch(PATH.top) && ' text-primary'
-                }`}
+                to={{
+                  pathname: PATH.top,
+                  search: createSearchParams({
+                    status: 'all',
+                    page: '1'
+                  }).toString()
+                }}
+                className={`hover:text-primary text-lg capitalize ${isMatchTop && ' text-primary'}`}
               >
                 BXH
               </Link>
@@ -103,8 +121,6 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-      <SearchBar />
-      <Navbar />
     </header>
   )
 }

@@ -1,13 +1,14 @@
-import PATH from '@/utils/path'
+import { paramOption } from '@/apis/comicApis'
 import classNames from 'classnames'
 import { Link, createSearchParams } from 'react-router-dom'
 
 interface Props {
   totalPage: number
   page: number
+  queryConfig: paramOption
 }
 const RANGE = 2
-export default function Pagination({ page, totalPage }: Props) {
+export default function Pagination({ page, totalPage, queryConfig }: Props) {
   const renderPagination = () => {
     let dotAfter = false
     let dotBefore = false
@@ -61,6 +62,7 @@ export default function Pagination({ page, totalPage }: Props) {
           <Link
             to={{
               search: createSearchParams({
+                ...queryConfig,
                 page: pageNumber.toString()
               }).toString()
             }}
@@ -97,6 +99,7 @@ export default function Pagination({ page, totalPage }: Props) {
         <Link
           to={{
             search: createSearchParams({
+              ...queryConfig,
               page: (page - 1).toString()
             }).toString()
           }}
@@ -133,6 +136,7 @@ export default function Pagination({ page, totalPage }: Props) {
         <Link
           to={{
             search: createSearchParams({
+              ...queryConfig,
               page: (page + 1).toString()
             }).toString()
           }}

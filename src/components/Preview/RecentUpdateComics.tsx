@@ -1,13 +1,12 @@
 import { comics } from '@/types/data'
 import PATH from '@/utils/path'
 import { useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, createSearchParams } from 'react-router-dom'
 import 'swiper/css'
-import 'swiper/css/grid'
 import 'swiper/css/pagination'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-
+import imgError from '@/assets/img/img-error.png'
 interface Props {
   data: comics[]
 }
@@ -86,18 +85,22 @@ const renderSwiperSlide = (data: comics[]) => {
       {data.map((item) => (
         <div key={item.id} className='col-span-4'>
           <div className='flex'>
-            <Link to={PATH.home} className='flex-shrink-0'>
+            <Link to={`${PATH.comics}/${item.id}`} title={item.title} className='flex-shrink-0'>
               <img
                 src={item.thumbnail}
                 alt={item.title}
                 title={item.title}
                 className='w-[165px] h-[220px] object-cover'
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null
+                  currentTarget.src = imgError
+                }}
               />
             </Link>
             <div className='pl-[15px] pr-2 leading-5 flex flex-col flex-1 justify-around'>
               <div>
                 <Link
-                  to={PATH.home}
+                  to={`${PATH.comics}/${item.id}`}
                   className='text-black hover:text-primary text-lg font-bold leading-5 line-clamp-1'
                   title={item.title}
                 >
@@ -117,11 +120,21 @@ const renderSwiperSlide = (data: comics[]) => {
               <div className='flex gap-1 items-center'>
                 {item.genres.slice(0, 3).map((genre) => {
                   return genre.id !== undefined ? (
-                    <div key={genre.id}>
-                      <span className='py-[2px] px-1 text-[13px] text-gray-400 border border-dashed border-[#d9d9d9] truncate'>
+                    <Link
+                      title={genre.name}
+                      to={{
+                        pathname: PATH.genres,
+                        search: createSearchParams({
+                          type: genre.id,
+                          page: '1'
+                        }).toString()
+                      }}
+                      key={genre.id}
+                    >
+                      <span className='py-[2px] px-1 text-[13px] text-gray-400 border-[#d9d9d9] hover:text-primary hover:border-primary border border-dashed truncate'>
                         {genre.name}
                       </span>
-                    </div>
+                    </Link>
                   ) : null
                 })}
               </div>

@@ -1,8 +1,9 @@
 import { comics } from '@/types/data'
 import PATH from '@/utils/path'
-import { Link } from 'react-router-dom'
+import { Link, createSearchParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { formatCurrency } from '@/utils/formatNumber'
+import imgError from '@/assets/img/img-error.png'
 
 interface Props {
   data: comics[]
@@ -23,11 +24,11 @@ const CompletedPreviewComics = ({ data }: Props) => {
       {data && (
         <div className='flex items-center h-full transition-all duration-300'>
           <div className='w-[339px] h-full'>
-            <Link to={PATH.home}>
+            <Link to={`${PATH.comics}/${data[currentIndex].id}`} title={data[currentIndex].title}>
               <p
                 className='bg-cover bg-no-repeat w-full h-full bg-[center_30%]'
                 style={{
-                  backgroundImage: `url('${currentImg}')`
+                  backgroundImage: `url('${currentImg}'), url('${imgError}')`
                 }}
               ></p>
             </Link>
@@ -36,7 +37,7 @@ const CompletedPreviewComics = ({ data }: Props) => {
             <div className='h-[133px] pl-[10px]'>
               <div className='transition-all duration-300'>
                 <Link
-                  to={PATH.home}
+                  to={`${PATH.comics}/${data[currentIndex].id}`}
                   title={data[currentIndex].title}
                   className='hover:text-primary font-semibold text-xl line-clamp-1'
                 >
@@ -60,11 +61,21 @@ const CompletedPreviewComics = ({ data }: Props) => {
                 <div className='flex gap-[6px] items-center mt-2'>
                   {data[currentIndex].genres.map((genre) => {
                     return genre.id !== undefined ? (
-                      <div key={genre.id}>
-                        <span className='py-1 px-2 text-[13px] text-gray-400 border border-dashed border-[#d9d9d9] truncate'>
+                      <Link
+                        to={{
+                          pathname: PATH.genres,
+                          search: createSearchParams({
+                            type: genre.id,
+                            page: '1'
+                          }).toString()
+                        }}
+                        title={genre.name}
+                        key={genre.id}
+                      >
+                        <span className='py-1 px-2 text-[13px] text-gray-400 border border-dashed border-[#d9d9d9] hover:text-primary hover:border-primary truncate'>
                           {genre.name}
                         </span>
-                      </div>
+                      </Link>
                     ) : null
                   })}
                 </div>
@@ -85,18 +96,22 @@ const CompletedPreviewComics = ({ data }: Props) => {
                   }`}
                 >
                   <div className='w-[167px] h-[220px] overflow-hidden'>
-                    <Link to={PATH.home} title={item.title}>
+                    <Link to={`${PATH.comics}/${item.id}`} title={item.title}>
                       <img
                         src={item.thumbnail}
                         title={item.title}
                         alt={item.title}
                         className='w-full h-full object-cover'
+                        onError={({ currentTarget }) => {
+                          currentTarget.onerror = null
+                          currentTarget.src = imgError
+                        }}
                       />
                     </Link>
                   </div>
                   <div className='mt-2 flex flex-col'>
                     <Link
-                      to={PATH.home}
+                      to={`${PATH.comics}/${item.id}`}
                       title={item.title}
                       className='hover:text-primary font-semibold text-base leading-4 line-clamp-1'
                     >

@@ -1,11 +1,9 @@
-import React from 'react'
-
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean
   className?: string
 }
 
-const Button: React.FC<Props> = ({ children, isLoading = false, className = '', ...rest }) => {
+const Button = ({ children, isLoading = false, className = '', ...rest }: Props) => {
   return (
     <button
       disabled={isLoading}

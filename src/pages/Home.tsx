@@ -1,51 +1,39 @@
 import comicApis from '@/apis/comicApis'
+import iconPopular from '@/assets/img/icon-popular.png'
+import iconRecentUpdate from '@/assets/img/icon-recentUpdate.png'
+import iconRecommend from '@/assets/img/icon-recommend.png'
+import { Banner } from '@/components'
 import {
-  Banner,
-  SlidePreviewComics,
+  CompletedPreviewComics,
   RecentUpdateComics,
   RecommendComics,
-  TopPreviewComics,
-  CompletedPreviewComics
-} from '@/components'
-import React from 'react'
-import { useQuery } from 'react-query'
+  SlidePreviewComics,
+  TopPreviewComics
+} from '@/components/Preview'
+import { useQueryConfig } from '@/hooks'
 import { comics, dataRecommend } from '@/types/data'
-import { Link, createSearchParams } from 'react-router-dom'
-import iconRecommend from '@/assets/img/icon-recommend.png'
-import iconRecentUpdate from '@/assets/img/icon-recentUpdate.png'
-import iconPopular from '@/assets/img/icon-popular.png'
-import iconBoy from '@/assets/img/icon-boy.png'
-import iconGirl from '@/assets/img/icon-girl.png'
 import PATH from '@/utils/path'
+import { useMemo } from 'react'
+import { useQuery } from 'react-query'
+import { Link, createSearchParams } from 'react-router-dom'
 
 const Home: React.FC = () => {
+  const queryConfig = useQueryConfig()
   const { data: dataRecentUpdated } = useQuery({
-    queryKey: [PATH.recent, { page: '1' }],
-    queryFn: () => comicApis.getComicsByUrl(PATH.recent, { page: '1' }),
+    queryKey: [PATH.recent, queryConfig],
+    queryFn: () => comicApis.getComicsByUrl(PATH.recent, queryConfig),
     keepPreviousData: true,
     staleTime: 3 * 60 * 1000
   })
   const { data: dataPopular } = useQuery({
-    queryKey: [PATH.popular, { page: '1' }],
-    queryFn: () => comicApis.getComicsByUrl(PATH.popular, { page: '1' }),
+    queryKey: [PATH.popular, queryConfig],
+    queryFn: () => comicApis.getComicsByUrl(PATH.popular, queryConfig),
     keepPreviousData: true,
     staleTime: 3 * 60 * 1000
   })
   const { data: dataCompleted } = useQuery({
-    queryKey: [PATH.completed, { page: '1' }],
-    queryFn: () => comicApis.getComicsByUrl(PATH.completed, { page: '1' }),
-    keepPreviousData: true,
-    staleTime: 3 * 60 * 1000
-  })
-  const { data: dataBoy } = useQuery({
-    queryKey: [PATH.boy, { page: '1' }],
-    queryFn: () => comicApis.getComicsByUrl(PATH.boy, { page: '1' }),
-    keepPreviousData: true,
-    staleTime: 3 * 60 * 1000
-  })
-  const { data: dataGirl } = useQuery({
-    queryKey: [PATH.girl, { page: '1' }],
-    queryFn: () => comicApis.getComicsByUrl(PATH.girl, { page: '1' }),
+    queryKey: [PATH.completed, queryConfig],
+    queryFn: () => comicApis.getComicsByUrl(PATH.completed, queryConfig),
     keepPreviousData: true,
     staleTime: 3 * 60 * 1000
   })
@@ -54,12 +42,10 @@ const Home: React.FC = () => {
     queryFn: () => comicApis.getRecommend(),
     staleTime: 3 * 60 * 1000
   })
-  const dataRecentUpdatedComics = dataRecentUpdated?.data.comics
-  const dataRecommendComics = dataRecommend?.data
-  const dataPopularComics = dataPopular?.data.comics
-  const dataCompletedComics = dataCompleted?.data.comics
-  const dataBoyComics = dataBoy?.data.comics
-  const dataGirlComics = dataGirl?.data.comics
+  const dataRecentUpdatedComics = useMemo(() => dataRecentUpdated?.data.comics, [dataRecentUpdated])
+  const dataRecommendComics = useMemo(() => dataRecommend?.data, [dataRecommend])
+  const dataPopularComics = useMemo(() => dataPopular?.data.comics, [dataPopular])
+  const dataCompletedComics = useMemo(() => dataCompleted?.data.comics, [dataCompleted])
 
   return (
     <div className='container'>
@@ -123,14 +109,6 @@ const Home: React.FC = () => {
           </Link>
         </div>
         <CompletedPreviewComics data={dataCompletedComics as comics[]} />
-      </section>
-      <section className='mt-16'>
-        {titleComicsPreview(iconBoy, 'con trai', PATH.boy)}
-        <SlidePreviewComics data={dataBoyComics as comics[]} />
-      </section>
-      <section className='mt-10'>
-        {titleComicsPreview(iconGirl, 'con gái', PATH.girl)}
-        <SlidePreviewComics data={dataGirlComics as comics[]} />
       </section>
     </div>
   )

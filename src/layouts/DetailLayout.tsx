@@ -1,12 +1,11 @@
-import { Footer, Header, Navbar, SearchBar } from '@/components'
+import { Footer, Header, SearchBar } from '@/components'
 import { Outlet } from 'react-router-dom'
 
-const MainLayout = ({ hideNav = false }: { hideNav?: boolean }) => {
+const MainLayout = () => {
   return (
     <main>
       <Header />
       <SearchBar />
-      {!hideNav && <Navbar />}
       <Outlet />
       <Footer />
     </main>

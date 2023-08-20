@@ -18,6 +18,19 @@ html {
   scroll-behavior: smooth;
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.4);
+  border-radius: 8px;
+}
+
 strong {
   font-size: unset;
   font-weight: unset;

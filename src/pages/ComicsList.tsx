@@ -1,28 +1,42 @@
-import comicApis, { typeUrlComics } from '@/apis/comicApis'
-import { CardItem, MiniPagination } from '@/components'
-import Pagination from '@/components/Pagination'
-import useQueryParams from '@/hooks/useQueryParams'
-import useScrollTop from '@/hooks/useScrollTop'
-import useTitle from '@/hooks/useTitle'
-import { useEffect, useState } from 'react'
+import comicApis from '@/apis/comicApis'
+import { CardItem, MiniPagination, Pagination } from '@/components'
+import { useQueryConfig, useScrollTop, useTitle } from '@/hooks'
+import PATH from '@/utils/path'
+import { useEffect, useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
-import { useLocation } from 'react-router-dom'
+import { Link, createSearchParams, useLocation } from 'react-router-dom'
+import classNames from 'classnames'
 
 const ComicsList = () => {
   const { pathname } = useLocation()
-  const queryParams = useQueryParams()
-  const page = queryParams.page || '1'
-  const [totalPage, setTotalPage] = useState<number>()
-  const title = useTitle(pathname)
-  useScrollTop([pathname, page])
+  const queryConfig = useQueryConfig()
+  const title = useMemo(() => useTitle(pathname), [pathname])
+  const isTopAndNew = useMemo(
+    () => pathname.includes(PATH.new) || pathname.includes(PATH.top),
+    [pathname]
+  )
+  useScrollTop([pathname, queryConfig])
 
-  const { data } = useQuery({
-    queryKey: [pathname, { page: page }],
-    queryFn: () => comicApis.getComicsByUrl(pathname as typeUrlComics, { page: page }),
-    staleTime: 3 * 60 * 1000
+  const { data, isError } = useQuery({
+    queryKey: [pathname, queryConfig],
+    queryFn: () => comicApis.getComicsByUrl(pathname, queryConfig),
+    staleTime: 3 * 60 * 1000,
+    enabled: pathname !== PATH.new
   })
-  const dataComics = data?.data
 
+  const { data: dataNew, isError: isErrorNew } = useQuery({
+    queryKey: [pathname, queryConfig],
+    queryFn: () => comicApis.getNew(queryConfig),
+    staleTime: 3 * 60 * 1000,
+    enabled: pathname === PATH.new
+  })
+
+  const dataComics = useMemo(
+    () => (pathname !== PATH.new ? data?.data : dataNew?.data),
+    [pathname, data, dataNew]
+  )
+
+  const [totalPage, setTotalPage] = useState<number>()
   useEffect(() => {
     if (dataComics) {
       setTotalPage(dataComics.total_pages as number)
@@ -31,15 +45,81 @@ const ComicsList = () => {
 
   return (
     <div className='container'>
-      {data?.data.status === 404 ? (
+      {data?.data.status === 404 || isError || isErrorNew ? (
         <div>not found</div>
       ) : (
         <>
-          <div className='mt-8 flex items-center justify-between'>
-            <h2 className='capitalize font-semibold text-black text-2xl'>
-              <strong className='text-primary'>{title}</strong> - trang {page}
-            </h2>
-            {totalPage && <MiniPagination page={Number(page)} totalPage={totalPage} />}
+          <div className='mt-8 flex items-center justify-between h-9'>
+            {isTopAndNew ? (
+              <div className='flex items-center gap-2'>
+                <Link
+                  className={classNames(
+                    'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline',
+                    {
+                      'bg-primary text-white hover:no-underline': queryConfig.status === 'all',
+                      'bg-transparent text-primary': queryConfig.status !== 'all'
+                    }
+                  )}
+                  to={{
+                    search: createSearchParams({
+                      ...queryConfig,
+                      page: '1',
+                      status: 'all'
+                    }).toString()
+                  }}
+                >
+                  tất cả
+                </Link>
+                <Link
+                  className={classNames(
+                    'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline',
+                    {
+                      'bg-primary text-white hover:no-underline':
+                        queryConfig.status === 'completed',
+                      'bg-transparent text-primary': queryConfig.status !== 'completed'
+                    }
+                  )}
+                  to={{
+                    search: createSearchParams({
+                      ...queryConfig,
+                      page: '1',
+                      status: 'completed'
+                    }).toString()
+                  }}
+                >
+                  hoàn thành
+                </Link>
+                <Link
+                  className={classNames(
+                    'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline',
+                    {
+                      'bg-primary text-white hover:no-underline': queryConfig.status === 'updating',
+                      'bg-transparent text-primary': queryConfig.status !== 'updating'
+                    }
+                  )}
+                  to={{
+                    search: createSearchParams({
+                      ...queryConfig,
+                      page: '1',
+                      status: 'updating'
+                    }).toString()
+                  }}
+                >
+                  cập nhật
+                </Link>
+              </div>
+            ) : (
+              <h2 className='capitalize font-semibold text-black text-2xl'>
+                <strong className='text-primary'>{title}</strong> - trang {queryConfig.page}
+              </h2>
+            )}
+            {totalPage && (
+              <MiniPagination
+                queryConfig={queryConfig}
+                page={Number(queryConfig.page)}
+                totalPage={totalPage}
+              />
+            )}
           </div>
           <div className='mt-6 min-h-[600px]'>
             <ul className='grid grid-cols-7 gap-y-5 gap-x-1'>
@@ -59,7 +139,13 @@ const ComicsList = () => {
             </ul>
           </div>
           <div className='mt-6'>
-            {totalPage && <Pagination page={Number(page)} totalPage={totalPage} />}
+            {totalPage && (
+              <Pagination
+                queryConfig={queryConfig}
+                page={Number(queryConfig.page)}
+                totalPage={totalPage}
+              />
+            )}
           </div>
         </>
       )}

@@ -2,12 +2,12 @@ import { comics } from '@/types/data'
 import { formatCurrency } from '@/utils/formatNumber'
 import PATH from '@/utils/path'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, createSearchParams } from 'react-router-dom'
 import 'swiper/css'
 import { EffectCoverflow } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { CardItem } from '.'
-
+import { CardItem } from '..'
+import imgError from '@/assets/img/img-error.png'
 interface Props {
   data: comics[]
 }
@@ -52,6 +52,10 @@ const SlidePreviewComics = ({ data }: Props) => {
                           className={`${
                             isActive && 'shadow-lg z-10'
                           }  w-full h-full object-cover border-[10px] border-white block`}
+                          onError={({ currentTarget }) => {
+                            currentTarget.onerror = null
+                            currentTarget.src = imgError
+                          }}
                         />
                       )
                     }}
@@ -66,7 +70,7 @@ const SlidePreviewComics = ({ data }: Props) => {
                     <div className='transition-all duration-300'>
                       <div className='flex items-center justify-between gap-6'>
                         <Link
-                          to={PATH.home}
+                          to={`${PATH.comics}/${item.id}`}
                           title={item.title}
                           className='hover:text-primary font-semibold text-xl truncate'
                         >
@@ -95,11 +99,21 @@ const SlidePreviewComics = ({ data }: Props) => {
                       <div className='flex gap-[6px] items-center mt-2'>
                         {item.genres.slice(0, 5).map((genre) => {
                           return genre.id !== undefined ? (
-                            <div key={genre.id}>
-                              <span className='py-1 px-2 text-[13px] border border-dashed border-[#d9d9d9] truncate'>
+                            <Link
+                              to={{
+                                pathname: PATH.genres,
+                                search: createSearchParams({
+                                  type: genre.id,
+                                  page: '1'
+                                }).toString()
+                              }}
+                              title={genre.name}
+                              key={genre.id}
+                            >
+                              <span className='py-1 px-2 text-[13px] border border-dashed border-[#d9d9d9] hover:text-primary hover:border-primary truncate'>
                                 {genre.name}
                               </span>
-                            </div>
+                            </Link>
                           ) : null
                         })}
                       </div>
