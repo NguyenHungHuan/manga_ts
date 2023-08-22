@@ -12,7 +12,8 @@ const RecommendComics = ({ data }: Props) => {
           data.slice(0, 14).map((item) => (
             <li key={item.id}>
               <CardItem
-                chapter={item.lastest_chapter.name}
+                chapterName={item.lastest_chapter.name}
+                chapterId={item.lastest_chapter.id}
                 description={item.short_description}
                 id={item.id}
                 thumbnail={item.thumbnail}

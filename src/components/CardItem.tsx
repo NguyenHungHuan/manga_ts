@@ -6,11 +6,20 @@ interface Props {
   title: string
   id: string
   updated_at: string
-  chapter: string
+  chapterName: string
+  chapterId: number
   description: string
 }
 
-const CardItem = ({ id, chapter, thumbnail, title, updated_at, description }: Props) => {
+const CardItem = ({
+  id,
+  chapterName,
+  chapterId,
+  thumbnail,
+  title,
+  updated_at,
+  description
+}: Props) => {
   return (
     <div className='relative'>
       <div className='w-full h-[220px] overflow-hidden group'>
@@ -45,13 +54,17 @@ const CardItem = ({ id, chapter, thumbnail, title, updated_at, description }: Pr
               <span className='text-sm text-gray-400 block'>{updated_at}</span>
               <p className='text-sm mt-[2px] inline-block'>
                 <span className='mr-1'>Cập nhật:</span>
-                <Link to={PATH.home} className='text-primary'>
-                  {chapter}
+                <Link
+                  to={`${PATH.chapters}/${id}/${chapterId}`}
+                  title={chapterName}
+                  className='text-primary'
+                >
+                  {chapterName}
                 </Link>
               </p>
               <p className='text-sm text-gray-400 line-clamp-2 h-10'>{description}</p>
               <Link
-                to={PATH.home}
+                to={`${PATH.chapters}/${id}/${chapterId}`}
                 className='text-white text-sm bg-primary w-full h-[30px] mt-[10px] uppercase font-semibold flex items-center justify-center rounded text-center'
               >
                 Đọc Ngay
@@ -71,8 +84,12 @@ const CardItem = ({ id, chapter, thumbnail, title, updated_at, description }: Pr
         <span className='text-sm text-gray-400 mt-2'>{updated_at}</span>
         <p className='inline-block text-sm truncate'>
           <span className='mr-1'>Cập nhật:</span>
-          <Link to={PATH.home} className='text-primary whitespace-nowrap'>
-            {chapter}
+          <Link
+            to={`${PATH.chapters}/${id}/${chapterId}`}
+            title={chapterName}
+            className='text-primary whitespace-nowrap'
+          >
+            {chapterName}
           </Link>
         </p>
       </div>

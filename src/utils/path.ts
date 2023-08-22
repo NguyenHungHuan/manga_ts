@@ -6,6 +6,7 @@ const PATH = {
   top: '/top',
   type: ':type',
   name: ':id',
+  idChapter: ':idChapter',
   daily: '/daily',
   weekly: '/weekly',
   monthly: '/monthly',
@@ -17,7 +18,10 @@ const PATH = {
   popular: '/trending-comics',
   completed: '/completed-comics',
   boy: '/boy-comics',
-  girl: '/girl-comics'
+  girl: '/girl-comics',
+  chapters: '/chapters',
+  search: '/search',
+  searchSuggest: '/search-suggest',
 } as const
 
 export default PATH

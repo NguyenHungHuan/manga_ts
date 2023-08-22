@@ -1,6 +1,5 @@
 import { comics } from '@/types/data'
 import PATH from '@/utils/path'
-import { useRef } from 'react'
 import { Link, createSearchParams } from 'react-router-dom'
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -11,18 +10,12 @@ interface Props {
   data: comics[]
 }
 const RecentUpdateComics = ({ data }: Props) => {
-  const prevRef = useRef<HTMLButtonElement>(null)
-  const nextRef = useRef<HTMLButtonElement>(null)
-
   return (
     <div className='w-full h-[450px]'>
       {data && (
         <div className='mt-4 mx-[-40px]'>
           <div className='flex h-[452px]'>
-            <button
-              ref={prevRef}
-              className='text-gray-400 hover:bg-[#f8f8f9] flex-shrink-0 h-[448px] w-[40px] flex items-center justify-center'
-            >
+            <button className='btn-prev-navigate text-gray-400 hover:bg-[#f8f8f9] flex-shrink-0 h-[448px] w-[40px] flex items-center justify-center'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -45,21 +38,18 @@ const RecentUpdateComics = ({ data }: Props) => {
                 modules={[Pagination, Navigation]}
                 pagination={{ el: '.swiper-pagination-recommend', clickable: true }}
                 navigation={{
-                  prevEl: prevRef.current,
-                  nextEl: nextRef.current
+                  prevEl: '.btn-prev-navigate',
+                  nextEl: '.btn-next-navigate'
                 }}
               >
-                <SwiperSlide>{renderSwiperSlide(data.slice(0, 6))}</SwiperSlide>
-                <SwiperSlide>{renderSwiperSlide(data.slice(7, 13))}</SwiperSlide>
-                <SwiperSlide>{renderSwiperSlide(data.slice(14, 20))}</SwiperSlide>
-                <SwiperSlide>{renderSwiperSlide(data.slice(21, 27))}</SwiperSlide>
+                <SwiperSlide>{renderSwiperSlide(data.slice(0, 6), 3, '2')}</SwiperSlide>
+                <SwiperSlide>{renderSwiperSlide(data.slice(7, 13), 3, '2')}</SwiperSlide>
+                <SwiperSlide>{renderSwiperSlide(data.slice(14, 20), 3, '2')}</SwiperSlide>
+                <SwiperSlide>{renderSwiperSlide(data.slice(21, 27), 3, '2')}</SwiperSlide>
               </Swiper>
               <div className='swiper-pagination-recommend inline-block absolute right-1/2 translate-x-1/2 mt-[6px]' />
             </div>
-            <button
-              ref={nextRef}
-              className='text-gray-400 hover:bg-[#f8f8f9] flex-shrink-0 h-[448px] w-[40px] flex items-center justify-center'
-            >
+            <button className='btn-next-navigate text-gray-400 hover:bg-[#f8f8f9] flex-shrink-0 h-[448px] w-[40px] flex items-center justify-center'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -79,11 +69,11 @@ const RecentUpdateComics = ({ data }: Props) => {
 }
 export default RecentUpdateComics
 
-const renderSwiperSlide = (data: comics[]) => {
+export const renderSwiperSlide = (data: comics[], perView: number, gap: string) => {
   return (
-    <div className='grid grid-cols-12 gap-2'>
+    <div className={`grid grid-cols-12 gap-${gap}`}>
       {data.map((item) => (
-        <div key={item.id} className='col-span-4'>
+        <div key={item.id} className={`col-span-${(12 / perView).toString()}`}>
           <div className='flex'>
             <Link to={`${PATH.comics}/${item.id}`} title={item.title} className='flex-shrink-0'>
               <img
@@ -111,7 +101,11 @@ const renderSwiperSlide = (data: comics[]) => {
               <div>
                 <p className='inline-block'>
                   <span className='mr-1 font-semibold'>Cập nhật:</span>
-                  <Link to={PATH.home} className='text-primary'>
+                  <Link
+                    to={`${PATH.chapters}/${item.id}/${item.last_chapter.id}`}
+                    title={item.last_chapter.name}
+                    className='text-primary'
+                  >
                     {item.last_chapter.name}
                   </Link>
                 </p>

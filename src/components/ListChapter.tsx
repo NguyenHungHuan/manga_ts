@@ -4,8 +4,13 @@ import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 import PATH from '@/utils/path'
 
-const ListChapter = (data: { data: comicsChapter }) => {
-  const newestChapter = useMemo(() => Number(data.data[0]?.name.match(/\d+(\.\d+)?/)?.[0]), [data])
+interface Props {
+  data: comicsChapter
+  id: string
+}
+
+const ListChapter = ({ data, id }: Props) => {
+  const newestChapter = useMemo(() => Number(data[0]?.name.match(/\d+(\.\d+)?/)?.[0]), [data])
   const numberButton = useMemo(() => Math.ceil(newestChapter / 50), [newestChapter])
   const [dataChapter, setDataChapter] = useState<any>([])
   const [range, setRange] = useState([0, 50])
@@ -13,7 +18,7 @@ const ListChapter = (data: { data: comicsChapter }) => {
 
   useEffect(() => {
     setDataChapter(
-      data.data
+      data
         .filter(
           (item) =>
             Number(item.name.match(/\d+(\.\d+)?/)?.[0]) <=
@@ -90,7 +95,7 @@ const ListChapter = (data: { data: comicsChapter }) => {
       <div className='grid grid-cols-4 gap-5 my-5 text-gray-800 font-semibold text-sm flex-wrap'>
         {(dataChapter as comicsChapter).map((item) => (
           <Link
-            to={PATH.home}
+            to={`${PATH.chapters}/${id}/${item.id}`}
             title={item.name}
             key={item.id}
             className='rounded-sm font-normal text-base h-[38px] pt-2 px-4 bg-[#f6f6f6] hover:bg-primary/10 hover:text-primary truncate'

@@ -9,6 +9,7 @@ export default function useQueryConfig() {
     {
       type: queryParams.type,
       status: queryParams.status,
+      q: queryParams.q,
       page: queryParams.page || '1',
     },
     isUndefined

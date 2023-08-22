@@ -128,7 +128,8 @@ const ComicsList = () => {
                   dataComics.comics.map((item) => (
                     <li key={item.id}>
                       <CardItem
-                        chapter={item.last_chapter.name}
+                        chapterName={item.last_chapter.name}
+                        chapterId={item.last_chapter.id}
                         description={item.short_description}
                         id={item.id}
                         thumbnail={item.thumbnail}

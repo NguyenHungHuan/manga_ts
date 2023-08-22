@@ -81,6 +81,7 @@ export type comicsComment = {
     {
       avatar: string
       username: string
+      chapter: string
       content: string
       stickers: [string]
       replies: [
@@ -102,3 +103,29 @@ export type comicsComment = {
   total_pages: number
   current_page: number
 }
+
+export type comicSingleChapter = {
+  images: [
+    {
+      page: number
+      src: string
+    }
+  ]
+  chapters: [
+    {
+      id: number
+      name: string
+    }
+  ]
+  chapter_name: string
+  comic_name: string
+}
+
+export type comicSuggestSearch = [{
+  id: string
+  title: string
+  thumbnail: string
+  lastest_chapter: string
+  genres: [string]
+  authors: string
+}]

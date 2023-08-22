@@ -77,7 +77,7 @@ const SlidePreviewComics = ({ data }: Props) => {
                           {item.title}
                         </Link>
                         <Link
-                          to={PATH.home}
+                          to={`${PATH.chapters}/${item.id}/${item.last_chapter.id}`}
                           className='text-white flex-shrink-0 text-sm bg-primary w-[100px] h-[34px] uppercase font-semibold flex items-center justify-center rounded text-center'
                         >
                           Đọc Ngay
@@ -86,7 +86,11 @@ const SlidePreviewComics = ({ data }: Props) => {
                       <span className='text-base text-gray-400 mt-4 block'>{item.updated_at}</span>
                       <p className='text-base mt-1 block truncate'>
                         <span className='mr-1 text-gray-400'>Cập nhật:</span>
-                        <Link to={PATH.home} className='text-primary'>
+                        <Link
+                          to={`${PATH.chapters}/${item.id}/${item.last_chapter.id}`}
+                          title={item.last_chapter.name}
+                          className='text-primary'
+                        >
                           {item.last_chapter.name}
                         </Link>
                       </p>
@@ -131,7 +135,8 @@ const SlidePreviewComics = ({ data }: Props) => {
               data.slice(5, 13).map((item) => (
                 <li key={item.id}>
                   <CardItem
-                    chapter={item.last_chapter.name}
+                    chapterName={item.last_chapter.name}
+                    chapterId={item.last_chapter.id}
                     description={item.short_description}
                     id={item.id}
                     thumbnail={item.thumbnail}

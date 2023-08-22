@@ -47,7 +47,11 @@ const CompletedPreviewComics = ({ data }: Props) => {
                   <span className='text-sm text-gray-400'>{data[currentIndex].updated_at}</span>
                   <p className='text-sm block truncate'>
                     <span className='mr-1 text-gray-400'>Cập nhật:</span>
-                    <Link to={PATH.home} className='text-primary'>
+                    <Link
+                      to={`${PATH.chapters}/${data[currentIndex].id}/${data[currentIndex].last_chapter.id}`}
+                      title={data[currentIndex].last_chapter.name}
+                      className='text-primary'
+                    >
                       {data[currentIndex].last_chapter.name}
                     </Link>
                   </p>
@@ -120,7 +124,11 @@ const CompletedPreviewComics = ({ data }: Props) => {
                     <span className='text-sm text-gray-400 mt-2'>{item.updated_at}</span>
                     <p className='inline-block text-sm truncate'>
                       <span className='mr-1'>Cập nhật:</span>
-                      <Link to={PATH.home} className='text-primary whitespace-nowrap'>
+                      <Link
+                        to={`${PATH.chapters}/${item.id}/${item.last_chapter.id}`}
+                        title={item.last_chapter.name}
+                        className='text-primary whitespace-nowrap'
+                      >
                         {item.last_chapter.name}
                       </Link>
                     </p>

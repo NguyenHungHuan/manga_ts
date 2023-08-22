@@ -6,6 +6,8 @@ import { MainLayout } from './layouts'
 const ComicsList = lazy(() => import('./pages/ComicsList'))
 const ComicsGenre = lazy(() => import('./pages/ComicsGenre'))
 const ComicsDetail = lazy(() => import('./pages/ComicsDetail'))
+const ComicsChapter = lazy(() => import('./pages/ComicsChapter'))
+const ComicsSearch = lazy(() => import('./pages/ComicsSearch'))
 const Home = lazy(() => import('./pages/Home'))
 
 function App() {
@@ -115,6 +117,22 @@ function App() {
           element: (
             <Suspense fallback={<LoadingPage />}>
               <ComicsDetail />
+            </Suspense>
+          )
+        },
+        {
+          path: `${PATH.chapters}/${PATH.name}/${PATH.idChapter}`,
+          element: (
+            <Suspense fallback={<LoadingPage />}>
+              <ComicsChapter />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.search,
+          element: (
+            <Suspense fallback={<LoadingPage />}>
+              <ComicsSearch />
             </Suspense>
           )
         }

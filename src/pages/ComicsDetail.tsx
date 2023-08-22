@@ -1,13 +1,24 @@
 import comicApis from '@/apis/comicApis'
-import { ListChapter, ListComment, RatingStar } from '@/components'
+import { ListChapter, ListComment, RatingStar, SuggestComics } from '@/components'
 import { useScrollTop } from '@/hooks'
 import { formatCurrency } from '@/utils/formatNumber'
 import PATH from '@/utils/path'
 import { useQuery } from 'react-query'
 import { Link, createSearchParams, useParams } from 'react-router-dom'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 const ComicsDetail = () => {
   const { id } = useParams()
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isShow, setIsShow] = useState<boolean>(false)
+  const description = useRef<HTMLParagraphElement>(null)
+
+  useEffect(() => {
+    if (description.current) {
+      setIsShow(description.current.scrollHeight !== description.current.clientHeight)
+    }
+  }, [])
+
   useScrollTop([id])
 
   const { data, isError } = useQuery({
@@ -16,6 +27,21 @@ const ComicsDetail = () => {
     staleTime: 3 * 60 * 1000,
     enabled: id !== ''
   })
+  const { data: dataWeekly } = useQuery({
+    queryKey: [`${PATH.top}${PATH.weekly}`, { page: '1', status: 'all' }],
+    queryFn: () =>
+      comicApis.getComicsByUrl(`${PATH.top}${PATH.weekly}`, { page: '1', status: 'all' }),
+    keepPreviousData: true,
+    staleTime: 3 * 60 * 1000
+  })
+  const { data: dataPopular } = useQuery({
+    queryKey: [PATH.popular, { page: '1' }],
+    queryFn: () => comicApis.getComicsByUrl(PATH.popular, { page: '1' }),
+    keepPreviousData: true,
+    staleTime: 3 * 60 * 1000
+  })
+  const dataPopularComics = useMemo(() => dataPopular?.data.comics, [dataPopular])
+  const dataWeeklyComics = useMemo(() => dataWeekly?.data.comics, [dataWeekly])
   const dataComics = data?.data
 
   return (
@@ -36,11 +62,11 @@ const ComicsDetail = () => {
             <div className='pt-[35px] pb-[30px] min-h-[300px]'>
               {dataComics && (
                 <div className='flex gap-5'>
-                  <div className='w-[240px] h-[320px] -mt-20 flex-shrink-0 rounded-md overflow-hidden shadow-[0_0_5px_#444]'>
+                  <div className='w-[240px] h-[330px] -mt-20 flex-shrink-0 rounded-md overflow-hidden shadow-[0_0_5px_#444]'>
                     <img
                       src={dataComics.thumbnail}
                       alt={dataComics.title}
-                      className='h-full w-full object-cover'
+                      className='h-full w-full object-cover pointer-events-none select-none'
                     />
                   </div>
                   <div className='w-full'>
@@ -88,12 +114,22 @@ const ComicsDetail = () => {
                         ) : null
                       })}
                     </div>
-                    <p className='text-base text-black/60 line-clamp-3 min-h-[72px]'>
+                    <p
+                      ref={description}
+                      className={`text-base text-black/60 min-h-[72px] ${
+                        !isOpen && ' line-clamp-3'
+                      }`}
+                    >
                       {dataComics.description}
                     </p>
-                    <div className='flex items-center gap-3 mt-3'>
+                    {isShow && (
+                      <button onClick={() => setIsOpen((prev) => !prev)}>
+                        {isOpen ? 'Show less' : 'Show more'}
+                      </button>
+                    )}
+                    <div className='flex items-center gap-3 mt-1'>
                       <Link
-                        to={PATH.home}
+                        to={`${PATH.chapters}/${id}/${dataComics.chapters[0].id}`}
                         className='text-white flex-shrink-0 bg-gradient w-[140px] h-[38px] capitalize font-semibold flex items-center justify-center rounded gap-2'
                       >
                         <svg
@@ -144,13 +180,55 @@ const ComicsDetail = () => {
             <div className='flex gap-[30px] justify-between'>
               <div className='flex-1'>
                 <div className='min-h-[500px]'>
-                  {dataComics && <ListChapter data={dataComics.chapters} />}
+                  {dataComics && id && <ListChapter id={id} data={dataComics.chapters} />}
                 </div>
                 <div className='mt-2'>{id && <ListComment id={id} />}</div>
               </div>
               <div className='w-[238px] flex flex-col gap-6'>
-                <div className='border h-[500px]'></div>
-                <div className='border h-[500px]'></div>
+                <div>
+                  <div className='px-5 pl-3 py-3 border flex items-center'>
+                    <span className='font-semibold text-lg'>Top tuần</span>
+                  </div>
+                  <div className='border border-t-0 flex flex-col'>
+                    {dataWeeklyComics &&
+                      dataWeeklyComics
+                        .slice(0, 10)
+                        .map((item, i) => (
+                          <SuggestComics
+                            key={item.id}
+                            index={i}
+                            title={item.title}
+                            src={item.thumbnail}
+                            idChapter={item.last_chapter.id}
+                            chapter={item.last_chapter.name}
+                            genres={item.genres.map((item) => item.name) as [string]}
+                            idComic={item.id}
+                          />
+                        ))}
+                  </div>
+                </div>
+                <div className='sticky top-[50px]'>
+                  <div className='px-5 pl-3 py-3 border flex items-center'>
+                    <span className='font-semibold text-lg'>Nổi bật</span>
+                  </div>
+                  <div className='border border-t-0 flex flex-col'>
+                    {dataPopularComics &&
+                      dataPopularComics
+                        .slice(0, 7)
+                        .map((item, i) => (
+                          <SuggestComics
+                            key={item.id}
+                            index={i}
+                            title={item.title}
+                            src={item.thumbnail}
+                            idChapter={item.last_chapter.id}
+                            chapter={item.last_chapter.name}
+                            genres={item.genres.map((item) => item.name) as [string]}
+                            idComic={item.id}
+                          />
+                        ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

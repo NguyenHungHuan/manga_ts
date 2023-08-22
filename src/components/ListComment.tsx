@@ -140,8 +140,11 @@ const ListComment = ({ id }: { id: string }) => {
                     />
                   </div>
                   <div className='flex-1 border-b border-dashed pb-6'>
-                    <span className='mt-1 block font-semibold'>{item.username}</span>
-                    <p className='mt-3 text-black/80'>{item.content}</p>
+                    <span className='mt-1 font-semibold'>{item.username}</span>
+                    {item.chapter && (
+                      <span className='ml-3 text-sm text-primary'>{item.chapter}</span>
+                    )}
+                    <p className='mt-3 text-black/80 break-all'>{item.content}</p>
                     {item.stickers.length > 0 && <img src={item.stickers[0]} alt='sticker' />}
                     <div className='flex items-center justify-between mt-7'>
                       <span className='text-gray-500 text-sm'>{item.created_at}</span>
@@ -201,7 +204,7 @@ const ListComment = ({ id }: { id: string }) => {
                           </div>
                           <div className='flex-1 pb-6'>
                             <span className='mt-1 block'>{itemReply.username}</span>
-                            <p className='mt-3 text-black/80'>
+                            <p className='mt-3 text-black/80 break-all'>
                               <strong className='text-primary/60 mr-1'>
                                 {itemReply.mention_user}
                               </strong>

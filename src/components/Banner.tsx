@@ -29,7 +29,7 @@ const Banner = () => {
           pagination={{ el: '.swiper-pagination', clickable: true }}
         >
           <SwiperSlide>
-            <Link to={PATH.home}>
+            <Link to={`${PATH.comics}/one-piece`}>
               <div
                 className='bg-no-repeat bg-cover w-full h-[380px] bg-center'
                 style={{
@@ -39,7 +39,7 @@ const Banner = () => {
             </Link>
           </SwiperSlide>
           <SwiperSlide>
-            <Link to={PATH.home}>
+            <Link to={`${PATH.comics}/jujutsu-kaisen-chu-thuat-hoi-chien`}>
               <div
                 className='bg-no-repeat bg-cover w-full h-[380px] bg-center'
                 style={{
@@ -49,7 +49,7 @@ const Banner = () => {
             </Link>
           </SwiperSlide>
           <SwiperSlide>
-            <Link to={PATH.home}>
+            <Link to={`${PATH.comics}/thanh-guom-diet-quy`}>
               <div
                 className='bg-no-repeat bg-cover w-full h-[380px] bg-center'
                 style={{
@@ -67,7 +67,10 @@ const Banner = () => {
       <div className='flex-shrink-0'>
         <div className='grid grid-cols-6 gap-[10px]'>
           <div className='col-span-6 flex items-center gap-[10px]'>
-            <Link to={PATH.home} className='w-[336px] h-[185px] overflow-hidden'>
+            <Link
+              to={`${PATH.comics}/onepunch-man`}
+              className='w-[336px] h-[185px] overflow-hidden'
+            >
               <div
                 className='bg-no-repeat bg-cover w-full h-full'
                 style={{
@@ -75,7 +78,10 @@ const Banner = () => {
                 }}
               />
             </Link>
-            <Link to={PATH.home} className='w-[336px] h-[185px] overflow-hidden'>
+            <Link
+              to={`${PATH.comics}/mashle-magic-and-muscles`}
+              className='w-[336px] h-[185px] overflow-hidden'
+            >
               <div
                 className='bg-no-repeat bg-cover w-full h-full'
                 style={{
@@ -85,7 +91,10 @@ const Banner = () => {
             </Link>
           </div>
           <div className='col-span-6 flex items-center gap-[10px]'>
-            <Link to={PATH.home} className='w-[221px] h-[185px] overflow-hidden'>
+            <Link
+              to={`${PATH.comics}/reincarnated-as-an-aristocrat-with-an-appraisal-skill`}
+              className='w-[221px] h-[185px] overflow-hidden'
+            >
               <div
                 className='bg-no-repeat bg-cover w-full h-full'
                 style={{
@@ -93,7 +102,10 @@ const Banner = () => {
                 }}
               />
             </Link>
-            <Link to={PATH.home} className='w-[221px] h-[185px] overflow-hidden'>
+            <Link
+              to={`${PATH.comics}/toi-muon-nhin-thay-dang-ve-xau-ho-cua-cau`}
+              className='w-[221px] h-[185px] overflow-hidden'
+            >
               <div
                 className='bg-no-repeat bg-cover w-full h-full'
                 style={{
@@ -101,7 +113,10 @@ const Banner = () => {
                 }}
               />
             </Link>
-            <Link to={PATH.home} className='w-[221px] h-[185px] overflow-hidden'>
+            <Link
+              to={`${PATH.comics}/ky-nang-vo-dung-auto-mode-bong-dung-thuc-tinh-ha-to-doi-trinh-sat-may-nguoi-chang-phai-da-noi`}
+              className='w-[221px] h-[185px] overflow-hidden'
+            >
               <div
                 className='bg-no-repeat bg-cover w-full h-full'
                 style={{
