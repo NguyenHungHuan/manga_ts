@@ -1,7 +1,7 @@
 import { Footer, Header, SearchBar } from '@/components'
 import { Outlet } from 'react-router-dom'
 
-const MainLayout = () => {
+const ChapterLayout = () => {
   return (
     <main>
       <Header />
@@ -12,4 +12,4 @@ const MainLayout = () => {
   )
 }
 
-export default MainLayout
+export default ChapterLayout

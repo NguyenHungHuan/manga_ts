@@ -17,7 +17,7 @@ const ComicsDetail = () => {
     if (description.current) {
       setIsShow(description.current.scrollHeight !== description.current.clientHeight)
     }
-  }, [])
+  }, [id])
 
   useScrollTop([id])
 

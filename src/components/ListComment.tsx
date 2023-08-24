@@ -9,15 +9,19 @@ import avatarError from '@/assets/img/anonymous.png'
 const ListComment = ({ id }: { id: string }) => {
   const el = useRef<HTMLDivElement>(null)
   const [page, setPage] = useState<number>(1)
-  const { data, isError, isLoading } = useQuery({
-    queryKey: ['comic_comment', id, { page }],
-    queryFn: () => comicApis.getComicComments(id as string, { page }),
+
+  useEffect(() => {
+    setPage(1)
+  }, [id])
+
+  const { data, isError, isFetching } = useQuery({
+    queryKey: ['comic_comment', id, { page: page }],
+    queryFn: () => comicApis.getComicComments(id as string, { page: page }),
     staleTime: 3 * 60 * 1000,
+    keepPreviousData: true,
     enabled: id !== ''
   })
   const dataComment = data?.data
-  const [totalPage, setTotalPage] = useState<number>()
-  const [totalComments, setTotalComments] = useState<number>()
   useEffect(() => {
     if (el.current) {
       window.scroll({
@@ -27,15 +31,8 @@ const ListComment = ({ id }: { id: string }) => {
     }
   }, [page])
 
-  useEffect(() => {
-    if (dataComment) {
-      setTotalPage(dataComment.total_pages)
-      setTotalComments(dataComment.total_comments)
-    }
-  }, [dataComment, id])
-
   const nextPage = () => {
-    if (totalPage && page < totalPage) {
+    if (dataComment && page < dataComment.total_pages) {
       setPage((prev) => prev + 1)
     }
   }
@@ -51,15 +48,15 @@ const ListComment = ({ id }: { id: string }) => {
         <div className='flex items-center justify-between p-5'>
           <div className='flex items-center gap-3'>
             <h3 className='text-primary capitalize text-lg'>Bình luận</h3>
-            {totalComments && (
+            {dataComment?.total_pages && (
               <span className='text-gray-400 capitalize text-sm'>{`(${formatCurrency(
-                totalComments
+                dataComment.total_comments
               )} bình luận)`}</span>
             )}
           </div>
           <div className={classNames('flex items-center gap-2', { hidden: isError })}>
             <div className='text-gray-400 text-md'>
-              <strong className='text-primary'>{page}</strong>/{totalPage}
+              <strong className='text-primary'>{page}</strong>/{dataComment?.total_pages}
             </div>
             <div className='flex items-center gap-2'>
               <button
@@ -87,8 +84,8 @@ const ListComment = ({ id }: { id: string }) => {
               <button
                 onClick={nextPage}
                 className={classNames('px-[10px] py-2 rounded-md border flex justify-center', {
-                  'opacity-80 cursor-default text-gray-400': totalPage === page,
-                  'hover:border-primary hover:text-primary': totalPage !== page
+                  'opacity-80 cursor-default text-gray-400': dataComment?.total_pages === page,
+                  'hover:border-primary hover:text-primary': dataComment?.total_pages !== page
                 })}
               >
                 <svg
@@ -111,7 +108,7 @@ const ListComment = ({ id }: { id: string }) => {
         </div>
       </div>
       <div className='p-5 border border-t-0'>
-        {isLoading && (
+        {isFetching && (
           <div className='h-[300px] border-b mb-5 border-dashed flex items-center justify-center gap-2'>
             <img src={imgLoading} alt='loading' />
             <span className='text-gray-400'>Loading...</span>
@@ -122,9 +119,10 @@ const ListComment = ({ id }: { id: string }) => {
             <span className='text-gray-400'>Not found...</span>
           </div>
         )}
-        {dataComment &&
-          dataComment?.comments.length > 0 &&
-          dataComment?.comments.map((item, i) => (
+        {!isFetching &&
+          dataComment &&
+          dataComment.comments.length > 0 &&
+          dataComment.comments.map((item, i) => (
             <div key={i}>
               <div className='pb-5'>
                 <div className='flex gap-[10px]'>
@@ -266,7 +264,7 @@ const ListComment = ({ id }: { id: string }) => {
           })}
         >
           <div className='text-gray-400 text-md'>
-            <strong className='text-primary'>{page}</strong>/{totalPage}
+            <strong className='text-primary'>{page}</strong>/{dataComment?.total_pages}
           </div>
           <div className='flex items-center gap-2'>
             <button
@@ -294,8 +292,8 @@ const ListComment = ({ id }: { id: string }) => {
             <button
               onClick={nextPage}
               className={classNames('px-[10px] py-2 rounded-md border flex justify-center', {
-                'opacity-80 cursor-default text-gray-400': totalPage === page,
-                'hover:border-primary hover:text-primary': totalPage !== page
+                'opacity-80 cursor-default text-gray-400': dataComment?.total_pages === page,
+                'hover:border-primary hover:text-primary': dataComment?.total_pages !== page
               })}
             >
               <svg

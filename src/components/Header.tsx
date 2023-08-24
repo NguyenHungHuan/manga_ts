@@ -8,7 +8,7 @@ const Header = () => {
   const isMatchTop = useMemo(() => pathname.includes('/top'), [pathname])
 
   return (
-    <header className='bg-white text-black sticky top-0 z-20 shadow'>
+    <header className='bg-white text-black shadow'>
       <div className='container h-[74px]'>
         <div className='flex items-center justify-between h-full'>
           <div className='flex items-center'>

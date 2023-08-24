@@ -5,24 +5,18 @@ import { useQueryConfig, useScrollTop } from '@/hooks'
 import PATH from '@/utils/path'
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 
 const ComicsSearch = () => {
   const queryConfig = useQueryConfig()
   useScrollTop([queryConfig.q, queryConfig.page])
 
-  const { data } = useQuery({
+  const { data, isError, isFetching } = useQuery({
     queryKey: ['search-comic', queryConfig],
-    queryFn: () => comicApis.getSearch(queryConfig)
+    queryFn: () => comicApis.getSearch(queryConfig),
+    staleTime: 3 * 60 * 1000,
+    keepPreviousData: true
   })
   const dataSearch = data?.data
-
-  const [totalPage, setTotalPage] = useState<number>()
-  useEffect(() => {
-    if (dataSearch) {
-      setTotalPage(dataSearch.total_pages as number)
-    }
-  }, [dataSearch])
 
   return (
     <div className='container'>
@@ -69,31 +63,32 @@ const ComicsSearch = () => {
           <span className='text-primary text-lg'>"{queryConfig.q}"</span>
         </div>
         <div className=''>
-          {totalPage && (
+          {dataSearch?.total_pages && (
             <MiniPagination
               queryConfig={queryConfig}
               page={Number(queryConfig.page)}
-              totalPage={totalPage}
+              totalPage={dataSearch?.total_pages}
             />
           )}
         </div>
       </div>
       <div className='mt-8 min-h-[550px]'>
         {dataSearch &&
+          !isFetching &&
           dataSearch?.comics.length > 0 &&
           renderSwiperSlide(dataSearch.comics, 2, '6')}
-        {Array.isArray(dataSearch?.comics) && !dataSearch?.comics.length && (
+        {Array.isArray(dataSearch?.comics) && !dataSearch?.comics.length && isError && (
           <div className='flex items-center justify-center text-2xl h-[550px]'>
             Không tìm thấy truyện với kết quả
           </div>
         )}
       </div>
       <div className='mt-14'>
-        {totalPage && (
+        {dataSearch?.total_pages && (
           <Pagination
             queryConfig={queryConfig}
             page={Number(queryConfig.page)}
-            totalPage={totalPage}
+            totalPage={dataSearch?.total_pages}
           />
         )}
       </div>

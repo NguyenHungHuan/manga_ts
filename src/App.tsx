@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import PATH from './utils/path'
 import { lazy, Suspense } from 'react'
-import { MainLayout } from './layouts'
+import { ChapterLayout, MainLayout } from './layouts'
 
 const ComicsList = lazy(() => import('./pages/ComicsList'))
 const ComicsGenre = lazy(() => import('./pages/ComicsGenre'))
@@ -121,18 +121,24 @@ function App() {
           )
         },
         {
-          path: `${PATH.chapters}/${PATH.name}/${PATH.idChapter}`,
-          element: (
-            <Suspense fallback={<LoadingPage />}>
-              <ComicsChapter />
-            </Suspense>
-          )
-        },
-        {
           path: PATH.search,
           element: (
             <Suspense fallback={<LoadingPage />}>
               <ComicsSearch />
+            </Suspense>
+          )
+        }
+      ]
+    },
+    {
+      element: <ChapterLayout />,
+      errorElement: <LoadingPage />,
+      children: [
+        {
+          path: `${PATH.chapters}/${PATH.name}/${PATH.idChapter}`,
+          element: (
+            <Suspense fallback={<LoadingPage />}>
+              <ComicsChapter />
             </Suspense>
           )
         }
