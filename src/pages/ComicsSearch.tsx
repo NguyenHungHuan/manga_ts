@@ -62,15 +62,13 @@ const ComicsSearch = () => {
           </span>
           <span className='text-primary text-lg'>"{queryConfig.q}"</span>
         </div>
-        <div className=''>
-          {dataSearch?.total_pages && (
-            <MiniPagination
-              queryConfig={queryConfig}
-              page={Number(queryConfig.page)}
-              totalPage={dataSearch?.total_pages}
-            />
-          )}
-        </div>
+        {dataSearch?.total_pages && (
+          <MiniPagination
+            queryConfig={queryConfig}
+            page={Number(queryConfig.page)}
+            totalPage={dataSearch?.total_pages}
+          />
+        )}
       </div>
       <div className='mt-8 min-h-[550px]'>
         {dataSearch &&

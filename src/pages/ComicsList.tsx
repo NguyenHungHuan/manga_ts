@@ -46,7 +46,7 @@ const ComicsList = () => {
   return (
     <div className='container'>
       {data?.data.status === 404 || isError || isErrorNew ? (
-        <div>not found</div>
+        <>not found</>
       ) : (
         <>
           <div className='mt-8 flex items-center justify-between h-9'>

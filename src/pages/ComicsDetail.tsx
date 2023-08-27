@@ -1,24 +1,25 @@
 import comicApis from '@/apis/comicApis'
-import { ListChapter, ListComment, RatingStar, SuggestComics } from '@/components'
+import {
+  ListChapter,
+  ListComment,
+  ListDownloadChapter,
+  RatingStar,
+  SuggestComics
+} from '@/components'
 import { useScrollTop } from '@/hooks'
 import { formatCurrency } from '@/utils/formatNumber'
 import PATH from '@/utils/path'
 import { useQuery } from 'react-query'
 import { Link, createSearchParams, useParams } from 'react-router-dom'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import imgError from '@/assets/img/img-error.png'
 
 const ComicsDetail = () => {
   const { id } = useParams()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isShow, setIsShow] = useState<boolean>(false)
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const description = useRef<HTMLParagraphElement>(null)
-
-  useEffect(() => {
-    if (description.current) {
-      setIsShow(description.current.scrollHeight !== description.current.clientHeight)
-    }
-  }, [id])
-
   useScrollTop([id])
 
   const { data, isError } = useQuery({
@@ -44,10 +45,16 @@ const ComicsDetail = () => {
   const dataWeeklyComics = useMemo(() => dataWeekly?.data.comics, [dataWeekly])
   const dataComics = data?.data
 
+  useEffect(() => {
+    if (description.current) {
+      setIsShow(description.current.scrollHeight !== description.current.clientHeight)
+    }
+  }, [dataComics])
+
   return (
     <>
       <div className='w-full min-h-[400px] relative overflow-hidden'>
-        <div
+        <p
           className='bg-no-repeat bg-cover h-[400px]'
           style={{
             backgroundColor: 'rgba(0,0,0,0.4)',
@@ -62,13 +69,18 @@ const ComicsDetail = () => {
             <div className='pt-[35px] pb-[30px] min-h-[300px]'>
               {dataComics && (
                 <div className='flex gap-5'>
-                  <div className='w-[240px] h-[330px] -mt-20 flex-shrink-0 rounded-md overflow-hidden shadow-[0_0_5px_#444]'>
+                  <figure className='w-[240px] h-[330px] -mt-20 flex-shrink-0 rounded-md overflow-hidden shadow-[0_0_5px_#444]'>
                     <img
                       src={dataComics.thumbnail}
+                      loading='lazy'
                       alt={dataComics.title}
                       className='h-full w-full object-cover pointer-events-none select-none'
+                      onError={({ currentTarget }) => {
+                        currentTarget.onerror = null
+                        currentTarget.src = imgError
+                      }}
                     />
-                  </div>
+                  </figure>
                   <div className='w-full'>
                     <div className='flex items-center justify-between gap-6 -mt-2'>
                       <h2 className='font-semibold text-3xl line-clamp-1 -ml-1'>
@@ -76,19 +88,19 @@ const ComicsDetail = () => {
                       </h2>
                       <RatingStar rating={dataComics.followers} />
                     </div>
-                    <span className='text-base text-gray-400 block capitalize mt-1'>
-                      tác giả: <strong className='text-black'>{dataComics.authors}</strong>
+                    <span className='text-base text-black block capitalize mt-1'>
+                      tác giả: <strong className='text-primary'>{dataComics.authors}</strong>
                     </span>
-                    <p className='flex items-center gap-4 text-base mt-1 text-gray-400 capitalize'>
+                    <p className='flex items-center gap-4 text-base mt-1 text-black capitalize'>
                       <span>
                         Lượt xem:{' '}
-                        <strong className='text-black'>
+                        <strong className='text-[#4b8fd7]'>
                           {formatCurrency(dataComics.total_views)}
                         </strong>
                       </span>
                       <span>
                         theo dõi:{' '}
-                        <strong className='text-black'>
+                        <strong className='text-[#64d363]'>
                           {formatCurrency(dataComics.followers)}
                         </strong>
                       </span>
@@ -116,7 +128,7 @@ const ComicsDetail = () => {
                     </div>
                     <p
                       ref={description}
-                      className={`text-base text-black/60 min-h-[72px] ${
+                      className={`text-base text-black/80 min-h-[72px] ${
                         !isOpen && ' line-clamp-3'
                       }`}
                     >
@@ -150,9 +162,12 @@ const ComicsDetail = () => {
                         </svg>
                         Đọc Ngay
                       </Link>
-                      <Link
-                        to={PATH.home}
-                        className='text-primary border-primary border flex-shrink-0 text-lg w-[140px] h-[38px] capitalize font-semibold flex items-center justify-center rounded gap-2'
+                      <button
+                        onClick={() => {
+                          setIsOpenModal(true)
+                          document.body.style.overflow = 'hidden'
+                        }}
+                        className='text-primary border-primary border flex-shrink-0 text-lg w-[140px] h-[38px] capitalize font-semibold flex items-center justify-center rounded gap-2 active:scale-95'
                       >
                         <svg
                           xmlns='http://www.w3.org/2000/svg'
@@ -171,25 +186,25 @@ const ComicsDetail = () => {
                           />
                         </svg>
                         Tải xuống
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 </div>
               )}
             </div>
             <div className='flex gap-[30px] justify-between'>
-              <div className='flex-1'>
-                <div className='min-h-[500px]'>
+              <div className='flex-1 max-w-[852px]'>
+                <section className='min-h-[500px]'>
                   {dataComics && id && <ListChapter id={id} data={dataComics.chapters} />}
-                </div>
-                <div className='mt-2'>{id && <ListComment id={id} />}</div>
+                </section>
+                <section className='mt-2'>{id && <ListComment id={id} />}</section>
               </div>
-              <div className='w-[238px] flex flex-col gap-6'>
-                <div>
-                  <div className='px-5 pl-3 py-3 border flex items-center'>
-                    <span className='font-semibold text-lg'>Top tuần</span>
-                  </div>
-                  <div className='border border-t-0 flex flex-col'>
+              <div className='flex-shrink-0 w-[238px] flex flex-col gap-6'>
+                <>
+                  <h4 className='px-5 pl-3 py-3 border flex items-center font-semibold text-lg'>
+                    Top tuần
+                  </h4>
+                  <div className='border border-t-0 flex flex-col -mt-6 min-h-[800px]'>
                     {dataWeeklyComics &&
                       dataWeeklyComics
                         .slice(0, 10)
@@ -206,12 +221,12 @@ const ComicsDetail = () => {
                           />
                         ))}
                   </div>
-                </div>
+                </>
                 <div className='sticky top-[50px]'>
-                  <div className='px-5 pl-3 py-3 border flex items-center'>
-                    <span className='font-semibold text-lg'>Nổi bật</span>
-                  </div>
-                  <div className='border border-t-0 flex flex-col'>
+                  <h4 className='px-5 pl-3 py-3 border flex items-center font-semibold text-lg'>
+                    Nổi bật
+                  </h4>
+                  <div className='border border-t-0 flex flex-col min-h-[800px]'>
                     {dataPopularComics &&
                       dataPopularComics
                         .slice(0, 7)
@@ -234,7 +249,22 @@ const ComicsDetail = () => {
           </div>
         </div>
       </div>
-      {(isError || Number(dataComics?.status) === 404) && <div className=''>not found</div>}
+      {(isError || Number(dataComics?.status) === 404) && <>not found</>}
+      <div
+        onMouseDown={() => {
+          setIsOpenModal(false)
+          document.body.style.overflow = 'auto'
+        }}
+        className={`fixed inset-0 bg-[rgba(0,0,0,.6)] z-30 flex flex-col items-center justify-center duration-500 transition-all ${
+          isOpenModal ? ' opacity-100 pointer-events-auto' : ' opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className='bg-white p-5 rounded-lg' onMouseDown={(e) => e.stopPropagation()}>
+          <section className='w-[700px]'>
+            {dataComics && id && <ListDownloadChapter id={id} data={dataComics.chapters} />}
+          </section>
+        </div>
+      </div>
     </>
   )
 }

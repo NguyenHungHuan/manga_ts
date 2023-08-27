@@ -1,13 +1,13 @@
 import axios from 'axios'
 
 export const axiosClients = axios.create({
-  baseURL: 'https://comics-api.vercel.app',
-  timeout: 10000000
+  baseURL: import.meta.env.VITE_API_URL,
+  timeout: 10000
 })
 
 export const axiosClients2 = axios.create({
-  baseURL: 'http://localhost:8080',
-  timeout: 10000000
+  baseURL: import.meta.env.VITE_API_URL_2,
+  timeout: 10000
 })
 
 axiosClients.interceptors.request.use(

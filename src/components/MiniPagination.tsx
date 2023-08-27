@@ -34,13 +34,13 @@ const MiniPagination = ({ totalPage, page, queryConfig }: Props) => {
 
   return (
     <div className='flex items-center gap-2'>
-      <div className='text-black text-lg'>
+      <span className='text-black text-lg'>
         <strong className='text-primary'>{page}</strong>/{totalPage}
-      </div>
+      </span>
       <div className='flex items-center gap-1'>
         <button
           onClick={PrevPage}
-          className={classNames('py-2 px-3 rounded-md border flex justify-center', {
+          className={classNames('py-2 px-3 rounded-md border flex justify-center active:scale-95', {
             'opacity-80 cursor-default text-gray-400': page === 1,
             'hover:border-primary hover:text-primary': page !== 1
           })}
@@ -58,7 +58,7 @@ const MiniPagination = ({ totalPage, page, queryConfig }: Props) => {
         </button>
         <button
           onClick={nextPage}
-          className={classNames('py-2 px-3 rounded-md border flex justify-center', {
+          className={classNames('py-2 px-3 rounded-md border flex justify-center active:scale-95', {
             'opacity-80 cursor-default text-gray-400': totalPage === page,
             'hover:border-primary hover:text-primary': totalPage !== page
           })}

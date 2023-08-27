@@ -5,6 +5,7 @@ import PATH from '@/utils/path'
 import { useQuery } from 'react-query'
 import { Link, createSearchParams } from 'react-router-dom'
 import { useMemo } from 'react'
+import imgError from '@/assets/img/img-error.png'
 
 const TopPreviewComics = () => {
   const { data: dataDaily } = useQuery({
@@ -99,10 +100,15 @@ const renderDataTopComics = (data: comics[], title: string, link: string) => {
               className='flex-shrink-0 overflow-hidden'
             >
               <img
+                loading='lazy'
                 src={item.thumbnail}
                 alt={item.title}
                 title={item.title}
                 className='object-cover object-center w-20 h-[50px]'
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null
+                  currentTarget.src = imgError
+                }}
               />
             </Link>
             <div className='flex items-start gap-3'>

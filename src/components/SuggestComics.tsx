@@ -1,6 +1,6 @@
 import PATH from '@/utils/path'
 import { Link } from 'react-router-dom'
-
+import imgError from '@/assets/img/img-error.png'
 interface Props {
   title: string
   src: string
@@ -29,7 +29,16 @@ const SuggestComics = ({
           className={`flex gap-2 py-3 ${index !== 0 && ' border-t border-dashed border-[#D9D9D9]'}`}
         >
           <Link title={title} to={`${PATH.comics}/${idComic}`} className='flex-shrink-0'>
-            <img src={src} alt={title} className='w-[70px] h-[90px] object-cover' />
+            <img
+              src={src}
+              alt={title}
+              className='w-[70px] h-[90px] object-cover'
+              loading='lazy'
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null
+                currentTarget.src = imgError
+              }}
+            />
           </Link>
           <div className={`text-sm flex flex-col ${!isStyleSearch && ' justify-between'}`}>
             <Link

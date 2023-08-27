@@ -22,23 +22,27 @@ const ListComment = ({ id }: { id: string }) => {
     enabled: id !== ''
   })
   const dataComment = data?.data
-  useEffect(() => {
-    if (el.current) {
-      window.scroll({
-        top: el.current.offsetTop + 100,
-        behavior: 'smooth'
-      })
-    }
-  }, [page])
 
   const nextPage = () => {
     if (dataComment && page < dataComment.total_pages) {
       setPage((prev) => prev + 1)
     }
+    if (el.current) {
+      window.scroll({
+        behavior: 'smooth',
+        top: el.current.offsetTop
+      })
+    }
   }
   const PrevPage = () => {
     if (page > 1) {
       setPage((prev) => prev - 1)
+    }
+    if (el.current) {
+      window.scroll({
+        behavior: 'smooth',
+        top: el.current.offsetTop
+      })
     }
   }
 
@@ -46,22 +50,22 @@ const ListComment = ({ id }: { id: string }) => {
     <div className='w-full h-full' ref={el}>
       <div className='border'>
         <div className='flex items-center justify-between p-5'>
-          <div className='flex items-center gap-3'>
-            <h3 className='text-primary capitalize text-lg'>Bình luận</h3>
+          <h3 className='flex items-center gap-3 text-primary capitalize text-lg'>
+            Bình luận
             {dataComment?.total_pages && (
               <span className='text-gray-400 capitalize text-sm'>{`(${formatCurrency(
                 dataComment.total_comments
               )} bình luận)`}</span>
             )}
-          </div>
+          </h3>
           <div className={classNames('flex items-center gap-2', { hidden: isError })}>
-            <div className='text-gray-400 text-md'>
+            <span className='text-gray-400 text-md'>
               <strong className='text-primary'>{page}</strong>/{dataComment?.total_pages}
-            </div>
+            </span>
             <div className='flex items-center gap-2'>
               <button
                 onClick={PrevPage}
-                className={classNames('px-[10px] py-2 rounded-md border flex justify-center', {
+                className={classNames('px-[10px] py-2 rounded-md border flex justify-center active:scale-95', {
                   'opacity-80 cursor-default text-gray-400': page === 1,
                   'hover:border-primary hover:text-primary': page !== 1
                 })}
@@ -83,7 +87,7 @@ const ListComment = ({ id }: { id: string }) => {
               </button>
               <button
                 onClick={nextPage}
-                className={classNames('px-[10px] py-2 rounded-md border flex justify-center', {
+                className={classNames('px-[10px] py-2 rounded-md border flex justify-center active:scale-95', {
                   'opacity-80 cursor-default text-gray-400': dataComment?.total_pages === page,
                   'hover:border-primary hover:text-primary': dataComment?.total_pages !== page
                 })}
@@ -110,7 +114,7 @@ const ListComment = ({ id }: { id: string }) => {
       <div className='p-5 border border-t-0'>
         {isFetching && (
           <div className='h-[300px] border-b mb-5 border-dashed flex items-center justify-center gap-2'>
-            <img src={imgLoading} alt='loading' />
+            <img src={imgLoading} alt='loading' loading='lazy' />
             <span className='text-gray-400'>Loading...</span>
           </div>
         )}
@@ -119,31 +123,30 @@ const ListComment = ({ id }: { id: string }) => {
             <span className='text-gray-400'>Not found...</span>
           </div>
         )}
-        {!isFetching &&
-          dataComment &&
-          dataComment.comments.length > 0 &&
-          dataComment.comments.map((item, i) => (
-            <div key={i}>
-              <div className='pb-5'>
-                <div className='flex gap-[10px]'>
-                  <div className='flex-shrink-0 h-full'>
-                    <img
-                      src={item.avatar}
-                      alt='avatar'
-                      className='w-[50px] h-[50px] object-cover rounded-full'
-                      onError={({ currentTarget }) => {
-                        currentTarget.onerror = null
-                        currentTarget.src = avatarError
-                      }}
-                    />
-                  </div>
-                  <div className='flex-1 border-b border-dashed pb-6'>
+        {!isFetching && dataComment && dataComment.comments.length > 0 && (
+          <ul>
+            {dataComment.comments.map((item, i) => (
+              <li key={i}>
+                <div className='flex gap-[10px] pb-5'>
+                  <img
+                    src={item.avatar}
+                    alt='avatar'
+                    className='flex-shrink-0 w-[50px] h-[50px] object-cover rounded-full'
+                    loading='lazy'
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null
+                      currentTarget.src = avatarError
+                    }}
+                  />
+                  <div className='flex-1 border-b border-dashed pb-6 overflow-hidden'>
                     <span className='mt-1 font-semibold'>{item.username}</span>
                     {item.chapter && (
                       <span className='ml-3 text-sm text-primary'>{item.chapter}</span>
                     )}
                     <p className='mt-3 text-black/80 break-all'>{item.content}</p>
-                    {item.stickers.length > 0 && <img src={item.stickers[0]} alt='sticker' />}
+                    {item.stickers.length > 0 && (
+                      <img src={item.stickers[0]} alt='sticker' loading='lazy' />
+                    )}
                     <div className='flex items-center justify-between mt-7'>
                       <span className='text-gray-500 text-sm'>{item.created_at}</span>
                       <div className='flex items-center gap-4 text-gray-500 text-md'>
@@ -189,18 +192,17 @@ const ListComment = ({ id }: { id: string }) => {
                           key={i}
                           className='mt-4 p-5 pb-0 flex gap-[10px] bg-[#f8f8f8] rounded-[10px]'
                         >
-                          <div className='flex-shrink-0 h-full'>
-                            <img
-                              src={itemReply.avatar}
-                              alt='avatar'
-                              className='w-[50px] h-[50px] object-cover rounded-full'
-                              onError={({ currentTarget }) => {
-                                currentTarget.onerror = null
-                                currentTarget.src = avatarError
-                              }}
-                            />
-                          </div>
-                          <div className='flex-1 pb-6'>
+                          <img
+                            src={itemReply.avatar}
+                            alt='avatar'
+                            className='flex-shrink-0 w-[50px] h-[50px] object-cover rounded-full'
+                            loading='lazy'
+                            onError={({ currentTarget }) => {
+                              currentTarget.onerror = null
+                              currentTarget.src = avatarError
+                            }}
+                          />
+                          <div className='flex-1 pb-6 overflow-auto'>
                             <span className='mt-1 block'>{itemReply.username}</span>
                             <p className='mt-3 text-black/80 break-all'>
                               <strong className='text-primary/60 mr-1'>
@@ -209,7 +211,7 @@ const ListComment = ({ id }: { id: string }) => {
                               {itemReply.content}
                             </p>
                             {itemReply.stickers.length > 0 && (
-                              <img src={itemReply.stickers[0]} alt='sticker' />
+                              <img src={itemReply.stickers[0]} alt='sticker' loading='lazy' />
                             )}
                             <div className='flex items-center justify-between mt-7'>
                               <span className='text-gray-500 text-sm'>{itemReply.created_at}</span>
@@ -255,21 +257,22 @@ const ListComment = ({ id }: { id: string }) => {
                       ))}
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              </li>
+            ))}
+          </ul>
+        )}
         <div
           className={classNames('flex items-center justify-end gap-2', {
             hidden: isError
           })}
         >
-          <div className='text-gray-400 text-md'>
+          <span className='text-gray-400 text-md'>
             <strong className='text-primary'>{page}</strong>/{dataComment?.total_pages}
-          </div>
+          </span>
           <div className='flex items-center gap-2'>
             <button
               onClick={PrevPage}
-              className={classNames('px-[10px] py-2 rounded-md border flex justify-center', {
+              className={classNames('px-[10px] py-2 rounded-md border flex justify-center active:scale-95', {
                 'opacity-80 cursor-default text-gray-400': page === 1,
                 'hover:border-primary hover:text-primary': page !== 1
               })}
@@ -291,7 +294,7 @@ const ListComment = ({ id }: { id: string }) => {
             </button>
             <button
               onClick={nextPage}
-              className={classNames('px-[10px] py-2 rounded-md border flex justify-center', {
+              className={classNames('px-[10px] py-2 rounded-md border flex justify-center active:scale-95', {
                 'opacity-80 cursor-default text-gray-400': dataComment?.total_pages === page,
                 'hover:border-primary hover:text-primary': dataComment?.total_pages !== page
               })}

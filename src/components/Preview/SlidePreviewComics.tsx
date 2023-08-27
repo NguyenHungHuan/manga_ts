@@ -1,7 +1,7 @@
 import { comics } from '@/types/data'
 import { formatCurrency } from '@/utils/formatNumber'
 import PATH from '@/utils/path'
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Link, createSearchParams } from 'react-router-dom'
 import 'swiper/css'
 import { EffectCoverflow } from 'swiper/modules'
@@ -49,6 +49,7 @@ const SlidePreviewComics = ({ data }: Props) => {
                           src={item.thumbnail}
                           alt={item.title}
                           title={item.title}
+                          loading='lazy'
                           className={`${
                             isActive && 'shadow-lg z-10'
                           }  w-full h-full object-cover border-[10px] border-white block`}
@@ -65,9 +66,9 @@ const SlidePreviewComics = ({ data }: Props) => {
             </div>
             <div className='h-[263px]'>
               {data.map((item, i) => (
-                <div key={item.id}>
+                <Fragment key={item.id}>
                   {i === activeSlide && (
-                    <div className='transition-all duration-300'>
+                    <>
                       <div className='flex items-center justify-between gap-6'>
                         <Link
                           to={`${PATH.comics}/${item.id}`}
@@ -124,9 +125,9 @@ const SlidePreviewComics = ({ data }: Props) => {
                       <p className='text-base text-gray-400 line-clamp-3 mt-4'>
                         {item.short_description}
                       </p>
-                    </div>
+                    </>
                   )}
-                </div>
+                </Fragment>
               ))}
             </div>
           </div>

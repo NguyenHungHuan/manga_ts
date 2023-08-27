@@ -52,8 +52,8 @@ const ListChapter = ({ data, id }: Props) => {
   }
 
   return (
-    <div>
-      <div className='flex items-center gap-2 border-b border-slate-200 pb-1'>
+    <>
+      <h3 className='flex items-center gap-2 border-b border-slate-200 pb-1 capitalize text-primary text-lg'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           xmlnsXlink='http://www.w3.org/1999/xlink'
@@ -70,28 +70,29 @@ const ListChapter = ({ data, id }: Props) => {
             d='M16 7S9 1 2 6v22c7-5 14 0 14 0s7-5 14 0V6c-7-5-14 1-14 1Zm0 0v21'
           />
         </svg>
-        <span className='capitalize text-primary text-lg'>Danh sách chương</span>
-      </div>
-      <div className='flex items-center gap-3 my-5 text-gray-800 font-semibold text-sm flex-wrap'>
+        Danh sách chương
+      </h3>
+      <ul className='flex items-center gap-3 my-5 text-gray-800 font-semibold text-sm flex-wrap'>
         {Array(numberButton)
           .fill(0)
           .map((_, i) => (
-            <button
-              key={i}
-              onClick={() => handleChangeGroupChapter(i)}
-              className={classNames(
-                'rounded-md font-normal text-base leading-5 py-[2px] px-2 border border-dashed truncate',
-                {
-                  'border-[#d9d9d9] hover:text-primary hover:border-primary ': i !== active,
-                  'border-primary text-primary': i === active,
-                  hidden: !(i * 50 + 1 <= Math.floor(newestChapter))
-                }
-              )}
-            >
-              {handleRenderGroupChapter(i)}
-            </button>
+            <li key={i}>
+              <button
+                onClick={() => handleChangeGroupChapter(i)}
+                className={classNames(
+                  'rounded-md font-normal text-base leading-5 py-[2px] px-2 border border-dashed truncate active:scale-95',
+                  {
+                    'border-[#d9d9d9] hover:text-primary hover:border-primary ': i !== active,
+                    'border-primary text-primary': i === active,
+                    hidden: !(i * 50 + 1 <= Math.floor(newestChapter))
+                  }
+                )}
+              >
+                {handleRenderGroupChapter(i)}
+              </button>
+            </li>
           ))}
-      </div>
+      </ul>
       <div className='grid grid-cols-4 gap-5 my-5 text-gray-800 font-semibold text-sm flex-wrap'>
         {(dataChapter as comicsChapter).map((item) => (
           <Link
@@ -104,7 +105,7 @@ const ListChapter = ({ data, id }: Props) => {
           </Link>
         ))}
       </div>
-    </div>
+    </>
   )
 }
 

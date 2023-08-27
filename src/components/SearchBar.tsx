@@ -1,6 +1,6 @@
 import bgSearch from '@/assets/img/search-bg.jpg'
 import iconSearch from '@/assets/img/icon_search.png'
-import { Button, SuggestComics } from '.'
+import { SuggestComics } from '.'
 import { useState } from 'react'
 import { useQuery } from 'react-query'
 import comicApis from '@/apis/comicApis'
@@ -52,7 +52,7 @@ const SearchBar = () => {
           <div className='h-full flex items-center justify-center'>
             <form className='relative flex items-center' onSubmit={(e) => handleSearch(e)}>
               <div className='flex-shrink-0 bg-white py-4 pl-[18px] pr-[14px]'>
-                <div
+                <p
                   className='bg-cover bg-no-repeat w-[18px] h-[18px]'
                   style={{
                     backgroundImage: `url(${iconSearch})`
@@ -68,44 +68,45 @@ const SearchBar = () => {
                 placeholder='Search...'
                 className='h-[50px] leading-[50px] pr-4 w-[420px] outline-none'
               />
-              <Button className='text-white capitalize flex items-center justify-center bg-gradient h-[50px] w-[140px]'>
+              <button className='text-white capitalize flex items-center justify-center bg-gradient h-[50px] w-[140px]'>
                 Tìm Kiếm
-              </Button>
-              <div
-                className='absolute top-[50px] left-0 z-[12] border border-[#EDEDED] bg-white w-[470px] shadow-[0_2px_4px_0_rgba(0,0,0,0.10)] max-h-[280px] overflow-y-auto'
-                style={{
-                  filter: 'blur(0)'
-                }}
-              >
-                {dataComicSuggest &&
-                  isOpen &&
-                  dataComicSuggest.map((item, i) => (
-                    <div
-                      key={item.id}
-                      onMouseDown={() => handleClick(item.id)}
-                      className='cursor-pointer'
-                    >
-                      <SuggestComics
-                        index={i}
-                        isStyleSearch={true}
-                        title={item.title}
-                        src={item.thumbnail}
-                        idComic={item.id}
-                        chapter={item.lastest_chapter}
-                        genres={item.genres}
-                      />
+              </button>
+              {isOpen && (
+                <div
+                  className='absolute top-[50px] left-0 z-[12] border border-[#EDEDED] bg-white w-[470px] shadow-[0_2px_4px_0_rgba(0,0,0,0.10)] max-h-[280px] overflow-y-auto'
+                  style={{
+                    filter: 'blur(0)'
+                  }}
+                >
+                  {dataComicSuggest &&
+                    dataComicSuggest.map((item, i) => (
+                      <div
+                        key={item.id}
+                        onMouseDown={() => handleClick(item.id)}
+                        className='cursor-pointer'
+                      >
+                        <SuggestComics
+                          index={i}
+                          isStyleSearch={true}
+                          title={item.title}
+                          src={item.thumbnail}
+                          idComic={item.id}
+                          chapter={item.lastest_chapter}
+                          genres={item.genres}
+                        />
+                      </div>
+                    ))}
+                  {isLoading && (
+                    <div className='flex items-center justify-center h-[100px] gap-2'>
+                      <img src={imgLoading} alt='loading icon' loading='lazy' />
+                      Loading...
                     </div>
-                  ))}
-                {isLoading && isOpen && (
-                  <div className='flex items-center justify-center h-[100px] gap-2'>
-                    <img src={imgLoading} alt='loading icon' />
-                    Loading...
-                  </div>
-                )}
-                {Array.isArray(dataComicSuggest) && !dataComicSuggest.length && isOpen && (
-                  <div className='flex items-center justify-center h-[100px]'>Not found</div>
-                )}
-              </div>
+                  )}
+                  {Array.isArray(dataComicSuggest) && !dataComicSuggest.length && (
+                    <div className='flex items-center justify-center h-[100px]'>Not found</div>
+                  )}
+                </div>
+              )}
             </form>
           </div>
         </div>

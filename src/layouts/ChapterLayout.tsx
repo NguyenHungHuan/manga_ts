@@ -3,12 +3,14 @@ import { Outlet } from 'react-router-dom'
 
 const ChapterLayout = () => {
   return (
-    <main>
+    <>
       <Header />
-      <SearchBar />
-      <Outlet />
+      <main>
+        <SearchBar />
+        <Outlet />
+      </main>
       <Footer />
-    </main>
+    </>
   )
 }
 

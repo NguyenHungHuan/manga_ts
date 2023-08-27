@@ -28,6 +28,7 @@ const CardItem = ({
           title={title}
           alt={title}
           className='w-full h-full object-cover'
+          loading='lazy'
           onError={({ currentTarget }) => {
             currentTarget.onerror = null
             currentTarget.src = imgError
@@ -41,7 +42,7 @@ const CardItem = ({
                 style={{
                   backgroundImage: `url('${thumbnail}'), url('${imgError}')`
                 }}
-              ></p>
+              />
             </Link>
             <div className='p-[10px]'>
               <Link

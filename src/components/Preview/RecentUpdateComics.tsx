@@ -13,55 +13,49 @@ const RecentUpdateComics = ({ data }: Props) => {
   return (
     <div className='w-full h-[450px]'>
       {data && (
-        <div className='mt-4 mx-[-40px]'>
-          <div className='flex h-[452px]'>
-            <button className='btn-prev-navigate text-gray-400 hover:bg-[#f8f8f9] flex-shrink-0 h-[448px] w-[40px] flex items-center justify-center'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth={1.5}
-                stroke='currentColor'
-                className='w-8 h-8'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M15.75 19.5L8.25 12l7.5-7.5'
-                />
-              </svg>
-            </button>
-            <div className='flex-none w-[1200px] relative'>
-              <Swiper
-                loop={true}
-                slidesPerView={1}
-                modules={[Pagination, Navigation]}
-                pagination={{ el: '.swiper-pagination-recommend', clickable: true }}
-                navigation={{
-                  prevEl: '.btn-prev-navigate',
-                  nextEl: '.btn-next-navigate'
-                }}
-              >
-                <SwiperSlide>{renderSwiperSlide(data.slice(0, 6), 3, '2')}</SwiperSlide>
-                <SwiperSlide>{renderSwiperSlide(data.slice(7, 13), 3, '2')}</SwiperSlide>
-                <SwiperSlide>{renderSwiperSlide(data.slice(14, 20), 3, '2')}</SwiperSlide>
-                <SwiperSlide>{renderSwiperSlide(data.slice(21, 27), 3, '2')}</SwiperSlide>
-              </Swiper>
-              <div className='swiper-pagination-recommend inline-block absolute right-1/2 translate-x-1/2 mt-[6px]' />
-            </div>
-            <button className='btn-next-navigate text-gray-400 hover:bg-[#f8f8f9] flex-shrink-0 h-[448px] w-[40px] flex items-center justify-center'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth={1.5}
-                stroke='currentColor'
-                className='w-8 h-8'
-              >
-                <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
-              </svg>
-            </button>
+        <div className='flex h-[452px] mt-4 mx-[-40px]'>
+          <button className='btn-prev-navigate text-gray-400 hover:bg-[#f8f8f9] flex-shrink-0 h-[448px] w-[40px] flex items-center justify-center'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='w-8 h-8'
+            >
+              <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
+            </svg>
+          </button>
+          <div className='flex-none w-[1200px] relative'>
+            <Swiper
+              loop={true}
+              slidesPerView={1}
+              modules={[Pagination, Navigation]}
+              pagination={{ el: '.swiper-pagination-recommend', clickable: true }}
+              navigation={{
+                prevEl: '.btn-prev-navigate',
+                nextEl: '.btn-next-navigate'
+              }}
+            >
+              <SwiperSlide>{renderSwiperSlide(data.slice(0, 6), 3, '2')}</SwiperSlide>
+              <SwiperSlide>{renderSwiperSlide(data.slice(7, 13), 3, '2')}</SwiperSlide>
+              <SwiperSlide>{renderSwiperSlide(data.slice(14, 20), 3, '2')}</SwiperSlide>
+              <SwiperSlide>{renderSwiperSlide(data.slice(21, 27), 3, '2')}</SwiperSlide>
+            </Swiper>
+            <div className='swiper-pagination-recommend inline-block absolute right-1/2 translate-x-1/2 mt-[6px]' />
           </div>
+          <button className='btn-next-navigate text-gray-400 hover:bg-[#f8f8f9] flex-shrink-0 h-[448px] w-[40px] flex items-center justify-center'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='w-8 h-8'
+            >
+              <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
+            </svg>
+          </button>
         </div>
       )}
     </div>
@@ -80,6 +74,7 @@ export const renderSwiperSlide = (data: comics[], perView: number, gap: string) 
                 src={item.thumbnail}
                 alt={item.title}
                 title={item.title}
+                loading='lazy'
                 className='w-[165px] h-[220px] object-cover'
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null

@@ -21,6 +21,7 @@ const PATH = {
   girl: '/girl-comics',
   chapters: '/chapters',
   search: '/search',
+  download: '/download',
   searchSuggest: '/search-suggest',
 } as const
 

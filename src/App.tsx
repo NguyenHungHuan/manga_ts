@@ -9,6 +9,7 @@ const ComicsDetail = lazy(() => import('./pages/ComicsDetail'))
 const ComicsChapter = lazy(() => import('./pages/ComicsChapter'))
 const ComicsSearch = lazy(() => import('./pages/ComicsSearch'))
 const Home = lazy(() => import('./pages/Home'))
+const Download = lazy(() => import('./pages/Download'))
 
 function App() {
   const router = createBrowserRouter([
@@ -143,11 +144,19 @@ function App() {
           )
         }
       ]
+    },
+    {
+      path: `${PATH.download}/${PATH.name}/${PATH.idChapter}`,
+      element: (
+        <Suspense fallback={<LoadingPage />}>
+          <Download />
+        </Suspense>
+      ),
+      errorElement: <LoadingPage />
     }
   ])
   return <RouterProvider router={router} />
 }
-
 export default App
 
 function LoadingPage() {

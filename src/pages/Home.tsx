@@ -121,7 +121,7 @@ const titleComicsPreview = (img: string, title: string, link?: string, showMore?
   return (
     <div className='flex items-end justify-between'>
       <div className='flex items-center gap-4'>
-        <img src={img} alt='Icon' className='w-auto h-[32px]' />
+        <img src={img} alt='Icon' className='w-auto h-[32px]' loading='lazy' />
         <h2 className='capitalize font-semibold mt-1 text-[28px] text-black leading-5'>{title}</h2>
       </div>
       {isShowMore && (
