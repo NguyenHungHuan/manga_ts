@@ -22,19 +22,16 @@ const Home: React.FC = () => {
   const { data: dataRecentUpdated } = useQuery({
     queryKey: [PATH.recent, queryConfig],
     queryFn: () => comicApis.getComicsByUrl(PATH.recent, queryConfig),
-    keepPreviousData: true,
     staleTime: 3 * 60 * 1000
   })
   const { data: dataPopular } = useQuery({
     queryKey: [PATH.popular, queryConfig],
     queryFn: () => comicApis.getComicsByUrl(PATH.popular, queryConfig),
-    keepPreviousData: true,
     staleTime: 3 * 60 * 1000
   })
   const { data: dataCompleted } = useQuery({
     queryKey: [PATH.completed, queryConfig],
     queryFn: () => comicApis.getComicsByUrl(PATH.completed, queryConfig),
-    keepPreviousData: true,
     staleTime: 3 * 60 * 1000
   })
   const { data: dataRecommend } = useQuery({

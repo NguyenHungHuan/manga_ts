@@ -325,7 +325,7 @@ const ButtonDownload = (id: string, chapterId: string) => {
   return (
     <button
       onClick={handleClick}
-      className='pl-8 border-l border-gray-400/60 font-medium flex items-center justify-center gap-2 h-6 hover:text-primary text-lg'
+      className='pl-8 border-l border-gray-400/60 text-gray-500 font-medium flex items-center justify-center gap-2 h-6 hover:text-primary text-lg'
     >
       <svg
         xmlns='http://www.w3.org/2000/svg'

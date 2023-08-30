@@ -73,7 +73,7 @@ const SearchBar = () => {
               </button>
               {isOpen && (
                 <div
-                  className='absolute top-[50px] left-0 z-[12] border border-[#EDEDED] bg-white w-[470px] shadow-[0_2px_4px_0_rgba(0,0,0,0.10)] max-h-[280px] overflow-y-auto'
+                  className='absolute top-[50px] left-0 z-40 border border-[#EDEDED] bg-white w-[470px] shadow-[0_2px_4px_0_rgba(0,0,0,0.10)] max-h-[280px] overflow-y-auto'
                   style={{
                     filter: 'blur(0)'
                   }}

@@ -16,6 +16,7 @@ html {
     sans-serif;
   user-select: none;
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 ::-webkit-scrollbar {
@@ -28,7 +29,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   border-radius: 8px;
 }
 

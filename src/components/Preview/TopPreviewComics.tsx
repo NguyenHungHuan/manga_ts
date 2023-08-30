@@ -36,107 +36,178 @@ const TopPreviewComics = () => {
   return (
     <div className='grid grid-cols-12 gap-5 justify-items-center justify-center w-full h-[323px]'>
       <div className='col-span-4 w-full'>
-        {dataDailyComics &&
-          renderDataTopComics(dataDailyComics.slice(0, 5), 'top ngày', `${PATH.top}${PATH.daily}`)}
+        <div className='flex items-end justify-between'>
+          <h3 className='capitalize text-xl font-bold leading-5'>top ngày</h3>
+          <Link
+            to={{
+              pathname: `${PATH.top}${PATH.daily}`,
+              search: createSearchParams({
+                status: 'all',
+                page: '1'
+              }).toString()
+            }}
+            className='flex items-center gap-1 text-sm text-gray-500 hover:text-primary'
+          >
+            <span>Tất cả</span>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='w-4 h-4'
+            >
+              <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
+            </svg>
+          </Link>
+        </div>
+        {dataDailyComics && renderDataTopComics(dataDailyComics.slice(0, 5))}
+        {!dataDailyComics && skeleton()}
       </div>
       <div className='col-span-4 w-full'>
-        {dataWeeklyComics &&
-          renderDataTopComics(
-            dataWeeklyComics.slice(0, 5),
-            'top tuần',
-            `${PATH.top}${PATH.weekly}`
-          )}
+        <div className='flex items-end justify-between'>
+          <h3 className='capitalize text-xl font-bold leading-5'>top tuần</h3>
+          <Link
+            to={{
+              pathname: `${PATH.top}${PATH.weekly}`,
+              search: createSearchParams({
+                status: 'all',
+                page: '1'
+              }).toString()
+            }}
+            className='flex items-center gap-1 text-sm text-gray-500 hover:text-primary'
+          >
+            <span>Tất cả</span>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='w-4 h-4'
+            >
+              <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
+            </svg>
+          </Link>
+        </div>
+        {dataWeeklyComics && renderDataTopComics(dataWeeklyComics.slice(0, 5))}
+        {!dataWeeklyComics && skeleton()}
       </div>
       <div className='col-span-4 w-full'>
-        {dataMonthlyComics &&
-          renderDataTopComics(
-            dataMonthlyComics.slice(0, 5),
-            'top tháng',
-            `${PATH.top}${PATH.monthly}`
-          )}
+        <div className='flex items-end justify-between'>
+          <h3 className='capitalize text-xl font-bold leading-5'>top tháng</h3>
+          <Link
+            to={{
+              pathname: `${PATH.top}${PATH.monthly}`,
+              search: createSearchParams({
+                status: 'all',
+                page: '1'
+              }).toString()
+            }}
+            className='flex items-center gap-1 text-sm text-gray-500 hover:text-primary'
+          >
+            <span>Tất cả</span>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='w-4 h-4'
+            >
+              <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
+            </svg>
+          </Link>
+        </div>
+        {dataMonthlyComics && renderDataTopComics(dataMonthlyComics.slice(0, 5))}
+        {!dataMonthlyComics && skeleton()}
       </div>
     </div>
   )
 }
 export default TopPreviewComics
 
-const renderDataTopComics = (data: comics[], title: string, link: string) => {
+const renderDataTopComics = (data: comics[]) => {
   return (
-    <>
-      <div className='flex items-end justify-between'>
-        <h3 className='capitalize text-xl font-bold leading-5'>{title}</h3>
-        <Link
-          to={{
-            pathname: link,
-            search: createSearchParams({
-              status: 'all',
-              page: '1'
-            }).toString()
-          }}
-          className='flex items-center gap-1 text-sm text-gray-500 hover:text-primary'
+    <ul className='mt-5 flex flex-col gap-[5px]'>
+      {data.map((item, index) => (
+        <li
+          key={item.id}
+          className='flex items-center gap-3 border-b border-dashed border-[#ededed]'
         >
-          <span>Tất cả</span>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={1.5}
-            stroke='currentColor'
-            className='w-4 h-4'
+          <Link
+            to={`${PATH.comics}/${item.id}`}
+            title={item.title}
+            className='flex-shrink-0 overflow-hidden'
           >
-            <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
-          </svg>
-        </Link>
-      </div>
-      <ul className='mt-5 flex flex-col gap-[5px]'>
-        {data.map((item, index) => (
-          <li
-            key={item.id}
-            className='flex items-center gap-3 border-b border-dashed border-[#ededed]'
-          >
-            <Link
-              to={`${PATH.comics}/${item.id}`}
+            <img
+              loading='lazy'
+              src={item.thumbnail}
+              alt={item.title}
               title={item.title}
-              className='flex-shrink-0 overflow-hidden'
-            >
-              <img
-                loading='lazy'
-                src={item.thumbnail}
-                alt={item.title}
-                title={item.title}
-                className='object-cover object-center w-20 h-[50px]'
-                onError={({ currentTarget }) => {
-                  currentTarget.onerror = null
-                  currentTarget.src = imgError
-                }}
-              />
-            </Link>
-            <div className='flex items-start gap-3'>
-              <span
-                className={`flex-shrink-0 text-center rounded-full w-[22px] h-[22px] -mt-[2px] 
+              className='object-cover object-center w-20 h-[50px]'
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null
+                currentTarget.src = imgError
+              }}
+            />
+          </Link>
+          <div className='flex items-start gap-3'>
+            <span
+              className={`flex-shrink-0 text-center rounded-full w-[22px] h-[22px] -mt-[2px] 
                      ${index === 0 && ' bg-[#feda00] text-white'} 
                      ${index === 1 && ' bg-[#feaf00] text-white'} 
                      ${index === 2 && ' bg-[#fe8f00] text-white'} 
                      ${index > 2 && ' text-black/70 bg-[#eeecec]'}`}
+            >
+              {index + 1}
+            </span>
+            <div className='-mt-[2px]'>
+              <Link
+                title={item.title}
+                to={`${PATH.comics}/${item.id}`}
+                className='hover:text-primary font-semibold text-base leading-4 line-clamp-1'
               >
-                {index + 1}
-              </span>
-              <div className='-mt-[2px]'>
-                <Link
-                  title={item.title}
-                  to={`${PATH.comics}/${item.id}`}
-                  className='hover:text-primary font-semibold text-base leading-4 line-clamp-1'
-                >
-                  {item.title}
-                </Link>
-                <p className='line-clamp-1 text-gray-400 leading-5 text-sm ml-[1px]'>
-                  {formatNumberSocial(item.total_views)} {' lượt xem'}
-                </p>
+                {item.title}
+              </Link>
+              <p className='line-clamp-1 text-gray-400 leading-5 text-sm ml-[1px]'>
+                {formatNumberSocial(item.total_views)} {' lượt xem'}
+              </p>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+const skeleton = () => {
+  return (
+    <ul className='mt-5 flex flex-col gap-[5px] animate-pulse'>
+      {Array(5)
+        .fill(0)
+        .map((_, i) => (
+          <li key={i} className='flex items-center gap-3'>
+            <div className='flex items-center justify-center w-20 h-[50px] bg-gray-300 dark:bg-gray-700 flex-shrink-0 overflow-hidden'>
+              <svg
+                className='w-8 h-8 text-gray-200 dark:text-gray-600'
+                aria-hidden='true'
+                xmlns='http://www.w3.org/2000/svg'
+                fill='currentColor'
+                viewBox='0 0 20 18'
+              >
+                <path d='M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z' />
+              </svg>
+            </div>
+            <div className='flex items-start gap-2'>
+              <span className='w-[22px] h-[22px] -mt-[2px] bg-gray-200 rounded-full dark:bg-gray-700' />
+              <div className='mt-[2px]'>
+                <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4 -mt-2' />
+                <div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 w-28 -mt-2' />
               </div>
             </div>
           </li>
         ))}
-      </ul>
-    </>
+    </ul>
   )
 }

@@ -1,4 +1,4 @@
-import { Footer, Header, SearchBar } from '@/components'
+import { Footer, Header, ScrollToTop, SearchBar } from '@/components'
 import { Outlet } from 'react-router-dom'
 
 const ChapterLayout = () => {
@@ -8,6 +8,7 @@ const ChapterLayout = () => {
       <main>
         <SearchBar />
         <Outlet />
+        <ScrollToTop/>
       </main>
       <Footer />
     </>

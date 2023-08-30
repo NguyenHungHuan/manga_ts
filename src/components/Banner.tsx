@@ -12,10 +12,25 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { Autoplay, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { useState, useEffect, useRef } from 'react'
 
 const Banner = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const el = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (el.current) {
+      setIsLoading(false)
+    }
+  }, [el.current])
+
   return (
-    <section className='flex gap-[10px]'>
+    <section
+      ref={el}
+      className={`flex gap-[10px] transition-all duration-500 ${
+        isLoading ? 'opacity-0' : 'opacity-100'
+      }`}
+    >
       <div className='w-[510px] relative'>
         <Swiper
           slidesPerView={1}
@@ -29,7 +44,7 @@ const Banner = () => {
           pagination={{ el: '.swiper-pagination', clickable: true }}
         >
           <SwiperSlide>
-            <Link to={`${PATH.comics}/one-piece`}>
+            <Link to={`${PATH.comics}/one-piece`} title='One Piece'>
               <div
                 className='bg-no-repeat bg-cover w-full h-[380px] bg-center'
                 style={{
@@ -39,7 +54,7 @@ const Banner = () => {
             </Link>
           </SwiperSlide>
           <SwiperSlide>
-            <Link to={`${PATH.comics}/jujutsu-kaisen-chu-thuat-hoi-chien`}>
+            <Link to={`${PATH.comics}/jujutsu-kaisen-chu-thuat-hoi-chien`} title='Jujutsu Kaisen - Chú Thuật Hồi Chiến'>
               <div
                 className='bg-no-repeat bg-cover w-full h-[380px] bg-center'
                 style={{
@@ -49,7 +64,7 @@ const Banner = () => {
             </Link>
           </SwiperSlide>
           <SwiperSlide>
-            <Link to={`${PATH.comics}/thanh-guom-diet-quy`}>
+            <Link to={`${PATH.comics}/thanh-guom-diet-quy`} title='Thanh Gươm Diệt Quỷ'>
               <div
                 className='bg-no-repeat bg-cover w-full h-[380px] bg-center'
                 style={{
@@ -66,7 +81,7 @@ const Banner = () => {
       </div>
       <div className='flex-shrink-0 grid grid-cols-6 gap-[10px]'>
         <div className='col-span-6 flex items-center gap-[10px]'>
-          <Link to={`${PATH.comics}/onepunch-man`} className='w-[336px] h-[185px] overflow-hidden'>
+          <Link to={`${PATH.comics}/onepunch-man`} title='Onepunch Man' className='w-[336px] h-[185px] overflow-hidden'>
             <p
               className='bg-no-repeat bg-cover w-full h-full'
               style={{
@@ -75,7 +90,7 @@ const Banner = () => {
             />
           </Link>
           <Link
-            to={`${PATH.comics}/mashle-magic-and-muscles`}
+            to={`${PATH.comics}/mashle-magic-and-muscles`} title='Mashle: Magic And Muscles'
             className='w-[336px] h-[185px] overflow-hidden'
           >
             <p
@@ -88,6 +103,7 @@ const Banner = () => {
         </div>
         <div className='col-span-6 flex items-center gap-[10px]'>
           <Link
+          title='REINCARNATED AS AN ARISTOCRAT WITH AN APPRAISAL SKILL'
             to={`${PATH.comics}/reincarnated-as-an-aristocrat-with-an-appraisal-skill`}
             className='w-[221px] h-[185px] overflow-hidden'
           >
@@ -99,6 +115,7 @@ const Banner = () => {
             />
           </Link>
           <Link
+          title='Tôi Muốn Nhìn Thấy Dáng Vẻ Xấu Hổ Của Cậu'
             to={`${PATH.comics}/toi-muon-nhin-thay-dang-ve-xau-ho-cua-cau`}
             className='w-[221px] h-[185px] overflow-hidden'
           >
@@ -110,6 +127,7 @@ const Banner = () => {
             />
           </Link>
           <Link
+          title='Kỹ Năng Vô Dụng [Auto Mode] Bỗng Dưng Thức Tỉnh ~ Hả, Tổ Đội Trinh Sát Mấy Người, Chẳng Phải Đã Nói'
             to={`${PATH.comics}/ky-nang-vo-dung-auto-mode-bong-dung-thuc-tinh-ha-to-doi-trinh-sat-may-nguoi-chang-phai-da-noi`}
             className='w-[221px] h-[185px] overflow-hidden'
           >

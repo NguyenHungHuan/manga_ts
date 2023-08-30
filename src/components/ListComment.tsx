@@ -120,7 +120,7 @@ const ListComment = ({ id }: { id: string }) => {
         )}
         {isError && (
           <div className='h-[100px] border-b mb-5 border-dashed flex items-center justify-center gap-2'>
-            <span className='text-gray-400'>Not found...</span>
+            <span className='text-gray-400'>Không tìm thấy bình luận</span>
           </div>
         )}
         {!isFetching && dataComment && dataComment.comments.length > 0 && (

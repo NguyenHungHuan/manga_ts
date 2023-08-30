@@ -92,7 +92,7 @@ const ListDownloadChapter = ({ data, id }: Props) => {
               onClick={() => setOpenList((prev) => !prev)}
             >
               <div className='flex items-center gap-2'>
-                <span className='line-clamp-1 max-w-[140px]'>Chọn chương</span>
+                <span className='line-clamp-1 max-w-[140px]'>{`${range[0]} - ${range[1]}`}</span>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'

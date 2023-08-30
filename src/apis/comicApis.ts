@@ -43,14 +43,14 @@ const comicApis = {
   },
   getNew(params?: paramOption) {
     const url = PATH.new
-    return axiosClients2.get<dataComics>(url, { params })
+    return axiosClients.get<dataComics>(url, { params })
   },
   getComicDetail(id: string) {
     const url = `${PATH.comics}/${id}`
     return axiosClients.get<comicsDetail>(url)
   },
   getComicComments(id: string, params?: { page: number }) {
-    const url = `${PATH.comics}/${id}${PATH.comment}`
+    const url = `${PATH.comics}/${id}${PATH.comments}`
     return axiosClients2.get<comicsComment>(url, { params })
   },
   getComicChapter(id: string, chapterId: string) {

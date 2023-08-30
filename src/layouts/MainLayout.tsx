@@ -1,4 +1,4 @@
-import { Footer, Header, Navbar, SearchBar } from '@/components'
+import { Footer, Header, Navbar, ScrollToTop, SearchBar } from '@/components'
 import { Outlet } from 'react-router-dom'
 
 const MainLayout = ({ hideNav = false }: { hideNav?: boolean }) => {
@@ -11,6 +11,7 @@ const MainLayout = ({ hideNav = false }: { hideNav?: boolean }) => {
         <SearchBar />
         {!hideNav && <Navbar />}
         <Outlet />
+        <ScrollToTop/>
       </main>
       <Footer />
     </>
