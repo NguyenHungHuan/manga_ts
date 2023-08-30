@@ -23,6 +23,7 @@ const PATH = {
   chapters: '/chapters',
   search: '/search',
   download: '/download',
+  history: '/history',
   searchSuggest: '/search-suggest',
 } as const
 

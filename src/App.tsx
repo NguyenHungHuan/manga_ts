@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import PATH from './utils/path'
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { ChapterLayout, MainLayout } from './layouts'
+import { initLocalDb } from './utils/history'
 
 const ComicsList = lazy(() => import('./pages/ComicsList'))
 const ComicsGenre = lazy(() => import('./pages/ComicsGenre'))
@@ -10,8 +11,13 @@ const ComicsChapter = lazy(() => import('./pages/ComicsChapter'))
 const ComicsSearch = lazy(() => import('./pages/ComicsSearch'))
 const Home = lazy(() => import('./pages/Home'))
 const Download = lazy(() => import('./pages/Download'))
+const History = lazy(() => import('./pages/History'))
 
 function App() {
+  useEffect(() => {
+    initLocalDb()
+  }, [])
+
   const router = createBrowserRouter([
     {
       path: '/',
@@ -96,6 +102,14 @@ function App() {
           element: (
             <Suspense fallback={<LoadingPage />}>
               <ComicsList />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.history,
+          element: (
+            <Suspense fallback={<LoadingPage />}>
+              <History />
             </Suspense>
           )
         }

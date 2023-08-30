@@ -11,7 +11,9 @@ const MainLayout = ({ hideNav = false }: { hideNav?: boolean }) => {
         <SearchBar />
         {!hideNav && <Navbar />}
         <Outlet />
-        <ScrollToTop/>
+        <div className='hidden md:block'>
+          <ScrollToTop />
+        </div>
       </main>
       <Footer />
     </>

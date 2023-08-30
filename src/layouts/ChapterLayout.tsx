@@ -8,7 +8,9 @@ const ChapterLayout = () => {
       <main>
         <SearchBar />
         <Outlet />
-        <ScrollToTop/>
+        <div className='hidden md:block'>
+          <ScrollToTop />
+        </div>
       </main>
       <Footer />
     </>

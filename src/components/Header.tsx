@@ -73,7 +73,10 @@ const Header = () => {
           </ul>
         </div>
         <div className='flex items-center gap-4'>
-          <button className='flex flex-col items-center px-2 py-1 active:ring-1 ring-gray-500 rounded-md active:scale-95'>
+          <Link
+            to={PATH.history}
+            className='flex flex-col items-center px-2 py-1 rounded-md hover:text-primary'
+          >
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -89,8 +92,8 @@ const Header = () => {
               />
             </svg>
             <span className='capitalize text-xs mt-[2px]'>lịch sử</span>
-          </button>
-          <button className='flex flex-col items-center px-2 py-1 active:ring-1 ring-gray-500 rounded-md active:scale-95'>
+          </Link>
+          <button className='flex flex-col items-center px-2 py-1 hover:text-primary'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -107,7 +110,7 @@ const Header = () => {
             </svg>
             <span className='capitalize text-xs mt-[2px]'>Ngôn ngữ</span>
           </button>
-          <button className='flex flex-col items-center px-2 py-1 active:ring-1 ring-gray-500 rounded-md active:scale-95'>
+          <button className='flex flex-col items-center px-2 py-1 hover:text-primary'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'

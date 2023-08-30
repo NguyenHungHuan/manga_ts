@@ -5,8 +5,9 @@ import PATH from '@/utils/path'
 import classNames from 'classnames'
 import { useQuery } from 'react-query'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { comicSingleChapter } from '@/types/data'
+import { historyAddComic } from '@/utils/history'
 
 const ComicsChapter = () => {
   const { id, idChapter } = useParams()
@@ -21,7 +22,30 @@ const ComicsChapter = () => {
     keepPreviousData: true,
     enabled: id !== '' && idChapter !== ''
   })
+
+  const { data: dataComic } = useQuery({
+    queryKey: ['comic_detail', id],
+    queryFn: () => comicApis.getComicDetail(id as string),
+    staleTime: 3 * 60 * 1000,
+    enabled: id !== ''
+  })
+  const dataComics = dataComic?.data
   const dataChapter = data?.data
+
+  useEffect(() => {
+    if (dataComics && dataChapter) {
+      historyAddComic({
+        id: dataComics.id,
+        status: dataComics.status,
+        title: dataComics.title,
+        thumbnail: dataComics.thumbnail,
+        description: dataComics.description,
+        reading_at: `${new Date().getHours()}:${new Date().getMinutes()} - ${new Date().getDay()}/${new Date().getMonth()}/${new Date().getFullYear()}`,
+        last_reading: dataChapter.chapter_name,
+        chapter_id: Number(idChapter)
+      })
+    }
+  }, [dataComics, dataChapter])
 
   const handleChangeEpisode = (type: 'prev' | 'next') => {
     if (dataChapter) {
@@ -196,7 +220,8 @@ const ComicsChapter = () => {
                         Number(idChapter) !==
                         dataChapter.chapters[dataChapter.chapters.length - 1].id,
                       'opacity-80 cursor-default':
-                        Number(idChapter) === dataChapter.chapters[dataChapter.chapters.length - 1].id
+                        Number(idChapter) ===
+                        dataChapter.chapters[dataChapter.chapters.length - 1].id
                     }
                   )}
                   disabled={
