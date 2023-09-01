@@ -139,25 +139,27 @@ const ListDownloadChapter = ({ data, id }: Props) => {
           </li>
         </ul>
       </div>
-      <div className='px-2 grid grid-cols-5 gap-3 my-3 text-gray-800 font-semibold text-sm flex-wrap overflow-y-auto h-[350px]'>
-        {(dataChapter as comicsChapter).map((item) => (
-          <button
-            onClick={() => onAddDownloadChapter(item.id)}
-            title={item.name}
-            key={item.id}
-            className={classNames(
-              'h-[38px] px-4 rounded-md font-normal dark:text-white text-base overflow-hidden whitespace-nowrap active:scale-95',
-              {
-                'text-primary bg-primary/10 dark:text-primary dark:bg-primary/50': downloadChapters.includes(item.id),
-                'bg-[#f6f6f6] dark:bg-gray-700': !downloadChapters.includes(
-                  item.id
-                )
-              }
-            )}
-          >
-            {item.name}
-          </button>
-        ))}
+      <div className='px-2 overflow-y-auto h-[350px]'>
+        <ul className='grid grid-cols-5 gap-3 my-3 text-gray-800 font-semibold text-sm flex-wrap'>
+          {(dataChapter as comicsChapter).map((item) => (
+            <li key={item.id} className='flex-1 rounded-md overflow-hidden'>
+              <button
+                onClick={() => onAddDownloadChapter(item.id)}
+                title={item.name}
+                className={classNames(
+                  'h-[38px] w-full px-3 font-normal rounded-md dark:text-white text-base overflow-hidden active:scale-95',
+                  {
+                    'text-primary bg-primary/10 dark:text-primary dark:bg-primary/50':
+                      downloadChapters.includes(item.id),
+                    'bg-[#f6f6f6] dark:bg-gray-700': !downloadChapters.includes(item.id)
+                  }
+                )}
+              >
+                <span className='line-clamp-1 whitespace-nowrap'>{item.name}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
       <div className='flex items-center gap-3 justify-end pr-4'>
         <span className='text-primary'>{`( ${downloadChapters.length} )`}</span>

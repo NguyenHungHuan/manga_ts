@@ -12,7 +12,6 @@ import { historyAddComic } from '@/utils/history'
 const ComicsChapter = () => {
   const { id, idChapter } = useParams()
   const navigate = useNavigate()
-  useScrollTop([idChapter])
   const [openList, setOpenList] = useState<boolean>(false)
 
   const { data, isFetching } = useQuery({
@@ -65,6 +64,8 @@ const ComicsChapter = () => {
   useEffect(() => {
     document.getElementById(idChapter as string)?.scrollIntoView({ block: 'center' })
   }, [idChapter])
+
+  useScrollTop([idChapter])
 
   return (
     <>

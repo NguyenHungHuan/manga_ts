@@ -83,8 +83,11 @@ const ComicsDetail = () => {
                     />
                   </figure>
                   <div className='w-full'>
-                    <div className='flex items-center justify-between gap-6 -mt-2'>
-                      <h2 className='font-semibold text-3xl line-clamp-1 -ml-1 text-black dark:text-white'>
+                    <div className='flex items-start justify-between gap-6 -mt-2'>
+                      <h2
+                        title={dataComics.title}
+                        className='font-semibold text-3xl -ml-1 text-black dark:text-white'
+                      >
                         {dataComics.title}
                       </h2>
                       <RatingStar rating={dataComics.followers} />
@@ -303,7 +306,10 @@ const ComicsDetail = () => {
           isOpenModal ? ' opacity-100 pointer-events-auto' : ' opacity-0 pointer-events-none'
         }`}
       >
-        <div className='bg-white dark:bg-gray-900 p-5 rounded-lg' onMouseDown={(e) => e.stopPropagation()}>
+        <div
+          className='bg-white dark:bg-gray-900 p-5 rounded-lg'
+          onMouseDown={(e) => e.stopPropagation()}
+        >
           <section className='w-[700px]'>
             {dataComics && id && <ListDownloadChapter id={id} data={dataComics.chapters} />}
           </section>

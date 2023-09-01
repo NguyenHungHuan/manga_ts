@@ -28,7 +28,7 @@ const Footer = () => {
             </svg>
           </a>
           <a
-            href='https://github.com/NguyenHungHuan/manga'
+            href='https://github.com/NguyenHungHuan/manga_ts'
             rel='noopener noreferrer'
             target='_blank'
             className='text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-200'

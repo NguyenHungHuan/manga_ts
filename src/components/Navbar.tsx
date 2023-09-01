@@ -116,7 +116,7 @@ const Navbar = () => {
               </li>
               <li className='ml-auto'>
                 <Link
-                  to='https://www.facebook.com/groups/860444028385945'
+                  to='https://github.com/NguyenHungHuan/manga_ts'
                   target='_blank'
                   rel='noopener noreferrer'
                   className='relative uppercase font-semibold text-sm hover:text-primary px-1 py-4 flex items-center gap-1'
@@ -132,7 +132,7 @@ const Navbar = () => {
                 <Link
                   target='_blank'
                   rel='noopener noreferrer'
-                  to='https://www.facebook.com/nettruyen/'
+                  to='https://www.facebook.com/huan.hung.311'
                   className='uppercase font-semibold text-sm hover:text-primary px-1 py-4'
                 >
                   fanpage
