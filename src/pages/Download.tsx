@@ -18,7 +18,7 @@ const Download = () => {
     <>
       {dataChapter && (
         <>
-          <h1 className='text-black font-semibold text-2xl text-center mt-20'>{`${dataChapter.comic_name} - ${dataChapter.chapter_name}`}</h1>
+          <h1 className='text-black dark:text-white font-semibold text-2xl text-center mt-20'>{`${dataChapter.comic_name} - ${dataChapter.chapter_name}`}</h1>
           <PDFDownloadLink
             document={
               <Document>
@@ -65,7 +65,7 @@ const Download = () => {
                   >
                     <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
                   </svg>
-                  <button ref={(elBtn) => (elBtn?.parentNode as HTMLAnchorElement).click()}>
+                  <button className='text-black dark:text-white' ref={(elBtn) => (elBtn?.parentNode as HTMLAnchorElement).click()}>
                     Completed
                   </button>
                 </div>
@@ -90,7 +90,7 @@ const Download = () => {
                       fill='currentFill'
                     />
                   </svg>
-                  Loading...
+                  <span className='text-black dark:text-white'>Loading...</span>
                 </div>
               )
             }}

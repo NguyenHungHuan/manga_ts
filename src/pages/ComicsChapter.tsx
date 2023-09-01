@@ -163,7 +163,7 @@ const ComicsChapter = () => {
                       {
                         'hover:border-primary hover:text-primary dark:text-white dark:hover:border-primary dark:hover:text-primary':
                           Number(idChapter) !== dataChapter.chapters[0].id,
-                        'opacity-80 cursor-default':
+                        'opacity-60 cursor-default dark:text-white/60':
                           Number(idChapter) === dataChapter.chapters[0].id
                       }
                     )}
