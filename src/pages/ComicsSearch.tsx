@@ -21,7 +21,7 @@ const ComicsSearch = () => {
   return (
     <div className='container'>
       <div className='mt-6 flex items-center justify-between'>
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-2 text-black dark:text-white'>
           <Link to={PATH.home} className='flex items-center gap-1 hover:text-primary text-lg'>
             Trang chủ{' '}
             <svg
@@ -75,8 +75,8 @@ const ComicsSearch = () => {
           !isFetching &&
           dataSearch?.comics.length > 0 &&
           renderSwiperSlide(dataSearch.comics, 2, '6')}
-        {Array.isArray(dataSearch?.comics) && !dataSearch?.comics.length && isError && (
-          <div className='flex items-center justify-center text-2xl h-[550px]'>
+        {!isFetching && ((Array.isArray(dataSearch?.comics) && !dataSearch?.comics.length) || isError) && (
+          <div className='flex items-center justify-center text-2xl h-[550px] text-black dark:text-white'>
             Không tìm thấy truyện với kết quả
           </div>
         )}

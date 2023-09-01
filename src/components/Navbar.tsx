@@ -13,19 +13,19 @@ const Navbar = () => {
   return (
     <div
       className={classNames('text-black/60 dark:text-white', {
-        'bg-white dark:bg-gradient': isHome,
-        'bg-[#f8f8f9] p-5': !isHome
+        'bg-white dark:bg-gray-900': isHome,
+        'bg-[#f8f8f9] dark:bg-gray-800 p-5': !isHome
       })}
     >
       <nav
         className={classNames('container h-[56px]', {
           'py-[15px]': isHome,
-          'py-10 px-4 bg-white border-t-[3px] border-primary': !isHome
+          'py-10 px-4 bg-white dark:bg-gray-900 border-t-[3px] border-primary': !isHome
         })}
       >
         <ul className='flex items-center gap-3 h-full'>
           {!isHome && !isTop && (
-            <li className='uppercase font-semibold text-sm py-4 text-black'>chủ đề:</li>
+            <li className='uppercase font-semibold text-sm py-4 text-black dark:text-gray-400'>chủ đề:</li>
           )}
           {!isTop && (
             <>

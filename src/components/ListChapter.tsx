@@ -57,7 +57,7 @@ const ListChapter = ({ data, id }: Props) => {
       <ul className='flex items-center gap-3 my-5 text-gray-800 font-semibold text-sm flex-wrap'>
         <li>
           <button
-            className='text-black rounded-md relative font-normal text-base leading-5 py-1 px-3 border flex items-center gap-2'
+            className='text-black dark:text-white rounded-md relative font-normal text-base leading-5 py-1 px-3 border dark:border dark:border-gray-500 flex items-center gap-2'
             onClick={(e) => {
               e.stopPropagation()
               setOpenList((prev) => !prev)
@@ -83,11 +83,11 @@ const ListChapter = ({ data, id }: Props) => {
               </svg>
             </div>
             <div
-              className={`absolute z-10 top-8 border shadow-lg bg-white w-32 px-1 rounded right-full translate-x-1/3 sm:translate-x-1/2 sm:right-1/2 text-left duration-200 origin-top ${
+              className={`absolute z-10 top-8 border dark:border dark:border-gray-500 shadow-lg bg-white dark:bg-gray-900 w-32 rounded right-full translate-x-1/3 sm:translate-x-1/2 sm:right-1/2 text-left duration-200 origin-top ${
                 openList ? 'scale-100' : 'scale-[0.001]'
               }`}
             >
-              <ul className='overflow-auto text-sm h-max max-h-72 font-normal px-2'>
+              <ul className='overflow-auto text-sm h-max max-h-72 font-normal pl-3 px-1'>
                 {Array(numberButton)
                   .fill(0)
                   .map((_, i) => (
@@ -99,7 +99,7 @@ const ListChapter = ({ data, id }: Props) => {
                         {
                           'hover:text-primary': i !== active,
                           'text-primary': i === active,
-                          'border-t border-dashed': i !== 0,
+                          'border-t border-dashed dark:border-gray-600': i !== 0,
                           hidden: !(i * 50 + 1 <= Math.floor(newestChapter))
                         }
                       )}
@@ -112,13 +112,13 @@ const ListChapter = ({ data, id }: Props) => {
           </button>
         </li>
       </ul>
-      <div className='grid grid-cols-4 gap-5 my-5 text-gray-800 font-semibold text-sm flex-wrap'>
+      <div className='grid grid-cols-4 gap-5 my-5 text-gray-800 dark:text-gray-200 font-semibold text-sm flex-wrap'>
         {(dataChapter as comicsChapter).map((item) => (
           <Link
             to={`${PATH.chapters}/${id}/${item.id}`}
             title={item.name}
             key={item.id}
-            className='rounded-sm font-normal text-base h-[38px] pt-2 px-4 bg-[#f6f6f6] hover:bg-primary/10 hover:text-primary truncate'
+            className='rounded-sm font-normal text-base h-[38px] pt-2 px-4 bg-[#f6f6f6] dark:bg-gray-800 dark:hover:bg-primary/20 hover:bg-primary/10 hover:text-primary truncate'
           >
             {item.name}
           </Link>

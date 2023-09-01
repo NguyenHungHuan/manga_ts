@@ -43,15 +43,18 @@ const SearchBar = () => {
   return (
     <div className='w-full'>
       <div
-        className='bg-no-repeat bg-cover h-[100px]'
+        className='bg-no-repeat bg-cover h-[100px] dark:relative dark:after:content-[""] dark:after:absolute dark:after:inset-0 dark:after:bg-gray-900/80'
         style={{
           backgroundImage: `url('${bgSearch}')`
         }}
       >
         <div className='container h-full'>
           <div className='h-full flex items-center justify-center'>
-            <form className='relative flex items-center' onSubmit={(e) => handleSearch(e)}>
-              <div className='flex-shrink-0 bg-white py-4 pl-[18px] pr-[14px]'>
+            <form
+              className='z-10 relative flex items-center dark:text-white'
+              onSubmit={(e) => handleSearch(e)}
+            >
+              <div className='flex-shrink-0 bg-white py-4 pl-[18px] pr-[14px] dark:bg-gray-900'>
                 <p
                   className='bg-cover bg-no-repeat w-[18px] h-[18px]'
                   style={{
@@ -65,15 +68,15 @@ const SearchBar = () => {
                 onChange={(e) => setValueForm(e.target.value)}
                 value={valueForm}
                 type='text'
-                placeholder='Search...'
-                className='h-[50px] leading-[50px] pr-4 w-[420px] outline-none'
+                placeholder='Tìm kiếm...'
+                className='h-[50px] leading-[50px] pr-4 w-[420px] outline-none dark:bg-gray-900'
               />
               <button className='text-white capitalize flex items-center justify-center bg-gradient h-[50px] w-[140px]'>
                 Tìm Kiếm
               </button>
               {isOpen && (
                 <div
-                  className='absolute top-[50px] left-0 z-40 border border-[#EDEDED] bg-white w-[470px] shadow-[0_2px_4px_0_rgba(0,0,0,0.10)] max-h-[280px] overflow-y-auto'
+                  className='absolute top-[50px] left-0 z-40 border border-[#EDEDED] dark:border-gray-600 bg-white dark:bg-gray-900 w-[470px] shadow-[0_2px_4px_0_rgba(0,0,0,0.10)] max-h-[280px] overflow-y-auto'
                   style={{
                     filter: 'blur(0)'
                   }}

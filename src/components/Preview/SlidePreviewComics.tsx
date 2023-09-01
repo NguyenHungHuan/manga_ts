@@ -51,8 +51,8 @@ const SlidePreviewComics = ({ data }: Props) => {
                           title={item.title}
                           loading='lazy'
                           className={`${
-                            isActive && 'shadow-lg z-10'
-                          }  w-full h-full object-cover border-[10px] border-white block`}
+                            isActive && 'shadow-lg dark:shadow-gray-800 z-10'
+                          }  w-full h-full object-cover border-[10px] border-white dark:border-gray-900 block`}
                           onError={({ currentTarget }) => {
                             currentTarget.onerror = null
                             currentTarget.src = imgError
@@ -73,7 +73,7 @@ const SlidePreviewComics = ({ data }: Props) => {
                         <Link
                           to={`${PATH.comics}/${item.id}`}
                           title={item.title}
-                          className='hover:text-primary font-semibold text-xl truncate'
+                          className='hover:text-primary text-black dark:text-white dark:hover:text-primary font-semibold text-xl truncate'
                         >
                           {item.title}
                         </Link>
@@ -97,7 +97,7 @@ const SlidePreviewComics = ({ data }: Props) => {
                       </p>
                       <span className='text-base mt-1 block text-gray-400'>
                         Lượt xem:{' '}
-                        <strong className='text-black font-normal lowercase'>
+                        <strong className='text-black dark:text-white font-normal lowercase'>
                           {formatCurrency(item.total_views)}
                         </strong>
                       </span>
@@ -115,7 +115,7 @@ const SlidePreviewComics = ({ data }: Props) => {
                               title={genre.name}
                               key={genre.id}
                             >
-                              <span className='py-1 px-2 text-[13px] border border-dashed border-[#d9d9d9] hover:text-primary hover:border-primary truncate'>
+                              <span className='py-1 px-2 text-[13px] border border-dashed border-[#d9d9d9] hover:text-primary hover:border-primary dark:text-gray-300 dark:hover:text-primary truncate'>
                                 {genre.name}
                               </span>
                             </Link>
@@ -131,7 +131,7 @@ const SlidePreviewComics = ({ data }: Props) => {
               ))}
             </div>
           </div>
-          <ul className='w-[688px] grid grid-cols-4 gap-x-[2.5px] gap-y-5'>
+          <ul className='w-[688px] grid grid-cols-4 gap-x-1 gap-y-5'>
             {data.slice(5, 13).map((item) => (
               <li key={item.id}>
                 <CardItem
@@ -170,7 +170,7 @@ const skeleton = () => {
               <path d='M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z' />
             </svg>
           </div>
-          <div className='flex items-center justify-center w-[248px] -ml-14 border z-10 h-full bg-gray-300 dark:bg-gray-700 flex-shrink-0'>
+          <div className='flex items-center justify-center w-[248px] -ml-14 border dark:border-gray-600 z-10 h-full bg-gray-300 dark:bg-gray-700 flex-shrink-0'>
             <svg
               className='w-16 h-16 text-gray-200 dark:text-gray-600'
               aria-hidden='true'

@@ -40,12 +40,16 @@ const ComicsChapter = () => {
         title: dataComics.title,
         thumbnail: dataComics.thumbnail,
         description: dataComics.description,
-        reading_at: `${new Date().getHours()}:${new Date().getMinutes()} - ${new Date().getDay()}/${new Date().getMonth()}/${new Date().getFullYear()}`,
-        last_reading: dataChapter.chapter_name,
+        reading_at: new Date().getTime(),
+        time: `${new Date().getHours()}:${new Date().getMinutes()} - ${new Date().getDate()}/${
+          new Date().getMonth() + 1
+        }/${new Date().getFullYear()}`,
+        last_reading: dataChapter.chapters.find((item) => item.id === Number(idChapter))
+          ?.name as string,
         chapter_id: Number(idChapter)
       })
     }
-  }, [dataComics, dataChapter])
+  }, [id, idChapter, dataComics, dataChapter])
 
   const handleChangeEpisode = (type: 'prev' | 'next') => {
     if (dataChapter) {
@@ -58,24 +62,28 @@ const ComicsChapter = () => {
     }
   }
 
+  useEffect(() => {
+    document.getElementById(idChapter as string)?.scrollIntoView({ block: 'center' })
+  }, [idChapter])
+
   return (
     <>
-      <div className='min-h-[60px] sticky top-0 z-20 bg-white shadow-lg'>
+      <div className='min-h-[60px] sticky top-0 left-0 z-20 bg-white dark:bg-gray-900 shadow-lg'>
         <div className='container max-w-4xl'>
           {dataChapter && (
             <div className='flex items-center justify-between'>
-              {Breadcrumb(id as string, dataChapter)}
-              <div className='flex items-center gap-8'>
+              {Breadcrumb(id as string, idChapter as string, dataChapter)}
+              <div className='flex items-center gap-2'>
                 <div className='flex items-center gap-2'>
                   <button
                     onClick={() => handleChangeEpisode('prev')}
                     className={classNames(
-                      'flex items-center justify-center gap-1 px-4 h-9 border rounded-md leading-3 active:scale-95',
+                      'flex items-center justify-center gap-1 px-3 h-8 border dark:border-gray-500 rounded-md leading-3 active:scale-95',
                       {
-                        'hover:border-primary hover:text-primary':
+                        'hover:border-primary hover:text-primary dark:text-white dark:hover:border-primary dark:hover:text-primary':
                           Number(idChapter) !==
                           dataChapter.chapters[dataChapter.chapters.length - 1].id,
-                        'opacity-80 cursor-default':
+                        'opacity-60 cursor-default dark:text-white/60':
                           Number(idChapter) ===
                           dataChapter.chapters[dataChapter.chapters.length - 1].id
                       }
@@ -100,14 +108,11 @@ const ComicsChapter = () => {
                     </svg>
                   </button>
                   <button
-                    className='px-4 py-[5px] text-black rounded-md relative border'
-                    onClick={() => {
-                      setOpenList((prev) => !prev)
-                      document.getElementById(idChapter as string)?.scrollIntoView()
-                    }}
+                    className='px-3 py-[3px] text-black dark:text-white rounded-md relative border dark:border-gray-500'
+                    onClick={() => setOpenList((prev) => !prev)}
                   >
                     <div className='flex items-center gap-2'>
-                      <span className='line-clamp-1 max-w-[140px]'>
+                      <span className='line-clamp-1 max-w-[120px]'>
                         {dataChapter.chapters.find((item) => item.id === Number(idChapter))?.name}
                       </span>
                       <svg
@@ -126,19 +131,20 @@ const ComicsChapter = () => {
                       </svg>
                     </div>
                     <div
-                      className={`absolute z-10 top-10 border shadow-lg bg-white w-60 py-3 rounded right-full translate-x-1/3 sm:translate-x-1/2 sm:right-1/2 text-left duration-200 origin-top ${
+                      className={`absolute z-10 top-10 border dark:border-gray-500 shadow-lg bg-white dark:bg-gray-900 w-60 py-3 rounded right-full translate-x-1/3 sm:translate-x-1/2 sm:right-1/2 text-left duration-200 origin-top ${
                         openList ? 'scale-100' : 'scale-[0.001]'
                       }`}
                     >
-                      <h5 className='text-lg px-4 pb-1'>
+                      <h5 className='text-lg px-4 pb-2 leading-5'>
                         All episodes {`(${dataChapter.chapters.length})`}
                       </h5>
-                      <ul className='overflow-auto text-sm h-max max-h-72 font-normal'>
+                      <ul className='overflow-auto text-sm h-max max-h-64 font-normal'>
                         {dataChapter.chapters.map((item) => (
-                          <li id={item.id.toString()} key={item.id}>
+                          <li key={item.id}>
                             <Link
+                              id={item.id.toString()}
                               to={`${PATH.chapters}/${id}/${item.id}`}
-                              className={`py-2 block truncate px-4 duration-100 hover:bg-[rgba(0,0,0,0.1)] ${
+                              className={`py-2 block truncate px-4 duration-100 hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.1)] ${
                                 item.id === Number(idChapter) ? 'text-primary font-bold' : ''
                               }`}
                             >
@@ -152,9 +158,9 @@ const ComicsChapter = () => {
                   <button
                     onClick={() => handleChangeEpisode('next')}
                     className={classNames(
-                      'flex items-center justify-center gap-1 px-4 h-9 border rounded-md leading-3 active:scale-95',
+                      'flex items-center justify-center gap-1 px-3 h-8 border dark:border-gray-500 rounded-md leading-3 active:scale-95',
                       {
-                        'hover:border-primary hover:text-primary':
+                        'hover:border-primary hover:text-primary dark:text-white dark:hover:border-primary dark:hover:text-primary':
                           Number(idChapter) !== dataChapter.chapters[0].id,
                         'opacity-80 cursor-default':
                           Number(idChapter) === dataChapter.chapters[0].id
@@ -208,9 +214,9 @@ const ComicsChapter = () => {
       <div className='container max-w-4xl min-h-[60px]'>
         {dataChapter && (
           <div className='flex items-center justify-between'>
-            {Breadcrumb(id as string, dataChapter)}
-            <div className='flex items-center gap-8'>
-              <div className='flex items-center gap-4'>
+            {Breadcrumb(id as string, idChapter as string, dataChapter)}
+            <div className='flex items-center gap-3'>
+              <div className='flex items-center gap-3 text-black dark:text-white'>
                 <button
                   onClick={() => handleChangeEpisode('prev')}
                   className={classNames(
@@ -284,10 +290,10 @@ const ComicsChapter = () => {
 }
 export default ComicsChapter
 
-const Breadcrumb = (id: string, dataChapter: comicSingleChapter) => {
+const Breadcrumb = (id: string, idChapter: string, dataChapter: comicSingleChapter) => {
   return (
-    <div className='flex items-center gap-2 my-4'>
-      <Link to={PATH.home} className='flex items-center gap-1 hover:text-primary text-lg'>
+    <div className='flex items-center gap-1 my-4 dark:text-white'>
+      <Link to={PATH.home} className='flex items-center hover:text-primary text-lg'>
         Trang chủ{' '}
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -309,7 +315,7 @@ const Breadcrumb = (id: string, dataChapter: comicSingleChapter) => {
       <Link
         to={`${PATH.comics}/${id}`}
         title={dataChapter.comic_name}
-        className='flex items-center gap-1 text-lg hover:text-primary'
+        className='flex items-center text-lg hover:text-primary'
       >
         <h2 className='max-w-[220px] line-clamp-1'>{dataChapter.comic_name}</h2>
         <svg
@@ -329,7 +335,18 @@ const Breadcrumb = (id: string, dataChapter: comicSingleChapter) => {
           />
         </svg>
       </Link>
-      <span className='text-primary text-lg'>{dataChapter.chapter_name}</span>
+      <h3
+        onClick={() =>
+          window.scroll({
+            top: 0,
+            behavior: 'smooth'
+          })
+        }
+        title={dataChapter.chapters.find((item) => item.id === Number(idChapter))?.name}
+        className='text-primary text-lg max-w-[200px] line-clamp-1 cursor-pointer'
+      >
+        {dataChapter.chapters.find((item) => item.id === Number(idChapter))?.name}
+      </h3>
     </div>
   )
 }
@@ -350,7 +367,7 @@ const ButtonDownload = (id: string, chapterId: string) => {
   return (
     <button
       onClick={handleClick}
-      className='pl-8 border-l border-gray-400/60 text-gray-500 font-medium flex items-center justify-center gap-2 h-6 hover:text-primary text-lg'
+      className='pl-2 border-l border-gray-400/60 text-gray-500 dark:text-gray-300 dark:border-gray-500 font-medium flex items-center justify-center gap-1 h-6 hover:text-primary text-lg'
     >
       <svg
         xmlns='http://www.w3.org/2000/svg'

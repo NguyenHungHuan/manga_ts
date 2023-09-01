@@ -23,10 +23,10 @@ const SuggestComics = ({
   isStyleSearch = false
 }: Props) => {
   return (
-    <div className='hover:bg-[#f6f6f6]'>
+    <div className='hover:bg-[#f6f6f6] dark:hover:bg-[rgba(255,255,255,0.1)]'>
       <div className='px-3'>
         <div
-          className={`flex gap-2 py-3 ${index !== 0 && ' border-t border-dashed border-[#D9D9D9]'}`}
+          className={`flex gap-2 py-3 ${index !== 0 && ' border-t border-dashed border-[#D9D9D9] dark:border-gray-500'}`}
         >
           <Link title={title} to={`${PATH.comics}/${idComic}`} className='flex-shrink-0'>
             <img
@@ -44,7 +44,7 @@ const SuggestComics = ({
             <Link
               title={title}
               to={`${PATH.comics}/${idComic}`}
-              className='font-semibold hover:text-primary line-clamp-1'
+              className='font-semibold hover:text-primary text-black dark:text-white dark:hover:text-primary line-clamp-1'
             >
               {title}
             </Link>
@@ -55,7 +55,7 @@ const SuggestComics = ({
             >
               {chapter}
             </Link>
-            <p className={`line-clamp-2 ${!isStyleSearch && ' text-xs'}`}>
+            <p className={`line-clamp-2 text-black dark:text-white ${!isStyleSearch && ' text-xs'}`}>
               {Array.isArray(genres) && genres.join(', ')}
             </p>
           </div>

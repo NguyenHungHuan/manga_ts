@@ -6,7 +6,7 @@ interface Props {
 
 const RecommendComics = ({ data }: Props) => {
   return (
-    <ul className='mt-5 grid grid-cols-7 gap-x-[2.5px] gap-y-5'>
+    <ul className='mt-5 grid grid-cols-7 gap-x-[3px] gap-y-5'>
       {data &&
         data.slice(0, 14).map((item) => (
           <li key={item.id}>

@@ -35,7 +35,7 @@ const CardItem = ({
           }}
         />
         <div className='absolute top-[-15px] left-[-30px] opacity-0 group-hover:opacity-100 scale-[0.73] group-hover:scale-100 transition-all duration-300 h-[299px] group-hover:h-[330px] z-[2] shadow-2xl'>
-          <div className='w-[226px] min-h-[330px] bg-white'>
+          <div className='w-[226px] min-h-[330px] bg-white dark:bg-gray-900 dark:border dark:border-gray-800 dark:overflow-hidden'>
             <Link to={`${PATH.comics}/${id}`} title={title}>
               <p
                 className='bg-cover bg-no-repeat w-[226px] h-[160px] bg-[center_30%]'
@@ -48,12 +48,12 @@ const CardItem = ({
               <Link
                 to={`${PATH.comics}/${id}`}
                 title={title}
-                className='hover:text-primary font-semibold text-base leading-5 block'
+                className='hover:text-primary dark:hover:text-primary text-black dark:text-white font-semibold text-base leading-5 block'
               >
                 {title}
               </Link>
               <span className='text-sm text-gray-400 block'>{updated_at}</span>
-              <p className='text-sm mt-[2px] inline-block'>
+              <p className='text-sm mt-[2px] inline-block text-black dark:text-white'>
                 <span className='mr-1'>Cập nhật:</span>
                 <Link
                   to={`${PATH.chapters}/${id}/${chapterId}`}
@@ -74,7 +74,7 @@ const CardItem = ({
           </div>
         </div>
       </div>
-      <div className='mt-2 flex flex-col'>
+      <div className='mt-2 flex flex-col text-black dark:text-white'>
         <Link
           to={`${PATH.comics}/${id}`}
           title={title}

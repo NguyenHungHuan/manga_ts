@@ -22,7 +22,7 @@ const RecentUpdateComics = ({ data }: Props) => {
   return (
     <div className='w-full h-[450px]'>
       <div className='flex h-[452px] mt-4 mx-[-40px]'>
-        <button className='btn-prev-navigate text-gray-400 hover:bg-[#f8f8f9] flex-shrink-0 h-[448px] w-[40px] flex items-center justify-center'>
+        <button className='btn-prev-navigate text-gray-400 hover:bg-[#f8f8f9] dark:hover:bg-[rgba(255,255,255,0.08)] flex-shrink-0 h-[448px] w-[40px] flex items-center justify-center'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -60,7 +60,7 @@ const RecentUpdateComics = ({ data }: Props) => {
           )}
           {!data && Skeleton()}
         </div>
-        <button className='btn-next-navigate text-gray-400 hover:bg-[#f8f8f9] flex-shrink-0 h-[448px] w-[40px] flex items-center justify-center'>
+        <button className='btn-next-navigate text-gray-400 hover:bg-[#f8f8f9] dark:hover:bg-[rgba(255,255,255,0.08)] flex-shrink-0 h-[448px] w-[40px] flex items-center justify-center'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -101,7 +101,7 @@ export const renderSwiperSlide = (data: comics[], perView: number, gap: string) 
               <div>
                 <Link
                   to={`${PATH.comics}/${item.id}`}
-                  className='text-black hover:text-primary text-lg font-bold leading-5 line-clamp-1'
+                  className='text-black hover:text-primary dark:text-white dark:hover:text-primary text-lg font-bold leading-5 line-clamp-1'
                   title={item.title}
                 >
                   {item.title}
@@ -109,17 +109,17 @@ export const renderSwiperSlide = (data: comics[], perView: number, gap: string) 
                 <span className='text-sm text-gray-400'>{item.updated_at}</span>
               </div>
               <div>
-                <p className='inline-block'>
+                <p className='inline-block text-black dark:text-white'>
                   <span className='mr-1 font-semibold'>Cập nhật:</span>
                   <Link
                     to={`${PATH.chapters}/${item.id}/${item.last_chapter.id}`}
                     title={item.last_chapter.name}
-                    className='text-primary'
+                    className='text-primary dark:text-primary'
                   >
                     {item.last_chapter.name}
                   </Link>
                 </p>
-                <p className='line-clamp-2 mt-2'>{item.short_description}</p>
+                <p className='line-clamp-2 mt-2 text-black dark:text-white'>{item.short_description}</p>
               </div>
               <div className='flex gap-1 items-center'>
                 {item.genres.slice(0, 3).map((genre) => {
@@ -135,7 +135,7 @@ export const renderSwiperSlide = (data: comics[], perView: number, gap: string) 
                       }}
                       key={genre.id}
                     >
-                      <span className='py-[2px] px-1 text-[13px] text-gray-400 border-[#d9d9d9] hover:text-primary hover:border-primary border border-dashed truncate'>
+                      <span className='py-[2px] px-1 text-[13px] text-gray-400 dark:text-gray-300 dark:hover:text-primary border-[#d9d9d9] hover:text-primary hover:border-primary border border-dashed truncate'>
                         {genre.name}
                       </span>
                     </Link>

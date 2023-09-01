@@ -81,14 +81,14 @@ const ListDownloadChapter = ({ data, id }: Props) => {
 
   return (
     <>
-      <div className='flex items-center gap-3 border-b border-slate-200 py-4'>
+      <div className='flex items-center gap-3 border-b border-slate-200 dark:border-gray-500 py-4'>
         <h3 className='flex items-center gap-2 capitalize text-primary text-lg'>
           Danh sách chương
         </h3>
         <ul className='flex items-center gap-3 text-gray-800 font-semibold text-sm flex-wrap'>
           <li>
             <button
-              className='text-black rounded-md relative font-normal text-base leading-5 py-1 px-2 border flex items-center gap-2'
+              className='text-black dark:text-white rounded-md relative font-normal text-base leading-5 py-1 px-2 border dark:border-gray-500 flex items-center gap-2'
               onClick={() => setOpenList((prev) => !prev)}
             >
               <div className='flex items-center gap-2'>
@@ -109,11 +109,11 @@ const ListDownloadChapter = ({ data, id }: Props) => {
                 </svg>
               </div>
               <div
-                className={`absolute z-10 top-8 border shadow-lg bg-white w-32 px-1 rounded right-full translate-x-1/3 sm:translate-x-1/2 sm:right-1/2 text-left duration-200 origin-top ${
+                className={`absolute z-10 top-8 border dark:border-gray-500 shadow-lg bg-white dark:bg-gray-900 w-32 rounded right-full translate-x-1/3 sm:translate-x-1/2 sm:right-1/2 text-left duration-200 origin-top ${
                   openList ? 'scale-100' : 'scale-[0.001]'
                 }`}
               >
-                <ul className='overflow-auto text-sm h-max max-h-72 font-normal px-2'>
+                <ul className='overflow-auto text-sm h-max max-h-72 font-normal px-1 pl-3'>
                   {Array(numberButton)
                     .fill(0)
                     .map((_, i) => (
@@ -125,7 +125,7 @@ const ListDownloadChapter = ({ data, id }: Props) => {
                           {
                             'hover:text-primary': i !== active,
                             'text-primary': i === active,
-                            'border-t border-dashed': i !== 0,
+                            'border-t border-dashed dark:border-gray-500': i !== 0,
                             hidden: !(i * 50 + 1 <= Math.floor(newestChapter))
                           }
                         )}
@@ -146,10 +146,10 @@ const ListDownloadChapter = ({ data, id }: Props) => {
             title={item.name}
             key={item.id}
             className={classNames(
-              'h-[38px] px-4 rounded-md font-normal text-base overflow-hidden whitespace-nowrap active:scale-95',
+              'h-[38px] px-4 rounded-md font-normal dark:text-white text-base overflow-hidden whitespace-nowrap active:scale-95',
               {
-                'text-primary bg-primary/10': downloadChapters.includes(item.id),
-                'bg-[#f6f6f6]': !downloadChapters.includes(
+                'text-primary bg-primary/10 dark:text-primary dark:bg-primary/50': downloadChapters.includes(item.id),
+                'bg-[#f6f6f6] dark:bg-gray-700': !downloadChapters.includes(
                   item.id
                 )
               }

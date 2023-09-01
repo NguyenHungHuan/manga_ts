@@ -22,11 +22,11 @@ const History = () => {
         setDataComics(response)
       }
     }
-  }, [window.db.transaction('history', 'readwrite').objectStore('history')])
+  }, [window.db.transaction('history', 'readwrite')])
 
   return (
     <div className='container'>
-      <div className='mt-6 flex items-center justify-between'>
+      <div className='mt-6 flex items-center justify-between text-black dark:text-white'>
         <div className='flex items-center gap-2'>
           <Link to={PATH.home} className='flex items-center gap-1 hover:text-primary text-lg'>
             Trang chủ{' '}
@@ -52,7 +52,7 @@ const History = () => {
         <div className='flex items-center'>
           <button
             onClick={() => historyDeleteComics()}
-            className='active:scale-90 border hover:border-primary hover:text-primary px-2 py-1 rounded-md'
+            className='active:scale-90 border dark:border-gray-400 dark:hover:border-primary hover:border-primary hover:text-primary px-2 py-1 rounded-md'
           >
             Xóa tất cả
           </button>
@@ -62,8 +62,11 @@ const History = () => {
         {dataComics && dataComics.length > 0 && (
           <div className={`grid grid-cols-12 gap-6`}>
             {(dataComics as HistoryComic[]).map((item) => (
-              <div key={item.id} className='col-span-6 hover:bg-[rgba(0,0,0,0.04)] p-4 rounded-lg'>
-                <div className='flex'>
+              <div
+                key={item.id}
+                className='col-span-6 hover:bg-[rgba(0,0,0,0.04)] dark:hover:bg-[rgba(255,255,255,0.04)] p-4 rounded-lg'
+              >
+                <div className='flex text-black dark:text-white'>
                   <Link
                     to={`${PATH.comics}/${item.id}`}
                     title={item.title}
@@ -84,12 +87,12 @@ const History = () => {
                   <div className='pl-[15px] pr-2 leading-5 flex flex-col flex-1'>
                     <Link
                       to={`${PATH.comics}/${item.id}`}
-                      className='text-black hover:text-primary text-lg font-bold leading-5 line-clamp-1 mt-3'
+                      className='text-black hover:text-primary dark:text-white dark:hover:text-primary text-lg font-bold leading-5 line-clamp-1 mt-3'
                       title={item.title}
                     >
                       {item.title}
                     </Link>
-                    <span className='text-sm mt-1'>{item.reading_at}</span>
+                    <span className='text-sm mt-1'>{item.time}</span>
                     <p className='inline-block mt-4'>
                       <span className='mr-1'>Đang đọc:</span>
                       <Link
@@ -105,13 +108,13 @@ const History = () => {
                       <Link
                         title={item.last_reading}
                         to={`${PATH.chapters}/${item.id}/${item.chapter_id}`}
-                        className='rounded-md w-full h-9 flex items-center justify-center border border-black/20 hover:border-[#4b8fd7] hover:text-[#4b8fd7] active:scale-90'
+                        className='dark:border-gray-400 dark:hover:border-[#4b8fd7] rounded-md w-full h-9 flex items-center justify-center border border-black/20 hover:border-[#4b8fd7] hover:text-[#4b8fd7] active:scale-90'
                       >
                         Đọc tiếp
                       </Link>
                       <button
                         onClick={() => historyDeleteComic(item.id)}
-                        className='rounded-md w-full h-9 flex items-center justify-center border border-black/20 hover:border-primary hover:text-primary active:scale-90'
+                        className='dark:border-gray-400 dark:hover:border-primary rounded-md w-full h-9 flex items-center justify-center border border-black/20 hover:border-primary hover:text-primary active:scale-90'
                       >
                         Xóa
                       </button>
@@ -123,7 +126,7 @@ const History = () => {
           </div>
         )}
         {Array.isArray(dataComics) && !dataComics.length && (
-          <h3 className='flex items-center justify-center text-2xl h-[550px]'>
+          <h3 className='flex items-center justify-center text-2xl h-[550px] text-black dark:text-white'>
             Không tìm thấy lịch sử
           </h3>
         )}

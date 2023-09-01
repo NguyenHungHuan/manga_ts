@@ -1,13 +1,13 @@
-const Footer= () => {
+const Footer = () => {
   return (
-    <footer className='bg-gray-200 mt-20'>
+    <footer className='bg-gray-200 dark:bg-gray-800 mt-20'>
       <div className='container space-y-8 overflow-hidden py-12'>
-        <div className='flex justify-center mt-8 space-x-6'>
+        <div className='flex justify-center mt-8 space-x-4'>
           <a
             href='https://www.facebook.com/huan.hung.311'
             rel='noopener noreferrer'
             target='_blank'
-            className='text-gray-400 hover:text-gray-500'
+            className='text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-200'
           >
             <span className='sr-only'>Facebook</span>
             <svg
@@ -31,7 +31,7 @@ const Footer= () => {
             href='https://github.com/NguyenHungHuan/manga'
             rel='noopener noreferrer'
             target='_blank'
-            className='text-gray-400 hover:text-gray-500'
+            className='text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-200'
           >
             <span className='sr-only'>GitHub</span>
             <svg
@@ -51,32 +51,8 @@ const Footer= () => {
               />
             </svg>
           </a>
-          <a
-            href='https://github.com/pth-1641/Comics-API'
-            rel='noopener noreferrer'
-            target='_blank'
-            className='text-gray-400 hover:text-gray-500'
-          >
-            <span className='sr-only'>API</span>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              xmlnsXlink='http://www.w3.org/1999/xlink'
-              aria-hidden='true'
-              role='img'
-              className='icon'
-              width='28px'
-              height='28px'
-              viewBox='0 0 24 24'
-              data-v-c3ad5561
-            >
-              <path
-                fill='currentColor'
-                d='M7 7H5a2 2 0 0 0-2 2v8h2v-4h2v4h2V9a2 2 0 0 0-2-2m0 4H5V9h2m7-2h-4v10h2v-4h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2m0 4h-2V9h2m6 0v6h1v2h-4v-2h1V9h-1V7h4v2Z'
-              />
-            </svg>
-          </a>
         </div>
-        <p className='mt-8 text-base leading-6 text-center text-gray-500'>
+        <p className='mt-8 text-base leading-6 text-center text-gray-500 dark:text-gray-300'>
           © 2023 VComics™. All rights reserved.
         </p>
       </div>

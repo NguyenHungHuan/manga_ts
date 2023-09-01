@@ -16,7 +16,10 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
       if (!dotBefore) {
         dotBefore = true
         return (
-          <span key={index} className='bg-white px-1 pt-2'>
+          <span
+            key={index}
+            className='bg-white dark:bg-gray-900 text-black dark:text-white px-1 pt-2'
+          >
             ...
           </span>
         )
@@ -27,7 +30,10 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
       if (!dotAfter) {
         dotAfter = true
         return (
-          <span key={index} className='bg-white px-1 pt-2'>
+          <span
+            key={index}
+            className='bg-white dark:bg-gray-900 text-black dark:text-white px-1 pt-2'
+          >
             ...
           </span>
         )
@@ -68,10 +74,12 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
             }}
             key={index}
             className={classNames(
-              'mx-1 cursor-pointer rounded border bg-white px-3 py-1 shadow-sm',
+              'mx-1 cursor-pointer rounded border dark:border-gray-600 bg-white dark:bg-gray-900 text-black dark:text-white px-3 py-1 shadow-sm',
               {
-                'border-primary text-primary': pageNumber === page,
-                'border hover:border-primary hover:text-primary': pageNumber !== page
+                'border-primary text-primary dark:border-primary dark:text-primary':
+                  pageNumber === page,
+                'border hover:border-primary hover:text-primary dark:border-gray-500 dark:hover:text-primary dark:hover:border-primary':
+                  pageNumber !== page
               }
             )}
           >
@@ -83,7 +91,7 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
   return (
     <div className='mt-6 flex flex-wrap justify-center'>
       {page === 1 ? (
-        <span className='mx-1 cursor-default rounded border opacity-60 px-3 py-1 shadow-sm flex items-center justify-center'>
+        <span className='mx-1 cursor-default rounded border dark:border-gray-500 dark:text-gray-400 text-black dark:bg-gray-900 opacity-60 px-3 py-1 shadow-sm flex items-center justify-center'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -103,7 +111,7 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
               page: (page - 1).toString()
             }).toString()
           }}
-          className='mx-1 cursor-pointer rounded border bg-white px-3 py-1 shadow-sm flex items-center justify-center hover:border-primary hover:text-primary'
+          className='mx-1 cursor-pointer rounded border dark:border-gray-500 dark:text-white text-black bg-white dark:bg-gray-900 px-3 py-1 shadow-sm flex items-center justify-center hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -120,7 +128,7 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
 
       {renderPagination()}
       {page === totalPage ? (
-        <span className='mx-1 cursor-default rounded border opacity-60 px-3 py-1 shadow-sm flex items-center justify-center'>
+        <span className='mx-1 cursor-default rounded border dark:border-gray-500 opacity-60 px-3 py-1 shadow-sm flex items-center justify-center text-black dark:text-gray-300'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -140,7 +148,7 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
               page: (page + 1).toString()
             }).toString()
           }}
-          className='mx-1 cursor-pointer rounded border bg-white px-3 py-1 flex items-center justify-center shadow-sm hover:border-primary hover:text-primary'
+          className='mx-1 cursor-pointer rounded border text-black dark:text-gray-300 dark:border-gray-500 bg-white dark:bg-gray-900 px-3 py-1 flex items-center justify-center shadow-sm hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'

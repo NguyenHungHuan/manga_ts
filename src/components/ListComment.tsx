@@ -48,7 +48,7 @@ const ListComment = ({ id }: { id: string }) => {
 
   return (
     <div className='w-full h-full' ref={el}>
-      <div className='border'>
+      <div className='border dark:border-gray-500'>
         <div className='flex items-center justify-between p-5'>
           <h3 className='flex items-center gap-3 text-primary capitalize text-lg'>
             Bình luận
@@ -65,9 +65,9 @@ const ListComment = ({ id }: { id: string }) => {
             <div className='flex items-center gap-2'>
               <button
                 onClick={PrevPage}
-                className={classNames('px-[10px] py-2 rounded-md border flex justify-center active:scale-95', {
+                className={classNames('px-[10px] py-2 rounded-md border dark:border-gray-500 flex justify-center active:scale-95', {
                   'opacity-80 cursor-default text-gray-400': page === 1,
-                  'hover:border-primary hover:text-primary': page !== 1
+                  'hover:border-primary hover:text-primary dark:text-white dark:hover:border-primary dark:hover:text-primary': page !== 1
                 })}
               >
                 <svg
@@ -87,9 +87,9 @@ const ListComment = ({ id }: { id: string }) => {
               </button>
               <button
                 onClick={nextPage}
-                className={classNames('px-[10px] py-2 rounded-md border flex justify-center active:scale-95', {
+                className={classNames('px-[10px] py-2 rounded-md border dark:border-gray-500 flex justify-center active:scale-95', {
                   'opacity-80 cursor-default text-gray-400': dataComment?.total_pages === page,
-                  'hover:border-primary hover:text-primary': dataComment?.total_pages !== page
+                  'hover:border-primary hover:text-primary dark:text-white dark:hover:border-primary dark:hover:text-primary': dataComment?.total_pages !== page
                 })}
               >
                 <svg
@@ -111,15 +111,15 @@ const ListComment = ({ id }: { id: string }) => {
           </div>
         </div>
       </div>
-      <div className='p-5 border border-t-0'>
+      <div className='p-5 border border-t-0 dark:border-gray-500'>
         {isFetching && (
-          <div className='h-[300px] border-b mb-5 border-dashed flex items-center justify-center gap-2'>
+          <div className='h-[300px] border-b dark:border-gray-500 mb-5 border-dashed flex items-center justify-center gap-2'>
             <img src={imgLoading} alt='loading' loading='lazy' />
             <span className='text-gray-400'>Loading...</span>
           </div>
         )}
         {isError && (
-          <div className='h-[100px] border-b mb-5 border-dashed flex items-center justify-center gap-2'>
+          <div className='h-[100px] dark:border-gray-500 border-b mb-5 border-dashed flex items-center justify-center gap-2'>
             <span className='text-gray-400'>Không tìm thấy bình luận</span>
           </div>
         )}
@@ -138,12 +138,12 @@ const ListComment = ({ id }: { id: string }) => {
                       currentTarget.src = avatarError
                     }}
                   />
-                  <div className='flex-1 border-b border-dashed pb-6 overflow-hidden'>
-                    <span className='mt-1 font-semibold'>{item.username}</span>
+                  <div className='flex-1 border-b border-dashed dark:border-gray-500 pb-6 overflow-hidden'>
+                    <span className='mt-1 font-semibold text-black dark:text-white'>{item.username}</span>
                     {item.chapter && (
                       <span className='ml-3 text-sm text-primary'>{item.chapter}</span>
                     )}
-                    <p className='mt-3 text-black/80 break-all'>{item.content}</p>
+                    <p className='mt-3 text-black/80 dark:text-gray-300 break-all'>{item.content}</p>
                     {item.stickers.length > 0 && (
                       <img src={item.stickers[0]} alt='sticker' loading='lazy' />
                     )}
@@ -190,7 +190,7 @@ const ListComment = ({ id }: { id: string }) => {
                       item.replies.map((itemReply, i) => (
                         <div
                           key={i}
-                          className='mt-4 p-5 pb-0 flex gap-[10px] bg-[#f8f8f8] rounded-[10px]'
+                          className='mt-4 p-5 pb-0 flex gap-[10px] bg-[#f8f8f8] dark:bg-gray-800 rounded-[10px]'
                         >
                           <img
                             src={itemReply.avatar}
@@ -203,9 +203,9 @@ const ListComment = ({ id }: { id: string }) => {
                             }}
                           />
                           <div className='flex-1 pb-6 overflow-auto'>
-                            <span className='mt-1 block'>{itemReply.username}</span>
-                            <p className='mt-3 text-black/80 break-all'>
-                              <strong className='text-primary/60 mr-1'>
+                            <span className='mt-1 block text-black dark:text-white'>{itemReply.username}</span>
+                            <p className='mt-3 text-black/80 dark:text-gray-300 break-all'>
+                              <strong className='text-primary/60 dark:text-primary/80 mr-1'>
                                 {itemReply.mention_user}
                               </strong>
                               {itemReply.content}
@@ -272,9 +272,9 @@ const ListComment = ({ id }: { id: string }) => {
           <div className='flex items-center gap-2'>
             <button
               onClick={PrevPage}
-              className={classNames('px-[10px] py-2 rounded-md border flex justify-center active:scale-95', {
+              className={classNames('px-[10px] py-2 rounded-md border dark:border-gray-500 flex justify-center active:scale-95', {
                 'opacity-80 cursor-default text-gray-400': page === 1,
-                'hover:border-primary hover:text-primary': page !== 1
+                'hover:border-primary hover:text-primary dark:text-white dark:hover:border-primary dark:hover:text-primary': page !== 1
               })}
             >
               <svg
@@ -294,9 +294,9 @@ const ListComment = ({ id }: { id: string }) => {
             </button>
             <button
               onClick={nextPage}
-              className={classNames('px-[10px] py-2 rounded-md border flex justify-center active:scale-95', {
+              className={classNames('px-[10px] py-2 rounded-md border dark:border-gray-500 flex justify-center active:scale-95', {
                 'opacity-80 cursor-default text-gray-400': dataComment?.total_pages === page,
-                'hover:border-primary hover:text-primary': dataComment?.total_pages !== page
+                'hover:border-primary hover:text-primary dark:text-white dark:hover:border-primary dark:hover:text-primary': dataComment?.total_pages !== page
               })}
             >
               <svg

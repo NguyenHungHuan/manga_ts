@@ -45,9 +45,9 @@ const ComicsList = () => {
 
   return (
     <>
-      <div className='px-5 py-4 bg-[#f8f8f9] min-h-[200px]'>
+      <div className='px-5 py-4 bg-[#f8f8f9] dark:bg-gray-800 min-h-[200px]'>
         <div className='mb-2'>
-          <div className='container border-t-4 border-primary bg-white py-3 px-6 rounded shadow cursor-grab'>
+          <div className='container border-t-4 border-primary bg-white dark:bg-gray-900 py-3 px-6 rounded shadow cursor-grab'>
             {dataGenreComics && (
               <Swiper
                 slidesPerView={8}
@@ -60,13 +60,13 @@ const ComicsList = () => {
                 modules={[FreeMode, Grid]}
               >
                 {dataGenreComics.map((item) => (
-                  <SwiperSlide key={item.id} className='flex-1 max-w-[130px] m-1'>
+                  <SwiperSlide key={item.id} className='flex-1 max-w-[130px] m-1 mt-0'>
                     <Link
                       className={classNames(
-                        'border text-center rounded-md px-12 py-2 flex items-center justify-center font-semibold leading-5 whitespace-nowrap',
+                        'border dark:border-gray-600 text-black dark:text-white text-center rounded-md px-12 py-2 flex items-center justify-center font-semibold leading-5 whitespace-nowrap',
                         {
                           'text-white bg-primary': type === item.id,
-                          'hover:text-primary hover:border-primary': type !== item.id
+                          'hover:text-primary hover:border-primary dark:hover:text-primary dark:hover:border-primary': type !== item.id
                         }
                       )}
                       to={{
@@ -103,7 +103,7 @@ const ComicsList = () => {
             </svg>
             {descGenre && <p className='text-lg font-semibold'>{descGenre}</p>}
             {!descGenre && (
-              <span className='h-3 bg-gray-50 rounded-full dark:bg-gray-700 w-[600px] animate-pulse' />
+              <span className='h-3 bg-gray-50 rounded-full w-[600px] animate-pulse' />
             )}
           </div>
         </div>
@@ -115,7 +115,7 @@ const ComicsList = () => {
         ) : (
           <>
             <div className='mt-8 flex items-center justify-between h-9'>
-              <h2 className='capitalize font-semibold text-black text-2xl'>
+              <h2 className='capitalize font-semibold text-black dark:text-white text-2xl'>
                 <strong className='text-primary'>Thể loại</strong> - trang {queryConfig.page}
               </h2>
               {totalPage && (

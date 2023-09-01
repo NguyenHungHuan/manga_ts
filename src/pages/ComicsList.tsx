@@ -109,7 +109,7 @@ const ComicsList = () => {
                 </Link>
               </div>
             ) : (
-              <h2 className='capitalize font-semibold text-black text-2xl'>
+              <h2 className='capitalize font-semibold text-black dark:text-white text-2xl'>
                 <strong className='text-primary'>{title}</strong> - trang {queryConfig.page}
               </h2>
             )}

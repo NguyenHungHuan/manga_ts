@@ -66,11 +66,11 @@ const ComicsDetail = () => {
       </div>
       <div className='container mt-[-300px] blur-0'>
         <div className='w-full'>
-          <div className='h-full container rounded-t-lg bg-white px-10'>
+          <div className='h-full container rounded-t-lg bg-white dark:bg-gray-900 px-10'>
             <div className='pt-[35px] pb-[30px] min-h-[300px]'>
               {dataComics && (
                 <div className='flex gap-5'>
-                  <figure className='w-[240px] h-[330px] -mt-20 flex-shrink-0 rounded-md overflow-hidden shadow-[0_0_5px_#444]'>
+                  <figure className='w-[240px] h-[330px] dark:border dark:border-gray-600 -mt-20 flex-shrink-0 rounded-md overflow-hidden shadow-[0_0_5px_#444]'>
                     <img
                       src={dataComics.thumbnail}
                       loading='lazy'
@@ -84,15 +84,15 @@ const ComicsDetail = () => {
                   </figure>
                   <div className='w-full'>
                     <div className='flex items-center justify-between gap-6 -mt-2'>
-                      <h2 className='font-semibold text-3xl line-clamp-1 -ml-1'>
+                      <h2 className='font-semibold text-3xl line-clamp-1 -ml-1 text-black dark:text-white'>
                         {dataComics.title}
                       </h2>
                       <RatingStar rating={dataComics.followers} />
                     </div>
-                    <span className='text-base text-black block capitalize mt-1'>
+                    <span className='text-base text-black dark:text-white block capitalize mt-1'>
                       tác giả: <strong className='text-primary'>{dataComics.authors}</strong>
                     </span>
-                    <p className='flex items-center gap-4 text-base mt-1 text-black capitalize'>
+                    <p className='flex items-center gap-4 text-base mt-1 text-black dark:text-white capitalize'>
                       <span>
                         Lượt xem:{' '}
                         <strong className='text-[#4b8fd7]'>
@@ -106,7 +106,7 @@ const ComicsDetail = () => {
                         </strong>
                       </span>
                     </p>
-                    <div className='flex gap-[6px] items-center my-2 mb-3'>
+                    <div className='flex gap-[6px] items-center my-2 mb-3 dark:text-white'>
                       {dataComics.genres.map((genre) => {
                         return genre.id !== undefined ? (
                           <Link
@@ -130,7 +130,7 @@ const ComicsDetail = () => {
                     <div className='relative'>
                       <p
                         ref={description}
-                        className={`text-base text-black/70 min-h-[72px] ${
+                        className={`text-base text-black/70 dark:text-gray-300 min-h-[72px] ${
                           !isOpen && ' overflow-hidden max-h-[72px]'
                         }`}
                       >
@@ -138,15 +138,15 @@ const ComicsDetail = () => {
                       </p>
                       {isShow && isOpen && (
                         <button onClick={() => setIsOpen((prev) => !prev)}>
-                          <span>Show less</span>
+                          <span className='text-black dark:text-white'>Show less</span>
                         </button>
                       )}{' '}
                       {isShow && !isOpen && (
                         <button
-                          className='absolute right-0 bg-white/90 rounded-full bottom-0 z-10 w-[50px] overflow-hidden'
+                          className='absolute right-0 bg-white/90 dark:bg-gray-900/90 rounded-full bottom-0 z-10 w-[50px] overflow-hidden'
                           onClick={() => setIsOpen((prev) => !prev)}
                         >
-                          <span className='text-black font-medium'>...more</span>
+                          <span className='text-black dark:text-white font-medium'>...more</span>
                         </button>
                       )}
                     </div>
@@ -207,7 +207,7 @@ const ComicsDetail = () => {
             <div className='flex gap-[30px] justify-between'>
               <div className='flex-1 max-w-[852px]'>
                 <section className='min-h-[400px]'>
-                  <h3 className='flex items-center gap-2 border-b border-slate-200 pb-1 capitalize text-primary text-lg'>
+                  <h3 className='flex items-center gap-2 border-b border-slate-200 dark:border-gray-500 pb-1 capitalize text-primary text-lg'>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       xmlnsXlink='http://www.w3.org/1999/xlink'
@@ -233,10 +233,10 @@ const ComicsDetail = () => {
               </div>
               <div className='flex-shrink-0 w-[238px] flex flex-col gap-6'>
                 <>
-                  <h4 className='px-5 pl-3 py-3 border flex items-center font-semibold text-lg'>
+                  <h4 className='px-5 pl-3 py-3 border dark:border-gray-500 flex items-center font-semibold text-lg text-black dark:text-white'>
                     Top tuần
                   </h4>
-                  <div className='border border-t-0 flex flex-col -mt-6 min-h-[600px]'>
+                  <div className='border border-t-0 dark:border-gray-500 flex flex-col -mt-6 min-h-[600px]'>
                     {dataWeeklyComics &&
                       dataWeeklyComics
                         .slice(0, 10)
@@ -253,7 +253,7 @@ const ComicsDetail = () => {
                           />
                         ))}
                     {!dataWeeklyComics && (
-                      <div className='flex items-center justify-center gap-2 h-[300px]'>
+                      <div className='flex items-center justify-center gap-2 h-[300px] text-black dark:text-white'>
                         <img src={imgLoading} alt='loading icon' loading='lazy' />
                         Loading...
                       </div>
@@ -261,10 +261,10 @@ const ComicsDetail = () => {
                   </div>
                 </>
                 <div className='sticky top-[50px]'>
-                  <h4 className='px-5 pl-3 py-3 border flex items-center font-semibold text-lg'>
+                  <h4 className='px-5 pl-3 py-3 border dark:border-gray-500 flex items-center font-semibold text-lg text-black dark:text-white'>
                     Nổi bật
                   </h4>
-                  <div className='border border-t-0 flex flex-col min-h-[600px]'>
+                  <div className='border border-t-0 dark:border-gray-500 flex flex-col min-h-[600px]'>
                     {dataPopularComics &&
                       dataPopularComics
                         .slice(0, 7)
@@ -281,7 +281,7 @@ const ComicsDetail = () => {
                           />
                         ))}
                     {!dataPopularComics && (
-                      <div className='flex items-center justify-center gap-2 h-[300px]'>
+                      <div className='flex items-center justify-center gap-2 h-[300px] text-black dark:text-white'>
                         <img src={imgLoading} alt='loading icon' loading='lazy' />
                         Loading...
                       </div>
@@ -303,7 +303,7 @@ const ComicsDetail = () => {
           isOpenModal ? ' opacity-100 pointer-events-auto' : ' opacity-0 pointer-events-none'
         }`}
       >
-        <div className='bg-white p-5 rounded-lg' onMouseDown={(e) => e.stopPropagation()}>
+        <div className='bg-white dark:bg-gray-900 p-5 rounded-lg' onMouseDown={(e) => e.stopPropagation()}>
           <section className='w-[700px]'>
             {dataComics && id && <ListDownloadChapter id={id} data={dataComics.chapters} />}
           </section>
@@ -316,7 +316,7 @@ export default ComicsDetail
 
 const skeleton = () => {
   return (
-    <div className='flex gap-5 animate-pulse'>
+    <div className='flex gap-5'>
       <div className='-mt-20 flex items-center justify-center w-[240px] h-[330px] rounded-md bg-gray-300 dark:bg-gray-700 flex-shrink-0'>
         <svg
           className='w-10 h-10 text-gray-200 dark:text-gray-600'
@@ -328,7 +328,7 @@ const skeleton = () => {
           <path d='M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z' />
         </svg>
       </div>
-      <div className='w-full'>
+      <div className='w-full animate-pulse'>
         <div className='flex items-center justify-between gap-6'>
           <div className='-ml-1 h-6 bg-gray-200 rounded-full dark:bg-gray-700 w-[450px]' />
           <div className='-ml-1 h-6 bg-gray-200 rounded-full dark:bg-gray-700 w-48' />

@@ -21,7 +21,7 @@ const CompletedPreviewComics = ({ data }: Props) => {
   return (
     <div className='mt-[15px] h-[460px]'>
       {data && (
-        <div className='flex items-center h-full'>
+        <div className='flex items-center gap-[2px] h-full'>
           <div className='w-[339px] h-full'>
             <Link to={`${PATH.comics}/${data[currentIndex].id}`} title={data[currentIndex].title}>
               <p
@@ -37,7 +37,7 @@ const CompletedPreviewComics = ({ data }: Props) => {
               <Link
                 to={`${PATH.comics}/${data[currentIndex].id}`}
                 title={data[currentIndex].title}
-                className='hover:text-primary font-semibold text-xl line-clamp-1'
+                className='hover:text-primary dark:hover:text-primary text-black dark:text-white font-semibold text-xl line-clamp-1'
               >
                 {data[currentIndex].title}
               </Link>
@@ -55,7 +55,7 @@ const CompletedPreviewComics = ({ data }: Props) => {
                 </p>
                 <span className='text-sm block text-gray-400'>
                   Lượt xem:{' '}
-                  <strong className='text-black font-normal lowercase'>
+                  <strong className='text-black dark:text-white font-normal lowercase'>
                     {formatCurrency(data[currentIndex].total_views)}
                   </strong>
                 </span>
@@ -74,7 +74,7 @@ const CompletedPreviewComics = ({ data }: Props) => {
                       title={genre.name}
                       key={genre.id}
                     >
-                      <span className='py-1 px-2 text-[13px] text-gray-400 border border-dashed border-[#d9d9d9] hover:text-primary hover:border-primary truncate'>
+                      <span className='py-1 px-2 text-[13px] text-gray-400 dark:text-gray-300 dark:hover:text-primary border border-dashed border-[#d9d9d9] hover:text-primary hover:border-primary truncate'>
                         {genre.name}
                       </span>
                     </Link>
@@ -115,12 +115,12 @@ const CompletedPreviewComics = ({ data }: Props) => {
                     <Link
                       to={`${PATH.comics}/${item.id}`}
                       title={item.title}
-                      className='hover:text-primary font-semibold text-base leading-4 line-clamp-1'
+                      className='hover:text-primary text-black dark:hover:text-white dark:text-white font-semibold text-base leading-4 line-clamp-1'
                     >
                       {item.title}
                     </Link>
                     <span className='text-sm text-gray-400 mt-2'>{item.updated_at}</span>
-                    <p className='inline-block text-sm truncate'>
+                    <p className='inline-block text-sm truncate text-black dark:text-white'>
                       <span className='mr-1'>Cập nhật:</span>
                       <Link
                         to={`${PATH.chapters}/${item.id}/${item.last_chapter.id}`}

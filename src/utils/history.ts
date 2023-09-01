@@ -10,7 +10,8 @@ export type HistoryComic = {
   thumbnail: string
   description: string
   status: string
-  reading_at: string
+  reading_at: number
+  time: string
   last_reading: string
   chapter_id: number
 }

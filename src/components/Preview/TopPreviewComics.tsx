@@ -37,7 +37,7 @@ const TopPreviewComics = () => {
     <div className='grid grid-cols-12 gap-5 justify-items-center justify-center w-full h-[323px]'>
       <div className='col-span-4 w-full'>
         <div className='flex items-end justify-between'>
-          <h3 className='capitalize text-xl font-bold leading-5'>top ngày</h3>
+          <h3 className='capitalize text-xl font-bold leading-5 text-black dark:text-white'>top ngày</h3>
           <Link
             to={{
               pathname: `${PATH.top}${PATH.daily}`,
@@ -46,7 +46,7 @@ const TopPreviewComics = () => {
                 page: '1'
               }).toString()
             }}
-            className='flex items-center gap-1 text-sm text-gray-500 hover:text-primary'
+            className='flex items-center gap-1 text-sm text-black dark:text-white hover:text-primary dark:hover:text-primary'
           >
             <span>Tất cả</span>
             <svg
@@ -66,7 +66,7 @@ const TopPreviewComics = () => {
       </div>
       <div className='col-span-4 w-full'>
         <div className='flex items-end justify-between'>
-          <h3 className='capitalize text-xl font-bold leading-5'>top tuần</h3>
+          <h3 className='capitalize text-xl font-bold leading-5 text-black dark:text-white'>top tuần</h3>
           <Link
             to={{
               pathname: `${PATH.top}${PATH.weekly}`,
@@ -75,7 +75,7 @@ const TopPreviewComics = () => {
                 page: '1'
               }).toString()
             }}
-            className='flex items-center gap-1 text-sm text-gray-500 hover:text-primary'
+            className='flex items-center gap-1 text-sm text-black dark:text-white hover:text-primary dark:hover:text-primary'
           >
             <span>Tất cả</span>
             <svg
@@ -95,7 +95,7 @@ const TopPreviewComics = () => {
       </div>
       <div className='col-span-4 w-full'>
         <div className='flex items-end justify-between'>
-          <h3 className='capitalize text-xl font-bold leading-5'>top tháng</h3>
+          <h3 className='capitalize text-xl font-bold leading-5 text-black dark:text-white'>top tháng</h3>
           <Link
             to={{
               pathname: `${PATH.top}${PATH.monthly}`,
@@ -104,7 +104,7 @@ const TopPreviewComics = () => {
                 page: '1'
               }).toString()
             }}
-            className='flex items-center gap-1 text-sm text-gray-500 hover:text-primary'
+            className='flex items-center gap-1 text-sm text-black dark:text-white hover:text-primary dark:hover:text-primary'
           >
             <span>Tất cả</span>
             <svg
@@ -133,7 +133,7 @@ const renderDataTopComics = (data: comics[]) => {
       {data.map((item, index) => (
         <li
           key={item.id}
-          className='flex items-center gap-3 border-b border-dashed border-[#ededed]'
+          className='flex items-center gap-3 border-b border-dashed border-[#ededed] dark:border-gray-600'
         >
           <Link
             to={`${PATH.comics}/${item.id}`}
@@ -158,7 +158,7 @@ const renderDataTopComics = (data: comics[]) => {
                      ${index === 0 && ' bg-[#feda00] text-white'} 
                      ${index === 1 && ' bg-[#feaf00] text-white'} 
                      ${index === 2 && ' bg-[#fe8f00] text-white'} 
-                     ${index > 2 && ' text-black/70 bg-[#eeecec]'}`}
+                     ${index > 2 && ' text-black/70 bg-[#eeecec] dark:text-white/70 dark:bg-gray-600'}`}
             >
               {index + 1}
             </span>
@@ -166,7 +166,7 @@ const renderDataTopComics = (data: comics[]) => {
               <Link
                 title={item.title}
                 to={`${PATH.comics}/${item.id}`}
-                className='hover:text-primary font-semibold text-base leading-4 line-clamp-1'
+                className='hover:text-primary text-black dark:text-white dark:hover:text-primary font-semibold text-base leading-4 line-clamp-1'
               >
                 {item.title}
               </Link>

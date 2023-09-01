@@ -4,7 +4,7 @@ const RatingStar = ({ rating }: { rating: number }) => {
 
   return (
     <div className='flex items-end gap-2'>
-      <span className='text-black text-[22px] leading-5 font-semibold'>{ratingNumber}</span>
+      <span className='text-black dark:text-white text-[22px] leading-5 font-semibold'>{ratingNumber}</span>
       <div className='flex items-center'>
         {Array(5)
           .fill(0)

@@ -34,16 +34,19 @@ const MiniPagination = ({ totalPage, page, queryConfig }: Props) => {
 
   return (
     <div className='flex items-center gap-2'>
-      <span className='text-black text-lg'>
+      <span className='text-black dark:text-white text-lg'>
         <strong className='text-primary'>{page}</strong>/{totalPage}
       </span>
       <div className='flex items-center gap-1'>
         <button
           onClick={PrevPage}
-          className={classNames('py-2 px-3 rounded-md border flex justify-center active:scale-95', {
-            'opacity-80 cursor-default text-gray-400': page === 1,
-            'hover:border-primary hover:text-primary': page !== 1
-          })}
+          className={classNames(
+            'py-2 px-3 rounded-md border dark:border-gray-500 text-black dark:text-gray-300 flex justify-center active:scale-95',
+            {
+              'opacity-60 cursor-default text-gray-400': page === 1,
+              'hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary': page !== 1
+            }
+          )}
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -58,10 +61,14 @@ const MiniPagination = ({ totalPage, page, queryConfig }: Props) => {
         </button>
         <button
           onClick={nextPage}
-          className={classNames('py-2 px-3 rounded-md border flex justify-center active:scale-95', {
-            'opacity-80 cursor-default text-gray-400': totalPage === page,
-            'hover:border-primary hover:text-primary': totalPage !== page
-          })}
+          className={classNames(
+            'py-2 px-3 rounded-md border dark:border-gray-500 text-black dark:text-gray-300 flex justify-center active:scale-95',
+            {
+              'opacity-60 cursor-default text-gray-400': totalPage === page,
+              'hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary':
+                totalPage !== page
+            }
+          )}
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
