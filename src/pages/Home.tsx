@@ -11,7 +11,7 @@ import {
   TopPreviewComics
 } from '@/components/Preview'
 import { useQueryConfig } from '@/hooks'
-import { comics, dataComics } from '@/types/data'
+import { comics } from '@/types/data'
 import PATH from '@/utils/path'
 import { useMemo } from 'react'
 import { useQuery } from 'react-query'
