@@ -53,7 +53,7 @@ const ListComment = ({ id }: { id: string }) => {
           <h3 className='flex items-center gap-3 text-primary capitalize text-lg'>
             Bình luận
             {dataComment?.total_pages && (
-              <span className='text-gray-400 capitalize text-sm'>{`(${formatCurrency(
+              <span className='text-gray-400 capitalize text-sm hidden md:inline-block'>{`(${formatCurrency(
                 dataComment.total_comments
               )} bình luận)`}</span>
             )}
@@ -131,7 +131,7 @@ const ListComment = ({ id }: { id: string }) => {
                   <img
                     src={item.avatar}
                     alt='avatar'
-                    className='flex-shrink-0 w-[50px] h-[50px] object-cover rounded-full'
+                    className='flex-shrink-0 w-[38px] h-[38px] md:w-[50px] md:h-[50px] object-cover rounded-full'
                     loading='lazy'
                     onError={({ currentTarget }) => {
                       currentTarget.onerror = null
@@ -190,19 +190,19 @@ const ListComment = ({ id }: { id: string }) => {
                       item.replies.map((itemReply, i) => (
                         <div
                           key={i}
-                          className='mt-4 p-5 pb-0 flex gap-[10px] bg-[#f8f8f8] dark:bg-gray-800 rounded-[10px]'
+                          className='mt-4 p-3 lg:p-5 flex gap-[10px] bg-[#f8f8f8] dark:bg-gray-800 rounded-[10px]'
                         >
                           <img
                             src={itemReply.avatar}
                             alt='avatar'
-                            className='flex-shrink-0 w-[50px] h-[50px] object-cover rounded-full'
+                            className='flex-shrink-0 w-[38px] h-[38px] md:w-[50px] md:h-[50px] object-cover rounded-full'
                             loading='lazy'
                             onError={({ currentTarget }) => {
                               currentTarget.onerror = null
                               currentTarget.src = avatarError
                             }}
                           />
-                          <div className='flex-1 pb-6 overflow-auto'>
+                          <div className='flex-1 overflow-auto'>
                             <span className='mt-1 block text-black dark:text-white'>{itemReply.username}</span>
                             <p className='mt-3 text-black/80 dark:text-gray-300 break-all'>
                               <strong className='text-primary/60 dark:text-primary/80 mr-1'>
@@ -215,7 +215,7 @@ const ListComment = ({ id }: { id: string }) => {
                             )}
                             <div className='flex items-center justify-between mt-7'>
                               <span className='text-gray-500 text-sm'>{itemReply.created_at}</span>
-                              <div className='flex items-center gap-4 text-gray-500 text-md'>
+                              <div className='hidden sm:flex items-center gap-4 text-gray-500 text-md'>
                                 <div className='flex items-center'>
                                   <svg
                                     xmlns='http://www.w3.org/2000/svg'
@@ -316,5 +316,4 @@ const ListComment = ({ id }: { id: string }) => {
     </div>
   )
 }
-
 export default ListComment

@@ -30,13 +30,6 @@ export type comics = {
   updated_at: string
 }
 
-export type dataRecommend = Omit<comics, 'last_chapter'> & {
-  lastest_chapter: {
-    id: number
-    name: string
-  }
-}
-
 export type dataGenres = [
   {
     id: string

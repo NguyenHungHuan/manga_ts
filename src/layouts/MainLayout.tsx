@@ -1,14 +1,17 @@
 import { Footer, Header, Navbar, ScrollToTop, SearchBar } from '@/components'
+import { useMediaQuery } from 'react-responsive'
 import { Outlet } from 'react-router-dom'
 
 const MainLayout = ({ hideNav = false }: { hideNav?: boolean }) => {
+  const isMobileMini = useMediaQuery({ maxWidth: 639 })
+
   return (
     <>
-      <div className='sticky top-0 z-20'>
+      <header className='sticky top-0 z-20 left-0 right-0'>
         <Header />
-      </div>
+      </header>
       <main>
-        <SearchBar />
+        {!isMobileMini && <SearchBar />}
         {!hideNav && <Navbar />}
         <Outlet />
         <div className='hidden md:block'>

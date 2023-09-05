@@ -3,7 +3,7 @@ const RatingStar = ({ rating }: { rating: number }) => {
   const ratingNumber = Number(rating) > 100000 ? '4.5' : '4.0'
 
   return (
-    <div className='flex items-end gap-2'>
+    <div className='hidden lg:flex items-end gap-2'>
       <span className='text-black dark:text-white text-[22px] leading-5 font-semibold'>{ratingNumber}</span>
       <div className='flex items-center'>
         {Array(5)

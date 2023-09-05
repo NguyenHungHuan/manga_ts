@@ -25,7 +25,7 @@ const History = () => {
   }, [window.db.transaction('history', 'readwrite')])
 
   return (
-    <div className='container'>
+    <div className='container px-2 lg:px-0'>
       <div className='mt-6 flex items-center justify-between text-black dark:text-white'>
         <div className='flex items-center gap-2'>
           <Link to={PATH.home} className='flex items-center gap-1 hover:text-primary text-lg'>
@@ -52,7 +52,7 @@ const History = () => {
         <div className='flex items-center'>
           <button
             onClick={() => historyDeleteComics()}
-            className='active:scale-90 border dark:border-gray-400 dark:hover:border-primary hover:border-primary hover:text-primary px-2 py-1 rounded-md'
+            className='active:scale-90 border border-gray-500 dark:border-gray-400 dark:hover:border-primary hover:border-primary hover:text-primary px-2 py-1 rounded-md'
           >
             Xóa tất cả
           </button>
@@ -60,11 +60,11 @@ const History = () => {
       </div>
       <div className='mt-8 min-h-[550px]'>
         {dataComics && dataComics.length > 0 && (
-          <div className={`grid grid-cols-12 gap-6`}>
+          <div className={`grid grid-cols-12 gap-4 lg:gap-6`}>
             {(dataComics as HistoryComic[]).map((item) => (
               <div
                 key={item.id}
-                className='col-span-6 hover:bg-[rgba(0,0,0,0.04)] dark:hover:bg-[rgba(255,255,255,0.04)] p-4 rounded-lg'
+                className='col-span-12 sm:col-span-6 hover:bg-[rgba(0,0,0,0.04)] dark:hover:bg-[rgba(255,255,255,0.04)] rounded-lg'
               >
                 <div className='flex text-black dark:text-white'>
                   <Link
@@ -94,7 +94,7 @@ const History = () => {
                     </Link>
                     <span className='text-sm mt-1'>{item.time}</span>
                     <p className='inline-block mt-4'>
-                      <span className='mr-1'>Đang đọc:</span>
+                      <span className='mr-1 lg:inline-block hidden'>Đang đọc:</span>
                       <Link
                         to={`${PATH.chapters}/${item.id}/${item.chapter_id}`}
                         title={item.last_reading}
@@ -103,18 +103,18 @@ const History = () => {
                         {item.last_reading}
                       </Link>
                     </p>
-                    <p className='line-clamp-3 mt-3'>{item.description}</p>
-                    <div className='flex items-center gap-3 mt-auto'>
+                    <p className='mt-3 hidden md:line-clamp-3'>{item.description}</p>
+                    <div className='flex flex-col md:flex-row items-center gap-1 md:gap-3 mt-auto mb-4 md:mb-0'>
                       <Link
                         title={item.last_reading}
                         to={`${PATH.chapters}/${item.id}/${item.chapter_id}`}
-                        className='dark:border-gray-400 dark:hover:border-[#4b8fd7] rounded-md w-full h-9 flex items-center justify-center border border-black/20 hover:border-[#4b8fd7] hover:text-[#4b8fd7] active:scale-90'
+                        className='border-[#4b8fd7] rounded-md w-full h-9 flex items-center justify-center border border-black/20 text-[#4b8fd7] active:scale-90'
                       >
                         Đọc tiếp
                       </Link>
                       <button
                         onClick={() => historyDeleteComic(item.id)}
-                        className='dark:border-gray-400 dark:hover:border-primary rounded-md w-full h-9 flex items-center justify-center border border-black/20 hover:border-primary hover:text-primary active:scale-90'
+                        className='border-primary rounded-md w-full h-9 flex items-center justify-center border border-black/20 text-primary active:scale-90'
                       >
                         Xóa
                       </button>

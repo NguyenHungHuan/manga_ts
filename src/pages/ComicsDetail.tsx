@@ -66,11 +66,11 @@ const ComicsDetail = () => {
       </div>
       <div className='container mt-[-300px] blur-0'>
         <div className='w-full'>
-          <div className='h-full container rounded-t-lg bg-white dark:bg-gray-900 px-10'>
+          <div className='h-full container rounded-t-lg bg-white dark:bg-gray-900 px-4 lg:px-10'>
             <div className='pt-[35px] pb-[30px] min-h-[300px]'>
               {dataComics && (
-                <div className='flex gap-5'>
-                  <figure className='w-[240px] h-[330px] dark:border dark:border-gray-600 -mt-20 flex-shrink-0 rounded-md overflow-hidden shadow-[0_0_5px_#444]'>
+                <div className='flex flex-col sm:flex-row items-center sm:items-start gap-5'>
+                  <figure className='w-[200px] h-[280px] sm:w-[240px] sm:h-[330px] dark:border dark:border-gray-600 -mt-20 flex-shrink-0 rounded-md overflow-hidden shadow-[0_0_5px_#444]'>
                     <img
                       src={dataComics.thumbnail}
                       loading='lazy'
@@ -83,7 +83,7 @@ const ComicsDetail = () => {
                     />
                   </figure>
                   <div className='w-full'>
-                    <div className='flex items-start justify-between gap-6 -mt-2'>
+                    <div className='flex items-start lg:justify-between gap-6 -mt-2'>
                       <h2
                         title={dataComics.title}
                         className='font-semibold text-3xl -ml-1 text-black dark:text-white'
@@ -95,7 +95,7 @@ const ComicsDetail = () => {
                     <span className='text-base text-black dark:text-white block capitalize mt-1'>
                       tác giả: <strong className='text-primary'>{dataComics.authors}</strong>
                     </span>
-                    <p className='flex items-center gap-4 text-base mt-1 text-black dark:text-white capitalize'>
+                    <p className='flex flex-wrap items-center gap-x-4 gap-y-2 text-base mt-1 text-black dark:text-white capitalize'>
                       <span>
                         Lượt xem:{' '}
                         <strong className='text-[#4b8fd7]'>
@@ -109,7 +109,7 @@ const ComicsDetail = () => {
                         </strong>
                       </span>
                     </p>
-                    <div className='flex gap-[6px] items-center my-2 mb-3 dark:text-white'>
+                    <div className='flex flex-wrap gap-[6px] items-center my-2 mb-3 dark:text-white'>
                       {dataComics.genres.map((genre) => {
                         return genre.id !== undefined ? (
                           <Link
@@ -133,7 +133,7 @@ const ComicsDetail = () => {
                     <div className='relative'>
                       <p
                         ref={description}
-                        className={`text-base text-black/70 dark:text-gray-300 min-h-[72px] ${
+                        className={`text-base text-black/70 dark:text-gray-300 ${
                           !isOpen && ' overflow-hidden max-h-[72px]'
                         }`}
                       >
@@ -207,7 +207,7 @@ const ComicsDetail = () => {
               )}
               {!dataComics && skeleton()}
             </div>
-            <div className='flex gap-[30px] justify-between'>
+            <div className='flex gap-4 lg:gap-[30px] justify-between'>
               <div className='flex-1 max-w-[852px]'>
                 <section className='min-h-[400px]'>
                   <h3 className='flex items-center gap-2 border-b border-slate-200 dark:border-gray-500 pb-1 capitalize text-primary text-lg'>
@@ -234,7 +234,7 @@ const ComicsDetail = () => {
                 </section>
                 <section className='mt-2'>{id && <ListComment id={id} />}</section>
               </div>
-              <div className='flex-shrink-0 w-[238px] flex flex-col gap-6'>
+              <div className='flex-shrink-0 w-[238px] hidden md:flex flex-col gap-6'>
                 <>
                   <h4 className='px-5 pl-3 py-3 border dark:border-gray-500 flex items-center font-semibold text-lg text-black dark:text-white'>
                     Top tuần
@@ -310,7 +310,7 @@ const ComicsDetail = () => {
           className='bg-white dark:bg-gray-900 p-5 rounded-lg'
           onMouseDown={(e) => e.stopPropagation()}
         >
-          <section className='w-[700px]'>
+          <section className='w-full sm:w-[450px] md:w-[550px] lg:w-[700px]'>
             {dataComics && id && <ListDownloadChapter id={id} data={dataComics.chapters} />}
           </section>
         </div>
@@ -322,8 +322,8 @@ export default ComicsDetail
 
 const skeleton = () => {
   return (
-    <div className='flex gap-5'>
-      <div className='-mt-20 flex items-center justify-center w-[240px] h-[330px] rounded-md bg-gray-300 dark:bg-gray-700 flex-shrink-0'>
+    <div className='flex flex-col sm:flex-row items-center sm:items-start gap-5'>
+      <div className='-mt-20 flex items-center justify-center w-[200px] h-[280px] sm:w-[240px] sm:h-[330px] rounded-md bg-gray-300 dark:bg-gray-700 flex-shrink-0'>
         <svg
           className='w-10 h-10 text-gray-200 dark:text-gray-600'
           aria-hidden='true'
@@ -334,10 +334,10 @@ const skeleton = () => {
           <path d='M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z' />
         </svg>
       </div>
-      <div className='w-full animate-pulse'>
-        <div className='flex items-center justify-between gap-6'>
+      <div className='w-full overflow-hidden animate-pulse'>
+        <div className='flex items-center xl:justify-between gap-6'>
           <div className='-ml-1 h-6 bg-gray-200 rounded-full dark:bg-gray-700 w-[450px]' />
-          <div className='-ml-1 h-6 bg-gray-200 rounded-full dark:bg-gray-700 w-48' />
+          <div className='hidden lg:block -ml-1 h-6 bg-gray-200 rounded-full dark:bg-gray-700 w-48' />
         </div>
         <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mt-4' />
         <div className='flex items-center gap-4'>
@@ -351,9 +351,9 @@ const skeleton = () => {
               <div key={i} className='h-6 bg-gray-200 rounded-md dark:bg-gray-700 w-16' />
             ))}
         </div>
-        <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-[810px] mt-3' />
-        <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-[840px] mt-2' />
-        <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-[770px] mt-2' />
+        <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-full mt-3' />
+        <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-full mt-2' />
+        <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-full mt-2' />
         <div className='flex items-center gap-3 mt-4'>
           <div className='w-[140px] h-[38px] bg-gray-200 rounded-md dark:bg-gray-700' />
           <div className='w-[140px] h-[38px] bg-gray-200 rounded-md dark:bg-gray-700' />
@@ -367,7 +367,7 @@ const skeletonListChapter = () => {
   return (
     <div className='animate-pulse'>
       <div className='my-5 h-[30px] bg-gray-200 rounded-md dark:bg-gray-700 w-[70px]' />
-      <div className='grid grid-cols-4 gap-5 my-5 text-gray-800 font-semibold text-sm flex-wrap'>
+      <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-5 my-5 text-gray-800 font-semibold text-sm flex-wrap'>
         {Array(20)
           .fill(0)
           .map((_, i) => (

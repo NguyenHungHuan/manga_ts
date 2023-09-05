@@ -83,8 +83,8 @@ const ListChapter = ({ data, id }: Props) => {
               </svg>
             </div>
             <div
-              className={`absolute z-10 top-8 border dark:border dark:border-gray-500 shadow-lg bg-white dark:bg-gray-900 w-32 rounded right-full translate-x-1/3 sm:translate-x-1/2 sm:right-1/2 text-left duration-200 origin-top ${
-                openList ? 'scale-100' : 'scale-[0.001]'
+              className={`absolute z-10 top-8 border dark:border dark:border-gray-500 shadow-lg bg-white dark:bg-gray-900 w-32 rounded left-0 text-left duration-200 origin-top ${
+                openList ? 'scale-100 pointer-events-auto' : 'scale-[0.001] pointer-events-none'
               }`}
             >
               <ul className='overflow-auto text-sm h-max max-h-72 font-normal pl-3 px-1'>
@@ -112,7 +112,7 @@ const ListChapter = ({ data, id }: Props) => {
           </button>
         </li>
       </ul>
-      <div className='grid grid-cols-4 gap-5 my-5 text-gray-800 dark:text-gray-200 font-semibold text-sm flex-wrap'>
+      <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-5 my-5 text-gray-800 dark:text-gray-200 font-semibold text-sm flex-wrap'>
         {(dataChapter as comicsChapter).map((item) => (
           <Link
             to={`${PATH.chapters}/${id}/${item.id}`}

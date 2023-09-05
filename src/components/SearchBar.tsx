@@ -1,4 +1,3 @@
-import bgSearch from '@/assets/img/search-bg.jpg'
 import iconSearch from '@/assets/img/icon_search.png'
 import { SuggestComics } from '.'
 import { useState } from 'react'
@@ -43,18 +42,15 @@ const SearchBar = () => {
   return (
     <div className='w-full'>
       <div
-        className='bg-no-repeat bg-cover h-[100px] dark:relative dark:after:content-[""] dark:after:absolute dark:after:inset-0 dark:after:bg-gray-900/80'
-        style={{
-          backgroundImage: `url('${bgSearch}')`
-        }}
+        className={`bg-no-repeat bg-cover h-[100px] sm:bg-[url('/src/assets/img/search-bg.jpg')] sm:dark:relative sm:dark:after:content-[""] sm:dark:after:absolute sm:dark:after:inset-0 sm:dark:after:bg-gray-900/80`}
       >
         <div className='container h-full'>
           <div className='h-full flex items-center justify-center'>
             <form
-              className='z-10 relative flex items-center dark:text-white'
+              className='z-10 relative flex items-center dark:text-white w-[320px] sm:w-auto'
               onSubmit={(e) => handleSearch(e)}
             >
-              <div className='flex-shrink-0 bg-white py-4 pl-[18px] pr-[14px] dark:bg-gray-900'>
+              <div className='flex-shrink-0 bg-white py-4 pl-[18px] pr-[14px] dark:bg-gray-900 hidden sm:block'>
                 <p
                   className='bg-cover bg-no-repeat w-[18px] h-[18px]'
                   style={{
@@ -69,14 +65,20 @@ const SearchBar = () => {
                 value={valueForm}
                 type='text'
                 placeholder='Tìm kiếm...'
-                className='h-[50px] leading-[50px] pr-4 w-[420px] outline-none dark:bg-gray-900'
+                className='h-[36px] sm:h-[50px] leading-[50px] pr-4 pl-4 sm:pl-0 w-full sm:w-[320px] lg:w-[420px] outline-none dark:bg-gray-900'
               />
-              <button className='text-white capitalize flex items-center justify-center bg-gradient h-[50px] w-[140px]'>
-                Tìm Kiếm
+              <button className='text-white capitalize flex items-center justify-center bg-gray-700 sm:bg-gradient h-[36px] sm:h-[50px] w-[50px] sm:w-[100px] lg:w-[140px]'>
+                <span className='sm:inline-block hidden'>Tìm Kiếm</span>
+                <p
+                  className='bg-cover bg-no-repeat w-[18px] h-[18px] inline-block sm:hidden'
+                  style={{
+                    backgroundImage: `url(${iconSearch})`
+                  }}
+                />
               </button>
               {isOpen && (
                 <div
-                  className='absolute top-[50px] left-0 z-40 border border-[#EDEDED] dark:border-gray-600 bg-white dark:bg-gray-900 w-[470px] shadow-[0_2px_4px_0_rgba(0,0,0,0.10)] max-h-[280px] overflow-y-auto'
+                  className='absolute top-[37px] md:top-[50px] left-0 z-40 border border-[#EDEDED] dark:border-gray-600 bg-white dark:bg-gray-900 w-full md:w-[470px] shadow-[0_2px_4px_0_rgba(0,0,0,0.10)] max-h-[280px] overflow-y-auto'
                   style={{
                     filter: 'blur(0)'
                   }}

@@ -27,11 +27,11 @@ const Banner = () => {
   return (
     <section
       ref={el}
-      className={`flex gap-[10px] transition-all duration-500 ${
+      className={`flex gap-[10px] mt-2 sm:mt-0 transition-all duration-500 ${
         isLoading ? 'opacity-0' : 'opacity-100'
       }`}
     >
-      <div className='w-[510px] relative'>
+      <div className='w-full md:w-[65%] lg:w-[510px] relative'>
         <Swiper
           slidesPerView={1}
           spaceBetween={10}
@@ -46,7 +46,7 @@ const Banner = () => {
           <SwiperSlide>
             <Link to={`${PATH.comics}/one-piece`} title='One Piece'>
               <div
-                className='bg-no-repeat bg-cover w-full h-[380px] bg-center'
+                className='bg-no-repeat bg-cover w-full h-[260px] md:h-[380px] bg-top md:bg-center'
                 style={{
                   backgroundImage: `url('${banner1}')`
                 }}
@@ -56,7 +56,7 @@ const Banner = () => {
           <SwiperSlide>
             <Link to={`${PATH.comics}/jujutsu-kaisen-chu-thuat-hoi-chien`} title='Jujutsu Kaisen - Chú Thuật Hồi Chiến'>
               <div
-                className='bg-no-repeat bg-cover w-full h-[380px] bg-center'
+                className='bg-no-repeat bg-cover w-full h-[260px] md:h-[380px] bg-bottom md:bg-center'
                 style={{
                   backgroundImage: `url('${banner2}')`
                 }}
@@ -66,7 +66,7 @@ const Banner = () => {
           <SwiperSlide>
             <Link to={`${PATH.comics}/thanh-guom-diet-quy`} title='Thanh Gươm Diệt Quỷ'>
               <div
-                className='bg-no-repeat bg-cover w-full h-[380px] bg-center'
+                className='bg-no-repeat bg-cover w-full h-[260px] md:h-[380px] bg-top md:bg-center'
                 style={{
                   backgroundImage: `url('${banner3}')`
                 }}
@@ -79,11 +79,12 @@ const Banner = () => {
           className='swiper-pagination right-0 bottom-[2px_!important]'
         />
       </div>
-      <div className='flex-shrink-0 grid grid-cols-6 gap-[10px]'>
-        <div className='col-span-6 flex items-center gap-[10px]'>
-          <Link to={`${PATH.comics}/onepunch-man`} title='Onepunch Man' className='w-[336px] h-[185px] overflow-hidden'>
+      <div className='flex-shrink-0 hidden md:grid grid-cols-6 gap-[10px] flex-1'>
+        <div className='col-span-6 flex lg:flex-row flex-col items-center gap-[10px]'>
+          <Link to={`${PATH.comics}/onepunch-man`} title='Onepunch Man' 
+            className='w-full h-[185px] overflow-hidden'>
             <p
-              className='bg-no-repeat bg-cover w-full h-full'
+              className='bg-no-repeat bg-cover w-full h-full bg-center'
               style={{
                 backgroundImage: `url(${banner4})`
               }}
@@ -91,17 +92,17 @@ const Banner = () => {
           </Link>
           <Link
             to={`${PATH.comics}/mashle-magic-and-muscles`} title='Mashle: Magic And Muscles'
-            className='w-[336px] h-[185px] overflow-hidden'
+            className='w-full h-[185px] overflow-hidden'
           >
             <p
-              className='bg-no-repeat bg-cover w-full h-full'
+              className='bg-no-repeat bg-cover w-full h-full bg-center'
               style={{
                 backgroundImage: `url(${banner5})`
               }}
             />
           </Link>
         </div>
-        <div className='col-span-6 flex items-center gap-[10px]'>
+        <div className='col-span-6 items-center gap-[10px] md:hidden lg:flex'>
           <Link
           title='REINCARNATED AS AN ARISTOCRAT WITH AN APPRAISAL SKILL'
             to={`${PATH.comics}/reincarnated-as-an-aristocrat-with-an-appraisal-skill`}

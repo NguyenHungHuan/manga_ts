@@ -72,9 +72,9 @@ const ComicsChapter = () => {
       <div className='min-h-[60px] sticky top-0 left-0 z-20 bg-white dark:bg-gray-900 shadow-lg'>
         <div className='container max-w-4xl'>
           {dataChapter && (
-            <div className='flex items-center justify-between'>
+            <div className='flex items-center justify-between px-4 lg:px-0'>
               {Breadcrumb(id as string, idChapter as string, dataChapter)}
-              <div className='flex items-center gap-2'>
+              <div className='flex flex-1 sm:flex-none items-center justify-between gap-4 sm:gap-2 my-4'>
                 <div className='flex items-center gap-2'>
                   <button
                     onClick={() => handleChangeEpisode('prev')}
@@ -132,8 +132,8 @@ const ComicsChapter = () => {
                       </svg>
                     </div>
                     <div
-                      className={`absolute z-10 top-10 border dark:border-gray-500 shadow-lg bg-white dark:bg-gray-900 w-60 py-3 rounded right-full translate-x-1/3 sm:translate-x-1/2 sm:right-1/2 text-left duration-200 origin-top ${
-                        openList ? 'scale-100' : 'scale-[0.001]'
+                      className={`absolute z-10 top-10 border dark:border-gray-500 shadow-lg bg-white dark:bg-gray-900 w-60 py-3 rounded translate-x-1/2 right-1/2 text-left duration-200 origin-top ${
+                        openList ? 'scale-100 pointer-events-auto' : 'scale-[0.001] pointer-events-none'
                       }`}
                     >
                       <h5 className='text-lg px-4 pb-2 leading-5'>
@@ -214,10 +214,10 @@ const ComicsChapter = () => {
       </div>
       <div className='container max-w-4xl min-h-[60px]'>
         {dataChapter && (
-          <div className='flex items-center justify-between'>
+          <div className='flex items-center justify-between px-4 lg:px-0'>
             {Breadcrumb(id as string, idChapter as string, dataChapter)}
-            <div className='flex items-center gap-3'>
-              <div className='flex items-center gap-3 text-black dark:text-white'>
+            <div className='flex flex-1 sm:flex-none items-center justify-between gap-3 my-4'>
+              <div className='flex items-center flex-wrap gap-3 text-black dark:text-white'>
                 <button
                   onClick={() => handleChangeEpisode('prev')}
                   className={classNames(
@@ -254,7 +254,7 @@ const ComicsChapter = () => {
                 <button
                   onClick={() => handleChangeEpisode('next')}
                   className={classNames(
-                    'flex items-center justify-center gap-1 px-4 h-9 border rounded-md leading-3 active:scale-95',
+                    'flex items-center justify-center gap-1 min-w-[125px] px-4 h-9 border rounded-md leading-3 active:scale-95',
                     {
                       'hover:border-primary hover:text-primary':
                         Number(idChapter) !== dataChapter.chapters[0].id,
@@ -293,8 +293,8 @@ export default ComicsChapter
 
 const Breadcrumb = (id: string, idChapter: string, dataChapter: comicSingleChapter) => {
   return (
-    <div className='flex items-center gap-1 my-4 dark:text-white'>
-      <Link to={PATH.home} className='flex items-center hover:text-primary text-lg'>
+    <div className='hidden sm:flex items-center gap-1 my-4 dark:text-white'>
+      <Link to={PATH.home} className='hidden lg:flex items-center hover:text-primary text-lg'>
         Trang chủ{' '}
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -316,7 +316,7 @@ const Breadcrumb = (id: string, idChapter: string, dataChapter: comicSingleChapt
       <Link
         to={`${PATH.comics}/${id}`}
         title={dataChapter.comic_name}
-        className='flex items-center text-lg hover:text-primary'
+        className='hidden md:flex items-center text-lg hover:text-primary'
       >
         <h2 className='max-w-[220px] line-clamp-1'>{dataChapter.comic_name}</h2>
         <svg
@@ -368,7 +368,7 @@ const ButtonDownload = (id: string, chapterId: string) => {
   return (
     <button
       onClick={handleClick}
-      className='pl-2 border-l border-gray-400/60 text-gray-500 dark:text-gray-300 dark:border-gray-500 font-medium flex items-center justify-center gap-1 h-6 hover:text-primary text-lg'
+      className='pl-4 sm:pl-2 border-l border-gray-400/60 text-gray-500 dark:text-gray-300 dark:border-gray-500 font-medium flex items-center justify-center gap-1 h-6 hover:text-primary text-lg'
     >
       <svg
         xmlns='http://www.w3.org/2000/svg'
@@ -386,7 +386,7 @@ const ButtonDownload = (id: string, chapterId: string) => {
           d='M7.25 7.689V2a.75.75 0 0 1 1.5 0v5.689l1.97-1.969a.749.749 0 1 1 1.06 1.06l-3.25 3.25a.749.749 0 0 1-1.06 0L4.22 6.78a.749.749 0 1 1 1.06-1.06l1.97 1.969Z'
         />
       </svg>
-      Download
+      <span className='hidden sm:inline-block'>Download</span>
     </button>
   )
 }

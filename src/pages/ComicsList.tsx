@@ -6,8 +6,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
 import { Link, createSearchParams, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
+import { useMediaQuery } from 'react-responsive'
 
 const ComicsList = () => {
+  const isMobile = useMediaQuery({ maxWidth: 640 })
   const { pathname } = useLocation()
   const queryConfig = useQueryConfig()
   const title = useMemo(() => useTitle(pathname), [pathname])
@@ -44,7 +46,7 @@ const ComicsList = () => {
   }, [pathname, dataComics])
 
   return (
-    <div className='container'>
+    <div className='container px-4 xl:px-0'>
       {data?.data.status === 404 || isError || isErrorNew ? (
         <>not found</>
       ) : (
@@ -109,42 +111,34 @@ const ComicsList = () => {
                 </Link>
               </div>
             ) : (
-              <h2 className='capitalize font-semibold text-black dark:text-white text-2xl'>
-                <strong className='text-primary'>{title}</strong> - trang {queryConfig.page}
+              <h2 className='capitalize font-semibold text-black dark:text-white text-xl lg:text-2xl'>
+                <strong className='text-primary'>{title}</strong>{' '}
+                <span className='hidden md:inline-block'>- trang {queryConfig.page}</span>
               </h2>
             )}
-            {totalPage && (
-              <MiniPagination
-                queryConfig={queryConfig}
-                page={Number(queryConfig.page)}
-                totalPage={totalPage}
-              />
+            {isTopAndNew && isMobile ? null : (
+              <>
+                {totalPage && (
+                  <MiniPagination
+                    queryConfig={queryConfig}
+                    page={Number(queryConfig.page)}
+                    totalPage={totalPage}
+                  />
+                )}
+              </>
             )}
           </div>
-          {dataComics && (
-            <div className='mt-6 min-h-[600px]'>
-              <ul className='grid grid-cols-7 gap-y-5 gap-x-1'>
-                {dataComics.comics.map((item) => (
+          <div className='mt-6 min-h-[600px]'>
+            <ul className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-2 xl:gap-x-[3px] gap-y-5'>
+              {dataComics &&
+                dataComics.comics.map((item) => (
                   <li key={item.id}>
-                    <CardItem
-                      chapterName={item.last_chapter.name}
-                      chapterId={item.last_chapter.id}
-                      description={item.short_description}
-                      id={item.id}
-                      thumbnail={item.thumbnail}
-                      title={item.title}
-                      updated_at={item.updated_at}
-                    />
+                    <CardItem data={item} />
                   </li>
                 ))}
-              </ul>
-            </div>
-          )}
-          {!dataComics && (
-            <div className='mt-6 min-h-[600px]'>
-              <ul className='grid grid-cols-7 gap-y-5 gap-x-1'>{skeleton()}</ul>
-            </div>
-          )}
+              {!dataComics && skeleton()}
+            </ul>
+          </div>
           <div className='mt-6'>
             {totalPage && (
               <Pagination
@@ -167,8 +161,8 @@ const skeleton = () => {
       {Array(21)
         .fill(0)
         .map((_, i) => (
-          <li key={i} className='w-full h-[292px] overflow-hidden animate-pulse'>
-            <div className='flex items-center justify-center w-full h-[220px] bg-gray-300 dark:bg-gray-700 flex-shrink-0'>
+          <li key={i} className='w-full min-h-[292px] overflow-hidden animate-pulse'>
+            <div className='flex items-center justify-center w-full h-[240px] xl:h-[220px] bg-gray-300 dark:bg-gray-700 flex-shrink-0'>
               <svg
                 className='w-16 h-16 text-gray-200 dark:text-gray-600'
                 aria-hidden='true'

@@ -14,18 +14,22 @@ const Navbar = () => {
     <div
       className={classNames('text-black/60 dark:text-white', {
         'bg-white dark:bg-gray-900': isHome,
-        'bg-[#f8f8f9] dark:bg-gray-800 p-5': !isHome
+        'bg-[#f8f8f9] dark:bg-gray-800 py-5 lg:p-5': !isHome,
+        'hidden sm:block': !isTop,
+        block: isTop
       })}
     >
       <nav
-        className={classNames('container h-[56px]', {
+        className={classNames('container min-h-[56px] px-4', {
           'py-[15px]': isHome,
-          'py-10 px-4 bg-white dark:bg-gray-900 border-t-[3px] border-primary': !isHome
+          'py-3 bg-white dark:bg-gray-900 border-t-[3px] border-primary': !isHome
         })}
       >
-        <ul className='flex items-center gap-3 h-full'>
+        <ul className='flex items-center gap-3 overflow-x-auto overflow-y-hidden'>
           {!isHome && !isTop && (
-            <li className='uppercase font-semibold text-sm py-4 text-black dark:text-gray-400'>chủ đề:</li>
+            <li className='uppercase font-semibold text-sm py-4 text-black dark:text-gray-400'>
+              chủ đề:
+            </li>
           )}
           {!isTop && (
             <>
@@ -114,7 +118,7 @@ const Navbar = () => {
                   con gái
                 </NavLink>
               </li>
-              <li className='ml-auto'>
+              <li className='ml-auto hidden lg:block'>
                 <Link
                   to='https://github.com/NguyenHungHuan/manga_ts'
                   target='_blank'
@@ -128,7 +132,7 @@ const Navbar = () => {
                   </span>
                 </Link>
               </li>
-              <li>
+              <li className='hidden lg:block'>
                 <Link
                   target='_blank'
                   rel='noopener noreferrer'
@@ -152,7 +156,7 @@ const Navbar = () => {
                     }).toString()
                   }}
                   className={classNames(
-                    'capitalize font-semibold text-[15px] hover:text-primary px-1 py-4 flex items-center justify-center gap-1',
+                    'capitalize whitespace-nowrap font-semibold text-[15px] hover:text-primary px-1 py-3 flex items-center justify-center gap-1',
                     {
                       'text-primary': pathname === PATH.top,
                       'text-current': pathname !== PATH.top
@@ -164,7 +168,7 @@ const Navbar = () => {
                     fill='currentColor'
                     strokeWidth={0}
                     viewBox='0 0 512 512'
-                    className='w-5 h-5'
+                    className='w-5 h-5 hidden lg:block'
                     xmlns='http://www.w3.org/2000/svg'
                   >
                     <path d='M102.594 25.97l90.062 345.78L481.844 395 391.75 49.22 102.594 25.97zm-18.906 1.593c-30.466 11.873-55.68 53.098-49.75 75.312l3.25 11.78c.667-1.76 1.36-3.522 2.093-5.28C49.19 85.668 65.84 62.61 89.657 50.47l-5.97-22.907zm44.937 18.906l247.813 21.593 80.937 305.156-249.344-20.064L128.626 46.47zM94.53 69.155c-16.66 10.01-29.916 28.068-38 47.406-5.245 12.552-8.037 25.64-8.75 36.532l64.814 235.28c.293-.55.572-1.105.875-1.655 10.6-19.254 27.822-37.696 51.124-48.47L94.53 69.156zm74.876 287.563c-17.673 9.067-31.144 23.712-39.562 39-4.464 8.105-7.262 16.36-8.688 23.75l11.688 42.405 1.625.125c-3.825-27.528 11.382-60.446 41.25-81.03l-6.314-24.25zm26.344 34.03c-32.552 17.26-46.49 52.402-41.844 72.906l289.844 24.53c-5.315-7.75-8.637-17.84-8.594-28.342l-22.562-9.063 46.625-7.31-13.595-12.97c5.605-6.907 13.688-13.025 24.78-17.656L195.75 390.75z' />
@@ -182,7 +186,7 @@ const Navbar = () => {
                     }).toString()
                   }}
                   className={({ isActive }) =>
-                    `capitalize font-semibold text-[15px] hover:text-primary px-1 py-4 flex items-center justify-center gap-1 ${
+                    `capitalize whitespace-nowrap font-semibold text-[15px] hover:text-primary px-1 py-3 flex items-center justify-center gap-1 ${
                       isActive && ' text-primary'
                     }`
                   }
@@ -192,7 +196,7 @@ const Navbar = () => {
                     fill='currentColor'
                     strokeWidth={0}
                     viewBox='0 0 512 512'
-                    className='w-5 h-5'
+                    className='w-5 h-5 hidden lg:block'
                     xmlns='http://www.w3.org/2000/svg'
                   >
                     <rect
@@ -244,7 +248,7 @@ const Navbar = () => {
                     }).toString()
                   }}
                   className={({ isActive }) =>
-                    `capitalize font-semibold text-[15px] hover:text-primary px-1 py-4 flex items-center justify-center gap-1 ${
+                    `capitalize whitespace-nowrap font-semibold text-[15px] hover:text-primary px-1 py-3 flex items-center justify-center gap-1 ${
                       isActive && ' text-primary'
                     }`
                   }
@@ -254,7 +258,7 @@ const Navbar = () => {
                     fill='currentColor'
                     strokeWidth={0}
                     viewBox='0 0 16 16'
-                    className='w-5 h-5'
+                    className='w-5 h-5 hidden lg:block'
                     xmlns='http://www.w3.org/2000/svg'
                   >
                     <path d='M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z' />
@@ -273,7 +277,7 @@ const Navbar = () => {
                     }).toString()
                   }}
                   className={({ isActive }) =>
-                    `capitalize font-semibold text-[15px] hover:text-primary px-1 py-4 flex items-center justify-center gap-1 ${
+                    `capitalize whitespace-nowrap font-semibold text-[15px] hover:text-primary px-1 py-3 flex items-center justify-center gap-1 ${
                       isActive && ' text-primary'
                     }`
                   }
@@ -282,7 +286,7 @@ const Navbar = () => {
                     stroke='currentColor'
                     strokeWidth={0}
                     viewBox='0 0 24 24'
-                    className='w-6 h-6 fill-slate-500/80'
+                    className='w-6 h-6 hidden lg:block fill-slate-500/80'
                     xmlns='http://www.w3.org/2000/svg'
                   >
                     <path d='M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 002 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z' />
@@ -300,7 +304,7 @@ const Navbar = () => {
                     }).toString()
                   }}
                   className={({ isActive }) =>
-                    `capitalize font-semibold text-[15px] hover:text-primary px-1 py-4 flex items-center justify-center gap-[2px] ${
+                    `capitalize whitespace-nowrap font-semibold text-[15px] hover:text-primary px-1 py-3 flex items-center justify-center gap-[2px] ${
                       isActive && ' text-primary'
                     }`
                   }
@@ -311,7 +315,7 @@ const Navbar = () => {
                     xmlnsXlink='http://www.w3.org/1999/xlink'
                     aria-hidden='true'
                     role='img'
-                    className='w-6 h-6'
+                    className='w-6 h-6 hidden lg:block'
                     viewBox='0 0 20 20'
                   >
                     <path
@@ -332,7 +336,7 @@ const Navbar = () => {
                     }).toString()
                   }}
                   className={({ isActive }) =>
-                    `capitalize font-semibold text-[15px] hover:text-primary px-1 py-4 flex items-center justify-center gap-[2px] ${
+                    `capitalize whitespace-nowrap font-semibold text-[15px] hover:text-primary px-1 py-3 flex items-center justify-center gap-[2px] ${
                       isActive && ' text-primary'
                     }`
                   }
@@ -343,7 +347,7 @@ const Navbar = () => {
                     xmlnsXlink='http://www.w3.org/1999/xlink'
                     aria-hidden='true'
                     role='img'
-                    className='w-6 h-6'
+                    className='w-6 h-6 hidden lg:block'
                     viewBox='0 0 256 256'
                   >
                     <path
@@ -354,7 +358,7 @@ const Navbar = () => {
                   Top theo dõi
                 </NavLink>
               </li>
-              <li>
+              <li className='pr-4'>
                 <NavLink
                   to={{
                     pathname: `${PATH.top}${PATH.comment}`,
@@ -364,7 +368,7 @@ const Navbar = () => {
                     }).toString()
                   }}
                   className={({ isActive }) =>
-                    `capitalize font-semibold text-[15px] hover:text-primary px-1 py-4 flex items-center justify-center gap-[2px] ${
+                    `capitalize whitespace-nowrap font-semibold text-[15px] hover:text-primary px-1 py-3 flex items-center justify-center gap-[2px] ${
                       isActive && ' text-primary'
                     }`
                   }
@@ -375,7 +379,7 @@ const Navbar = () => {
                     xmlnsXlink='http://www.w3.org/1999/xlink'
                     aria-hidden='true'
                     role='img'
-                    className='w-6 h-6'
+                    className='w-6 h-6 hidden lg:block'
                     viewBox='0 0 20 20'
                   >
                     <path

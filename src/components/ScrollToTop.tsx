@@ -25,8 +25,8 @@ const ScrollToTop = () => {
           behavior: 'smooth'
         })
       }}
-      className={`active:scale-75 fixed p-2 bottom-6 right-6 flex items-center justify-center aspect-square rounded-full shadow-md border dark:border-gray-700 dark:text-white bg-white dark:bg-gray-900 -rotate-45 transition-all duration-200 sm:bottom-6 sm:right-6 ${
-        isShow ? ' opacity-1 pointer-events-auto' : ' opacity-0 pointer-events-none translate-y-3'
+      className={`active:scale-75 hidden lg:flex fixed p-2 bottom-6 right-6 items-center justify-center aspect-square rounded-full shadow-md border dark:border-gray-700 dark:text-white bg-white dark:bg-gray-900 -rotate-45 transition-all duration-200 sm:bottom-6 sm:right-6 ${
+        isShow ? ' opacity-100 pointer-events-auto' : ' opacity-0 pointer-events-none translate-y-3'
       }`}
     >
       <svg

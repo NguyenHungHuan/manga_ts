@@ -1,11 +1,11 @@
 import {
   comicSingleChapter,
   comicSuggestSearch,
+  comics,
   comicsComment,
   comicsDetail,
   dataComics,
   dataGenres,
-  dataRecommend
 } from '@/types/data'
 import PATH from '@/utils/path'
 import { axiosClients, axiosClients2 } from './axiosClients'
@@ -31,7 +31,7 @@ const comicApis = {
   },
   getRecommend() {
     const url = PATH.recommend
-    return axiosClients.get<dataRecommend[]>(url)
+    return axiosClients.get<comics[]>(url)
   },
   getGenre() {
     const url = PATH.genres

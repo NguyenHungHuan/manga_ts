@@ -109,8 +109,8 @@ const ListDownloadChapter = ({ data, id }: Props) => {
                 </svg>
               </div>
               <div
-                className={`absolute z-10 top-8 border dark:border-gray-500 shadow-lg bg-white dark:bg-gray-900 w-32 rounded right-full translate-x-1/3 sm:translate-x-1/2 sm:right-1/2 text-left duration-200 origin-top ${
-                  openList ? 'scale-100' : 'scale-[0.001]'
+                className={`absolute z-10 top-8 border dark:border-gray-500 shadow-lg bg-white dark:bg-gray-900 w-32 rounded translate-x-1/2 right-1/2 text-left duration-200 origin-top ${
+                  openList ? 'scale-100 pointer-events-auto' : 'scale-[0.001] pointer-events-none'
                 }`}
               >
                 <ul className='overflow-auto text-sm h-max max-h-72 font-normal px-1 pl-3'>
@@ -140,7 +140,7 @@ const ListDownloadChapter = ({ data, id }: Props) => {
         </ul>
       </div>
       <div className='px-2 overflow-y-auto h-[350px]'>
-        <ul className='grid grid-cols-5 gap-3 my-3 text-gray-800 font-semibold text-sm flex-wrap'>
+        <ul className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 my-3 text-gray-800 font-semibold text-sm flex-wrap'>
           {(dataChapter as comicsChapter).map((item) => (
             <li key={item.id} className='flex-1 rounded-md overflow-hidden'>
               <button
@@ -161,7 +161,7 @@ const ListDownloadChapter = ({ data, id }: Props) => {
           ))}
         </ul>
       </div>
-      <div className='flex items-center gap-3 justify-end pr-4'>
+      <div className='flex items-center gap-3 justify-end pr-4 pt-2'>
         <span className='text-primary'>{`( ${downloadChapters.length} )`}</span>
         <button
           onClick={handleDownloadChapters}

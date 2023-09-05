@@ -4,9 +4,11 @@ import { renderSwiperSlide } from '@/components/Preview/RecentUpdateComics'
 import { useQueryConfig, useScrollTop } from '@/hooks'
 import PATH from '@/utils/path'
 import { useQuery } from 'react-query'
+import { useMediaQuery } from 'react-responsive'
 import { Link } from 'react-router-dom'
 
 const ComicsSearch = () => {
+  const isMobile = useMediaQuery({ maxWidth: 767 })
   const queryConfig = useQueryConfig()
   useScrollTop([queryConfig.q, queryConfig.page])
 
@@ -19,7 +21,7 @@ const ComicsSearch = () => {
   const dataSearch = data?.data
 
   return (
-    <div className='container'>
+    <div className='container px-4 lg:px-0'>
       <div className='mt-6 flex items-center justify-between'>
         <div className='flex items-center gap-2 text-black dark:text-white'>
           <Link to={PATH.home} className='flex items-center gap-1 hover:text-primary text-lg'>
@@ -62,24 +64,28 @@ const ComicsSearch = () => {
           </span>
           <span className='text-primary text-lg'>"{queryConfig.q}"</span>
         </div>
-        {dataSearch?.total_pages && (
-          <MiniPagination
-            queryConfig={queryConfig}
-            page={Number(queryConfig.page)}
-            totalPage={dataSearch?.total_pages}
-          />
-        )}
+          {dataSearch?.total_pages && !isMobile && (
+            <MiniPagination
+              queryConfig={queryConfig}
+              page={Number(queryConfig.page)}
+              totalPage={dataSearch?.total_pages}
+            />
+          )}
       </div>
       <div className='mt-8 min-h-[550px]'>
         {dataSearch &&
           !isFetching &&
           dataSearch?.comics.length > 0 &&
-          renderSwiperSlide(dataSearch.comics, 2, '6')}
-        {!isFetching && ((Array.isArray(dataSearch?.comics) && !dataSearch?.comics.length) || isError) && (
-          <div className='flex items-center justify-center text-2xl h-[550px] text-black dark:text-white'>
-            Không tìm thấy truyện với kết quả
-          </div>
-        )}
+          (isMobile
+            ? renderSwiperSlide(dataSearch.comics, 1, '6')
+            : renderSwiperSlide(dataSearch.comics, 2, '6')
+            )}
+        {!isFetching &&
+          ((Array.isArray(dataSearch?.comics) && !dataSearch?.comics.length) || isError) && (
+            <div className='flex items-center justify-center text-2xl h-[550px] text-black dark:text-white'>
+              Không tìm thấy truyện với kết quả
+            </div>
+          )}
         {isFetching && Skeleton()}
       </div>
       <div className='mt-14'>
@@ -98,11 +104,11 @@ export default ComicsSearch
 
 const Skeleton = () => {
   return (
-    <div className='grid grid-cols-12 gap-6 h-full w-full animate-pulse'>
+    <div className='grid grid-cols-6 md:grid-cols-12 gap-6 h-full w-full animate-pulse overflow-hidden'>
       {Array(6)
         .fill(0)
         .map((_, i) => (
-          <div key={i} className='md:flex col-span-6'>
+          <div key={i} className='flex col-span-6'>
             <div className='flex items-center justify-center w-[165px] h-[220px] bg-gray-300 dark:bg-gray-700 flex-shrink-0'>
               <svg
                 className='w-10 h-10 text-gray-200 dark:text-gray-600'

@@ -74,7 +74,7 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
             }}
             key={index}
             className={classNames(
-              'mx-1 cursor-pointer rounded border dark:border-gray-600 bg-white dark:bg-gray-900 text-black dark:text-white px-3 py-1 shadow-sm',
+              'mx-1 cursor-pointer rounded border dark:border-gray-600 bg-white dark:bg-gray-900 text-black dark:text-white px-3 h-[34px] shadow-sm flex items-center justify-center',
               {
                 'border-primary text-primary dark:border-primary dark:text-primary':
                   pageNumber === page,
@@ -89,9 +89,9 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
       })
   }
   return (
-    <div className='mt-6 flex flex-wrap justify-center'>
+    <div className='mt-8 flex flex-wrap justify-center gap-1 gap-y-2'>
       {page === 1 ? (
-        <span className='mx-1 cursor-default rounded border dark:border-gray-500 dark:text-gray-400 text-black dark:bg-gray-900 opacity-60 px-3 py-1 shadow-sm flex items-center justify-center'>
+        <span className='cursor-default rounded border dark:border-gray-500 dark:text-gray-400 text-black dark:bg-gray-900 opacity-60 px-3 h-[34px] shadow-sm flex items-center justify-center'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -111,7 +111,7 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
               page: (page - 1).toString()
             }).toString()
           }}
-          className='mx-1 cursor-pointer rounded border dark:border-gray-500 dark:text-white text-black bg-white dark:bg-gray-900 px-3 py-1 shadow-sm flex items-center justify-center hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary'
+          className='cursor-pointer rounded border dark:border-gray-500 dark:text-white text-black bg-white dark:bg-gray-900 px-3 h-[34px] shadow-sm flex items-center justify-center hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -128,7 +128,7 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
 
       {renderPagination()}
       {page === totalPage ? (
-        <span className='mx-1 cursor-default rounded border dark:border-gray-500 opacity-60 px-3 py-1 shadow-sm flex items-center justify-center text-black dark:text-gray-300'>
+        <span className='cursor-default rounded border dark:border-gray-500 opacity-60 px-3 h-[34px] shadow-sm flex items-center justify-center text-black dark:text-gray-300'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -148,7 +148,7 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
               page: (page + 1).toString()
             }).toString()
           }}
-          className='mx-1 cursor-pointer rounded border text-black dark:text-gray-300 dark:border-gray-500 bg-white dark:bg-gray-900 px-3 py-1 flex items-center justify-center shadow-sm hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary'
+          className='cursor-pointer rounded border text-black dark:text-gray-300 dark:border-gray-500 bg-white dark:bg-gray-900 px-3 h-[34px] flex items-center justify-center shadow-sm hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'

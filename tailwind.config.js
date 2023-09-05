@@ -23,7 +23,7 @@ export default {
         '.container': {
           maxWidth: '1200px',
           marginLeft: 'auto',
-          marginRight: 'auto'
+          marginRight: 'auto',
         }
       })
     }
