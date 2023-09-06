@@ -64,6 +64,7 @@ const ListComment = ({ id }: { id: string }) => {
             </span>
             <div className='flex items-center gap-2'>
               <button
+              title='Trước'
                 onClick={PrevPage}
                 className={classNames('px-[10px] py-2 rounded-md border dark:border-gray-500 flex justify-center active:scale-95', {
                   'opacity-80 cursor-default text-gray-400': page === 1,
@@ -86,6 +87,7 @@ const ListComment = ({ id }: { id: string }) => {
                 </svg>
               </button>
               <button
+              title='Sau'
                 onClick={nextPage}
                 className={classNames('px-[10px] py-2 rounded-md border dark:border-gray-500 flex justify-center active:scale-95', {
                   'opacity-80 cursor-default text-gray-400': dataComment?.total_pages === page,
@@ -271,6 +273,7 @@ const ListComment = ({ id }: { id: string }) => {
           </span>
           <div className='flex items-center gap-2'>
             <button
+            title='Trước'
               onClick={PrevPage}
               className={classNames('px-[10px] py-2 rounded-md border dark:border-gray-500 flex justify-center active:scale-95', {
                 'opacity-80 cursor-default text-gray-400': page === 1,
@@ -293,6 +296,7 @@ const ListComment = ({ id }: { id: string }) => {
               </svg>
             </button>
             <button
+            title='Sau'
               onClick={nextPage}
               className={classNames('px-[10px] py-2 rounded-md border dark:border-gray-500 flex justify-center active:scale-95', {
                 'opacity-80 cursor-default text-gray-400': dataComment?.total_pages === page,

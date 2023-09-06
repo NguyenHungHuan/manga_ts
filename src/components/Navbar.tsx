@@ -20,9 +20,9 @@ const Navbar = () => {
       })}
     >
       <nav
-        className={classNames('container min-h-[56px] px-4', {
-          'py-[15px]': isHome,
-          'py-3 bg-white dark:bg-gray-900 border-t-[3px] border-primary': !isHome
+        className={classNames('container min-h-[56px]', {
+          'px-4 xl:px-0': isHome,
+          'p-3 bg-white dark:bg-gray-900 border-t-[3px] border-primary': !isHome
         })}
       >
         <ul className='flex items-center gap-3 overflow-x-auto overflow-y-hidden'>
@@ -35,6 +35,7 @@ const Navbar = () => {
             <>
               <li>
                 <NavLink
+                title='Truyện mới cập nhật'
                   to={{
                     pathname: PATH.recent,
                     search: createSearchParams({
@@ -52,6 +53,7 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
+                title='Truyện nổi bật'
                   to={{
                     pathname: PATH.popular,
                     search: createSearchParams({
@@ -69,6 +71,7 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
+                title='Truyện đã hoàn thành'
                   to={{
                     pathname: PATH.completed,
                     search: createSearchParams({
@@ -86,6 +89,7 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
+                title='Truyện con trai'
                   to={{
                     pathname: PATH.boy,
                     search: createSearchParams({
@@ -103,6 +107,7 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
+                title='Truyện con gái'
                   to={{
                     pathname: PATH.girl,
                     search: createSearchParams({

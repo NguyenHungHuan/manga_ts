@@ -66,6 +66,7 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
 
         return (
           <Link
+          title={`Trang ${pageNumber}`}
             to={{
               search: createSearchParams({
                 ...queryConfig,
@@ -105,6 +106,7 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
         </span>
       ) : (
         <Link
+        title='Trang trước'
           to={{
             search: createSearchParams({
               ...queryConfig,
@@ -142,6 +144,7 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
         </span>
       ) : (
         <Link
+        title='Trang sau'
           to={{
             search: createSearchParams({
               ...queryConfig,

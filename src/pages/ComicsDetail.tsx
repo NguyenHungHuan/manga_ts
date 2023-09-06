@@ -15,6 +15,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import imgError from '@/assets/img/img-error.png'
 import imgLoading from '@/assets/img/loading.gif'
 import { NotFound } from '@/App'
+import { Helmet } from 'react-helmet-async'
 
 const ComicsDetail = () => {
   const { id } = useParams()
@@ -55,6 +56,13 @@ const ComicsDetail = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{`${dataComics?.title} [Tới ${dataComics?.chapters.at(0)?.name}] - VTruyen`}</title>
+        <meta
+          name='description'
+          content={`Đọc truyện tranh ${dataComics?.title} Tiếng Việt bản dịch Full mới nhất, ảnh đẹp chất lượng cao, cập nhật nhanh và sớm nhất tại VTruyen`}
+        />
+      </Helmet>
       {!(isError || Number(dataComics?.status) === 404) && (
         <>
           <div className='w-full min-h-[400px] relative overflow-hidden'>
@@ -143,12 +151,16 @@ const ComicsDetail = () => {
                             {dataComics.description}
                           </p>
                           {isShow && isOpen && (
-                            <button onClick={() => setIsOpen((prev) => !prev)}>
+                            <button
+                              title='Thu gọn mô tả'
+                              onClick={() => setIsOpen((prev) => !prev)}
+                            >
                               <span className='text-black dark:text-white'>Show less</span>
                             </button>
                           )}{' '}
                           {isShow && !isOpen && (
                             <button
+                              title='Xem thêm mô tả'
                               className='absolute right-0 bg-white/90 dark:bg-gray-900/90 rounded-full bottom-0 z-10 w-[50px] overflow-hidden'
                               onClick={() => setIsOpen((prev) => !prev)}
                             >
@@ -160,6 +172,7 @@ const ComicsDetail = () => {
                         </div>
                         <div className='flex items-center gap-3 mt-2'>
                           <Link
+                          title='Đọc ngay chương mới nhất'
                             to={`${PATH.chapters}/${id}/${dataComics.chapters[0].id}`}
                             className='text-white flex-shrink-0 bg-gradient w-[140px] h-[38px] capitalize font-semibold flex items-center justify-center rounded gap-2'
                           >
@@ -182,6 +195,7 @@ const ComicsDetail = () => {
                             Đọc Ngay
                           </Link>
                           <button
+                          title='Tải truyện tranh'
                             onClick={() => {
                               setIsOpenModal(true)
                               document.body.style.overflow = 'hidden'

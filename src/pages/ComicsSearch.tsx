@@ -3,6 +3,7 @@ import { MiniPagination, Pagination } from '@/components'
 import { renderSwiperSlide } from '@/components/Preview/RecentUpdateComics'
 import { useQueryConfig, useScrollTop } from '@/hooks'
 import PATH from '@/utils/path'
+import { Helmet } from 'react-helmet-async'
 import { useQuery } from 'react-query'
 import { useMediaQuery } from 'react-responsive'
 import { Link } from 'react-router-dom'
@@ -21,49 +22,57 @@ const ComicsSearch = () => {
   const dataSearch = data?.data
 
   return (
-    <div className='container px-4 lg:px-0'>
-      <div className='mt-6 flex items-center justify-between'>
-        <div className='flex items-center gap-2 text-black dark:text-white'>
-          <Link to={PATH.home} className='flex items-center gap-1 hover:text-primary text-lg'>
-            Trang chủ{' '}
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              xmlnsXlink='http://www.w3.org/1999/xlink'
-              aria-hidden='true'
-              className='w-5 h-5'
-              viewBox='0 0 48 48'
-            >
-              <path
-                fill='none'
-                stroke='currentColor'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={3}
-                d='M19 12L31 24L19 36'
-              />
-            </svg>
-          </Link>
-          <span className='flex items-center gap-1 text-lg'>
-            Tìm kiếm{' '}
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              xmlnsXlink='http://www.w3.org/1999/xlink'
-              aria-hidden='true'
-              className='w-5 h-5'
-              viewBox='0 0 48 48'
-            >
-              <path
-                fill='none'
-                stroke='currentColor'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={3}
-                d='M19 12L31 24L19 36'
-              />
-            </svg>
-          </span>
-          <span className='text-primary text-lg'>"{queryConfig.q}"</span>
-        </div>
+    <>
+      <Helmet>
+        <title>Tìm truyện tranh online - VTruyen</title>
+        <meta
+          name='description'
+          content='Tìm truyện tranh - Tất cả truyện đều có thể tìm thấy tại VTruyen'
+        />
+      </Helmet>
+      <div className='container px-4 lg:px-0'>
+        <div className='mt-6 flex items-center justify-between'>
+          <div className='flex items-center gap-2 text-black dark:text-white'>
+            <Link to={PATH.home} className='flex items-center gap-1 hover:text-primary text-lg'>
+              Trang chủ{' '}
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                xmlnsXlink='http://www.w3.org/1999/xlink'
+                aria-hidden='true'
+                className='w-5 h-5'
+                viewBox='0 0 48 48'
+              >
+                <path
+                  fill='none'
+                  stroke='currentColor'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={3}
+                  d='M19 12L31 24L19 36'
+                />
+              </svg>
+            </Link>
+            <span className='flex items-center gap-1 text-lg'>
+              Tìm kiếm{' '}
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                xmlnsXlink='http://www.w3.org/1999/xlink'
+                aria-hidden='true'
+                className='w-5 h-5'
+                viewBox='0 0 48 48'
+              >
+                <path
+                  fill='none'
+                  stroke='currentColor'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={3}
+                  d='M19 12L31 24L19 36'
+                />
+              </svg>
+            </span>
+            <span className='text-primary text-lg'>"{queryConfig.q}"</span>
+          </div>
           {dataSearch?.total_pages && !isMobile && (
             <MiniPagination
               queryConfig={queryConfig}
@@ -71,33 +80,33 @@ const ComicsSearch = () => {
               totalPage={dataSearch?.total_pages}
             />
           )}
-      </div>
-      <div className='mt-8 min-h-[550px]'>
-        {dataSearch &&
-          !isFetching &&
-          dataSearch?.comics.length > 0 &&
-          (isMobile
-            ? renderSwiperSlide(dataSearch.comics, 1, '6')
-            : renderSwiperSlide(dataSearch.comics, 2, '6')
+        </div>
+        <div className='mt-8 min-h-[550px]'>
+          {dataSearch &&
+            !isFetching &&
+            dataSearch?.comics.length > 0 &&
+            (isMobile
+              ? renderSwiperSlide(dataSearch.comics, 1, '6')
+              : renderSwiperSlide(dataSearch.comics, 2, '6'))}
+          {!isFetching &&
+            ((Array.isArray(dataSearch?.comics) && !dataSearch?.comics.length) || isError) && (
+              <div className='flex items-center justify-center text-2xl h-[550px] text-black dark:text-white'>
+                Không tìm thấy truyện với kết quả
+              </div>
             )}
-        {!isFetching &&
-          ((Array.isArray(dataSearch?.comics) && !dataSearch?.comics.length) || isError) && (
-            <div className='flex items-center justify-center text-2xl h-[550px] text-black dark:text-white'>
-              Không tìm thấy truyện với kết quả
-            </div>
+          {isFetching && Skeleton()}
+        </div>
+        <div className='mt-14'>
+          {dataSearch?.total_pages && (
+            <Pagination
+              queryConfig={queryConfig}
+              page={Number(queryConfig.page)}
+              totalPage={dataSearch?.total_pages}
+            />
           )}
-        {isFetching && Skeleton()}
+        </div>
       </div>
-      <div className='mt-14'>
-        {dataSearch?.total_pages && (
-          <Pagination
-            queryConfig={queryConfig}
-            page={Number(queryConfig.page)}
-            totalPage={dataSearch?.total_pages}
-          />
-        )}
-      </div>
-    </div>
+    </>
   )
 }
 export default ComicsSearch

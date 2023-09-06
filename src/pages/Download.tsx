@@ -1,5 +1,6 @@
 import comicApis from '@/apis/comicApis'
 import { Document, Image, PDFDownloadLink, Page, View } from '@react-pdf/renderer'
+import { Helmet } from 'react-helmet-async'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 
@@ -16,6 +17,10 @@ const Download = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{`Tải truyện - ${id} - VTruyen`}</title>
+        <meta name='description' content={`Tải chương truyện của ${id} từ VTruyen`} />
+      </Helmet>
       {dataChapter && (
         <>
           <h1 className='text-black dark:text-white font-semibold text-2xl text-center mt-20'>{`${dataChapter.comic_name} - ${dataChapter.chapter_name}`}</h1>
@@ -38,7 +43,7 @@ const Download = () => {
                           minWidth: '100%',
                           minHeight: '100%',
                           height: '100%',
-                          width: '100%',
+                          width: '100%'
                         }}
                         src={item.src}
                       />
@@ -65,7 +70,10 @@ const Download = () => {
                   >
                     <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
                   </svg>
-                  <button className='text-black dark:text-white' ref={(elBtn) => (elBtn?.parentNode as HTMLAnchorElement).click()}>
+                  <button
+                    className='text-black dark:text-white'
+                    ref={(elBtn) => (elBtn?.parentNode as HTMLAnchorElement).click()}
+                  >
                     Completed
                   </button>
                 </div>

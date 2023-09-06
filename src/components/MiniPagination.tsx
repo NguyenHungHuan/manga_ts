@@ -39,6 +39,7 @@ const MiniPagination = ({ totalPage, page, queryConfig }: Props) => {
       </span>
       <div className='flex items-center gap-1'>
         <button
+        title='Trang trước'
           onClick={PrevPage}
           className={classNames(
             'py-2 px-3 rounded-md border dark:border-gray-500 text-black dark:text-gray-300 flex justify-center active:scale-95',
@@ -60,6 +61,7 @@ const MiniPagination = ({ totalPage, page, queryConfig }: Props) => {
           </svg>
         </button>
         <button
+        title='Trang sau'
           onClick={nextPage}
           className={classNames(
             'py-2 px-3 rounded-md border dark:border-gray-500 text-black dark:text-gray-300 flex justify-center active:scale-95',

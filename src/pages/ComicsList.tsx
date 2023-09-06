@@ -8,6 +8,7 @@ import { Link, createSearchParams, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import { useMediaQuery } from 'react-responsive'
 import { NotFound } from '@/App'
+import { Helmet } from 'react-helmet-async'
 
 const ComicsList = () => {
   const isMobile = useMediaQuery({ maxWidth: 640 })
@@ -47,111 +48,124 @@ const ComicsList = () => {
   }, [pathname, dataComics])
 
   return (
-    <div className='container px-4 xl:px-0'>
-      {data?.data.status === 404 || isError || isErrorNew ? (
-        <NotFound />
-      ) : (
-        <>
-          <div className='mt-8 flex items-center justify-between h-9'>
-            {isTopAndNew ? (
-              <div className='flex items-center gap-2'>
-                <Link
-                  className={classNames(
-                    'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline',
-                    {
-                      'bg-primary text-white hover:no-underline': queryConfig.status === 'all',
-                      'bg-transparent text-primary': queryConfig.status !== 'all'
-                    }
+    <>
+      <Helmet>
+        <title>{`Truyện tranh ${title} online - VTruyen`}</title>
+        <meta
+          name='description'
+          content={`Truyện tranh ${title} online - Tất cả truyện ${title} có thể tìm thấy tại VTruyen`}
+        />
+      </Helmet>
+      <div className='container px-4 xl:px-0'>
+        {data?.data.status === 404 || isError || isErrorNew ? (
+          <NotFound />
+        ) : (
+          <>
+            <div className='mt-8 flex items-center justify-between h-9'>
+              {isTopAndNew ? (
+                <div className='flex items-center gap-2'>
+                  <Link
+                  title='Tất cả truyện'
+                    className={classNames(
+                      'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline',
+                      {
+                        'bg-primary text-white hover:no-underline': queryConfig.status === 'all',
+                        'bg-transparent text-primary': queryConfig.status !== 'all'
+                      }
+                    )}
+                    to={{
+                      search: createSearchParams({
+                        ...queryConfig,
+                        page: '1',
+                        status: 'all'
+                      }).toString()
+                    }}
+                  >
+                    tất cả
+                  </Link>
+                  <Link
+                  title='Truyện đã hoàn thành'
+                    className={classNames(
+                      'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline',
+                      {
+                        'bg-primary text-white hover:no-underline':
+                          queryConfig.status === 'completed',
+                        'bg-transparent text-primary': queryConfig.status !== 'completed'
+                      }
+                    )}
+                    to={{
+                      search: createSearchParams({
+                        ...queryConfig,
+                        page: '1',
+                        status: 'completed'
+                      }).toString()
+                    }}
+                  >
+                    hoàn thành
+                  </Link>
+                  <Link
+                  title='Truyện đang cập nhật'
+                    className={classNames(
+                      'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline',
+                      {
+                        'bg-primary text-white hover:no-underline':
+                          queryConfig.status === 'ongoing',
+                        'bg-transparent text-primary': queryConfig.status !== 'ongoing'
+                      }
+                    )}
+                    to={{
+                      search: createSearchParams({
+                        ...queryConfig,
+                        page: '1',
+                        status: 'ongoing'
+                      }).toString()
+                    }}
+                  >
+                    cập nhật
+                  </Link>
+                </div>
+              ) : (
+                <h2 className='capitalize font-semibold text-black dark:text-white text-xl lg:text-2xl'>
+                  <strong className='text-primary'>{title}</strong>{' '}
+                  <span className='hidden md:inline-block'>- trang {queryConfig.page}</span>
+                </h2>
+              )}
+              {isTopAndNew && isMobile ? null : (
+                <>
+                  {totalPage && (
+                    <MiniPagination
+                      queryConfig={queryConfig}
+                      page={Number(queryConfig.page)}
+                      totalPage={totalPage}
+                    />
                   )}
-                  to={{
-                    search: createSearchParams({
-                      ...queryConfig,
-                      page: '1',
-                      status: 'all'
-                    }).toString()
-                  }}
-                >
-                  tất cả
-                </Link>
-                <Link
-                  className={classNames(
-                    'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline',
-                    {
-                      'bg-primary text-white hover:no-underline':
-                        queryConfig.status === 'completed',
-                      'bg-transparent text-primary': queryConfig.status !== 'completed'
-                    }
-                  )}
-                  to={{
-                    search: createSearchParams({
-                      ...queryConfig,
-                      page: '1',
-                      status: 'completed'
-                    }).toString()
-                  }}
-                >
-                  hoàn thành
-                </Link>
-                <Link
-                  className={classNames(
-                    'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline',
-                    {
-                      'bg-primary text-white hover:no-underline': queryConfig.status === 'ongoing',
-                      'bg-transparent text-primary': queryConfig.status !== 'ongoing'
-                    }
-                  )}
-                  to={{
-                    search: createSearchParams({
-                      ...queryConfig,
-                      page: '1',
-                      status: 'ongoing'
-                    }).toString()
-                  }}
-                >
-                  cập nhật
-                </Link>
-              </div>
-            ) : (
-              <h2 className='capitalize font-semibold text-black dark:text-white text-xl lg:text-2xl'>
-                <strong className='text-primary'>{title}</strong>{' '}
-                <span className='hidden md:inline-block'>- trang {queryConfig.page}</span>
-              </h2>
-            )}
-            {isTopAndNew && isMobile ? null : (
-              <>
-                {totalPage && (
-                  <MiniPagination
-                    queryConfig={queryConfig}
-                    page={Number(queryConfig.page)}
-                    totalPage={totalPage}
-                  />
-                )}
-              </>
-            )}
-          </div>
-          <div className='mt-6 min-h-[600px]'>
-            <ul className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-2 xl:gap-x-[3px] gap-y-5'>
-              {dataComics &&
-                dataComics.comics.map((item) => (
-                  <li key={item.id}>
-                    <CardItem data={item} />
-                  </li>
-                ))}
-              {!dataComics && skeleton()}
-            </ul>
-          </div>
-          <div className='mt-6'>
-            {totalPage && (
-              <Pagination
-                queryConfig={queryConfig}
-                page={Number(queryConfig.page)}
-                totalPage={totalPage}
-              />
-            )}
-          </div>
-        </>
-      )}
-    </div>
+                </>
+              )}
+            </div>
+            <div className='mt-6 min-h-[600px]'>
+              <ul className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-2 xl:gap-x-[3px] gap-y-5'>
+                {dataComics &&
+                  dataComics.comics.map((item) => (
+                    <li key={item.id}>
+                      <CardItem data={item} />
+                    </li>
+                  ))}
+                {!dataComics && skeleton()}
+              </ul>
+            </div>
+            <div className='mt-6'>
+              {totalPage && (
+                <Pagination
+                  queryConfig={queryConfig}
+                  page={Number(queryConfig.page)}
+                  totalPage={totalPage}
+                />
+              )}
+            </div>
+          </>
+        )}
+      </div>
+    </>
   )
 }
 export default ComicsList

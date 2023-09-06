@@ -28,7 +28,7 @@ const RecentUpdateComics = ({ data }: Props) => {
     <div className='w-full min-h-[450px]'>
       {!isMobile && (
         <div className='flex h-[452px] mt-4 mx-0 xl:mx-[-40px]'>
-          <button className='btn-prev-navigate text-gray-400 hover:bg-[#f8f8f9] dark:hover:bg-[rgba(255,255,255,0.08)] flex-shrink-0 h-[448px] w-[40px] hidden xl:flex items-center justify-center'>
+          <button title='Trước' className='btn-prev-navigate text-gray-400 hover:bg-[#f8f8f9] dark:hover:bg-[rgba(255,255,255,0.08)] flex-shrink-0 h-[448px] w-[40px] hidden xl:flex items-center justify-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -82,7 +82,7 @@ const RecentUpdateComics = ({ data }: Props) => {
             )}
             {!data && Skeleton(isBigScreen, isTablet)}
           </div>
-          <button className='btn-next-navigate text-gray-400 hover:bg-[#f8f8f9] dark:hover:bg-[rgba(255,255,255,0.08)] flex-shrink-0 h-[448px] w-[40px] hidden xl:flex items-center justify-center'>
+          <button title='Sau' className='btn-next-navigate text-gray-400 hover:bg-[#f8f8f9] dark:hover:bg-[rgba(255,255,255,0.08)] flex-shrink-0 h-[448px] w-[40px] hidden xl:flex items-center justify-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'

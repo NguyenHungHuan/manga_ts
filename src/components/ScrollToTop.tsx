@@ -19,6 +19,7 @@ const ScrollToTop = () => {
 
   return (
     <button
+      title='Lên trang đầu'
       onClick={() => {
         window.scroll({
           top: 0,

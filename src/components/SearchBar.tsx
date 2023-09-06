@@ -67,7 +67,7 @@ const SearchBar = () => {
                 placeholder='Tìm kiếm...'
                 className='h-[36px] sm:h-[50px] leading-[50px] pr-4 pl-4 sm:pl-0 w-full sm:w-[320px] lg:w-[420px] outline-none dark:bg-gray-900'
               />
-              <button className='text-white capitalize flex items-center justify-center bg-gray-700 sm:bg-gradient h-[36px] sm:h-[50px] w-[50px] sm:w-[100px] lg:w-[140px]'>
+              <button title='Tìm Kiếm' className='text-white capitalize flex items-center justify-center bg-gray-700 sm:bg-gradient h-[36px] sm:h-[50px] w-[50px] sm:w-[100px] lg:w-[140px]'>
                 <span className='sm:inline-block hidden'>Tìm Kiếm</span>
                 <p
                   className='bg-cover bg-no-repeat w-[18px] h-[18px] inline-block sm:hidden'

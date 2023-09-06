@@ -13,6 +13,6 @@ export default function useTitle(pathname: string) {
     case PATH.recent:
       return 'mới cập nhật'
     default:
-      return ''
+      return 'mới nhất'
   }
 }
