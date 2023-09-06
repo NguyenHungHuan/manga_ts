@@ -7,6 +7,7 @@ import { useQuery } from 'react-query'
 import { Link, createSearchParams, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import { useMediaQuery } from 'react-responsive'
+import { NotFound } from '@/App'
 
 const ComicsList = () => {
   const isMobile = useMediaQuery({ maxWidth: 640 })
@@ -48,7 +49,7 @@ const ComicsList = () => {
   return (
     <div className='container px-4 xl:px-0'>
       {data?.data.status === 404 || isError || isErrorNew ? (
-        <>not found</>
+        <NotFound />
       ) : (
         <>
           <div className='mt-8 flex items-center justify-between h-9'>

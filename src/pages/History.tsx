@@ -108,13 +108,13 @@ const History = () => {
                       <Link
                         title={item.last_reading}
                         to={`${PATH.chapters}/${item.id}/${item.chapter_id}`}
-                        className='border-[#4b8fd7] rounded-md w-full h-9 flex items-center justify-center border border-black/20 text-[#4b8fd7] active:scale-90'
+                        className='border-[#4b8fd7] rounded-md w-full h-9 flex items-center justify-center border text-[#4b8fd7] active:scale-90'
                       >
                         Đọc tiếp
                       </Link>
                       <button
                         onClick={() => historyDeleteComic(item.id)}
-                        className='border-primary rounded-md w-full h-9 flex items-center justify-center border border-black/20 text-primary active:scale-90'
+                        className='border-primary rounded-md w-full h-9 flex items-center justify-center border text-primary active:scale-90'
                       >
                         Xóa
                       </button>

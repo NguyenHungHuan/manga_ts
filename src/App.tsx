@@ -28,7 +28,7 @@ function App() {
     {
       path: '/',
       element: <MainLayout />,
-      errorElement: <LoadingPage />,
+      errorElement: <ErrorBoundary />,
       children: [
         {
           index: true,
@@ -123,7 +123,7 @@ function App() {
     },
     {
       element: <MainLayout hideNav={true} />,
-      errorElement: <LoadingPage />,
+      errorElement: <ErrorBoundary />,
       children: [
         {
           path: PATH.genres,
@@ -153,7 +153,7 @@ function App() {
     },
     {
       element: <ChapterLayout />,
-      errorElement: <LoadingPage />,
+      errorElement: <ErrorBoundary />,
       children: [
         {
           path: `${PATH.chapters}/${PATH.name}/${PATH.idChapter}`,
@@ -167,12 +167,25 @@ function App() {
     },
     {
       path: `${PATH.download}/${PATH.name}/${PATH.idChapter}`,
+      errorElement: <ErrorBoundary />,
       element: (
         <Suspense fallback={<LoadingPage />}>
           <Download />
         </Suspense>
       ),
-      errorElement: <LoadingPage />
+    },
+    {
+      element: <MainLayout />,
+      children: [
+        {
+          path: '*',
+          element: (
+            <Suspense fallback={<LoadingPage />}>
+              <NotFound />
+            </Suspense>
+          )
+        }
+      ]
     }
   ])
   return <RouterProvider router={router} />
@@ -181,7 +194,7 @@ export default App
 
 function LoadingPage() {
   return (
-    <div role='status' className='flex h-[80vh] flex-col items-center justify-center gap-2'>
+    <div role='status' className='flex h-screen flex-col items-center justify-center gap-2'>
       <svg
         aria-hidden='true'
         className='mr-2 h-16 w-16 animate-spin fill-primary text-gray-200 dark:text-white'
@@ -199,5 +212,29 @@ function LoadingPage() {
         />
       </svg>
     </div>
+  )
+}
+
+export function NotFound() {
+  return (
+    <div role='status' className='flex h-screen flex-col items-center justify-center gap-4'>
+      <h2 className='text-7xl md:text-9xl font-black text-primary'>404</h2>
+      <p className='text-3xl text-black dark:text-white'>Không tìm thấy trang</p>
+    </div>
+  )
+}
+
+function ErrorBoundary() {
+  return (
+    <main role='status' className='flex h-screen flex-col items-center justify-center gap-4'>
+      <h1 className='text-7xl md:text-9xl font-black text-primary'>500</h1>
+      <p className='text-3xl text-black dark:text-white'>Đã xảy ra lỗi</p>
+      <a
+        href='/'
+        className='mt-4 rounded-lg bg-orange px-6 py-2 text-white text-xl shadow bg-primary'
+      >
+        Trở về trang chủ
+      </a>
+    </main>
   )
 }

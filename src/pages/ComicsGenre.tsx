@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
 import { Link, createSearchParams } from 'react-router-dom'
 import classNames from 'classnames'
+import { NotFound } from '@/App'
 
 const ComicsList = () => {
   const queryConfig = useQueryConfig()
@@ -28,7 +29,7 @@ const ComicsList = () => {
   const dataGenreComics = dataGenres?.data
 
   const descGenre = useMemo(
-    () => dataGenreComics?.find((item) => item.id === type)?.description,
+    () => dataGenreComics?.find((item) => item.id === type ? item.id === type : 'all')?.description,
     [type, dataGenreComics]
   )
 
@@ -54,7 +55,7 @@ const ComicsList = () => {
                   className={classNames(
                     'border dark:border-gray-600 text-black dark:text-white text-center min-w-[100px] sm:min-w-[130px] overflow-hidden rounded-md px-12 py-2 flex items-center justify-center font-semibold leading-5 whitespace-nowrap',
                     {
-                      'text-white bg-primary': type === item.id,
+                      'text-white bg-primary': type === item.id ? type === item.id : item.id === 'all',
                       'hover:text-primary hover:border-primary dark:hover:text-primary dark:hover:border-primary':
                         type !== item.id
                     }
@@ -77,7 +78,7 @@ const ComicsList = () => {
 
       <div className='container px-4 xl:px-0'>
         {data?.data.status === 404 || isError ? (
-          <>not found</>
+          <NotFound />
         ) : (
           <>
             <div className='mt-8 flex items-center justify-between h-9'>

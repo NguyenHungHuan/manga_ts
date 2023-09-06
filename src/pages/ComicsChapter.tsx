@@ -57,7 +57,9 @@ const ComicsChapter = () => {
         (chapter: { id: number; name: string }) => chapter.id === Number(idChapter)
       )
       const nextChapterIdx = chapterIdx + (type === 'next' ? 1 : -1)
-      navigate(`${PATH.chapters}/${id}/${episodes[nextChapterIdx].id}`)
+      if (dataChapter.chapters.map((item) => item.id).includes(Number(idChapter))) {
+        navigate(`${PATH.chapters}/${id}/${episodes[nextChapterIdx].id}`)
+      }
     }
   }
 
@@ -114,7 +116,9 @@ const ComicsChapter = () => {
                   >
                     <div className='flex items-center gap-2'>
                       <span className='line-clamp-1 max-w-[120px]'>
-                        {dataChapter.chapters.find((item) => item.id === Number(idChapter))?.name}
+                        {dataChapter.chapters.find((item) => item.id === Number(idChapter))?.name
+                          ? dataChapter.chapters.find((item) => item.id === Number(idChapter))?.name
+                          : dataChapter.chapters[0].name}
                       </span>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -133,7 +137,9 @@ const ComicsChapter = () => {
                     </div>
                     <div
                       className={`absolute z-10 top-10 border dark:border-gray-500 shadow-lg bg-white dark:bg-gray-900 w-60 py-3 rounded translate-x-1/2 right-1/2 text-left duration-200 origin-top ${
-                        openList ? 'scale-100 pointer-events-auto' : 'scale-[0.001] pointer-events-none'
+                        openList
+                          ? 'scale-100 pointer-events-auto'
+                          : 'scale-[0.001] pointer-events-none'
                       }`}
                     >
                       <h5 className='text-lg px-4 pb-2 leading-5'>
@@ -196,6 +202,7 @@ const ComicsChapter = () => {
           <div className='flex flex-col min-h-screen'>
             {!isFetching &&
               dataChapter &&
+              dataChapter.images.length > 0 &&
               dataChapter.images.map((item) => (
                 <img
                   src={item.src}
@@ -205,6 +212,11 @@ const ComicsChapter = () => {
                   className='w-full'
                 />
               ))}
+            {!isFetching && dataChapter && dataChapter.images.length <= 0 && (
+              <h2 className='text-3xl text-white flex-1 flex items-center justify-center'>
+                Không tìm thấy chương
+              </h2>
+            )}
             {isFetching &&
               Array(10)
                 .fill(0)
@@ -318,7 +330,9 @@ const Breadcrumb = (id: string, idChapter: string, dataChapter: comicSingleChapt
         title={dataChapter.comic_name}
         className='hidden md:flex items-center text-lg hover:text-primary'
       >
-        <h2 className='max-w-[220px] line-clamp-1'>{dataChapter.comic_name}</h2>
+        <h2 className='max-w-[220px] line-clamp-1'>
+          {dataChapter.comic_name ? dataChapter.comic_name : id.split('-').join(' ')}
+        </h2>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           xmlnsXlink='http://www.w3.org/1999/xlink'
