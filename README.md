@@ -26,6 +26,7 @@ https://vtruyen.vercel.app
 - Search/Filter/Sort/Pagination comics
 - Save/delete read comics history
 - Fully responsive
+- Dark/Light mode
 - Download chapters as PDF file for offline reading
 
 ## Screenshots
@@ -53,6 +54,9 @@ https://vtruyen.vercel.app
 
 ### History
 ![History](/assets/img/demo-history.webp)
+
+### Dark mode
+![History](/assets/img/demo-dark.webp)
 
 ### Performance
 ![Performance](/assets/img/demo-performance.webp)
