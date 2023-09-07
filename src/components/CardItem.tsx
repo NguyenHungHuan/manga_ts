@@ -1,6 +1,6 @@
 import PATH from '@/utils/path'
 import { Link } from 'react-router-dom'
-import imgError from '@/assets/img/img-error.png'
+import imgError from '../../public/img-error.webp'
 import { comics } from '@/types/data'
 interface Props {
   data: comics

@@ -1,7 +1,7 @@
 import PATH from '@/utils/path'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import imgError from '@/assets/img/img-error.png'
+import imgError from '../../public/img-error.webp'
 import { HistoryComic, historyDeleteComic, historyDeleteComics } from '@/utils/history'
 import { Helmet } from 'react-helmet-async'
 

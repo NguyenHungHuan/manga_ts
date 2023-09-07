@@ -1,7 +1,7 @@
 import comicApis from '@/apis/comicApis'
-import iconPopular from '@/assets/img/icon-popular.png'
-import iconRecentUpdate from '@/assets/img/icon-recentUpdate.png'
-import iconRecommend from '@/assets/img/icon-recommend.png'
+import iconPopular from '../../public/icon-popular.webp'
+import iconRecentUpdate from '../../public/icon-recentUpdate.webp'
+import iconRecommend from '../../public/icon-recommend.webp'
 import { Banner } from '@/components'
 import {
   CompletedPreviewComics,

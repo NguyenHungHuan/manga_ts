@@ -3,8 +3,8 @@ import { formatCurrency } from '@/utils/formatNumber'
 import classNames from 'classnames'
 import { useState, useRef, useEffect } from 'react'
 import { useQuery } from 'react-query'
-import imgLoading from '@/assets/img/loading.gif'
-import avatarError from '@/assets/img/anonymous.png'
+import imgLoading from '../../public/loading.gif'
+import avatarError from '../../public/anonymous.webp'
 
 const ListComment = ({ id }: { id: string }) => {
   const el = useRef<HTMLDivElement>(null)
