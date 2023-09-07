@@ -1,0 +1,16 @@
+{
+  "theme_color": "#fff",
+  "background_color": "#fff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "VTruyen",
+  "short_name": "VTruyen",
+  "description": "Web đọc truyện tranh online lớn nhất được cập nhật liên tục mỗi ngày - Cùng tham gia đọc truyện và thảo luận với hơn 10 triệu thành viên 🎉 tại VTruyen ❤️💛💚",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "type": "image/png"
+    }
+  ]
+}

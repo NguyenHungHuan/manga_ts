@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>https://vtruyen.vercel.app</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+<url>
+  <loc>https://vtruyen.vercel.app/genres</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+<url>
+  <loc>https://vtruyen.vercel.app/new-comics</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+<url>
+  <loc>https://vtruyen.vercel.app/top</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+<url>
+  <loc>https://vtruyen.vercel.app/top/daily</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+<url>
+  <loc>https://vtruyen.vercel.app/top/weekly</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+<url>
+  <loc>https://vtruyen.vercel.app/top/monthly</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+<url>
+  <loc>https://vtruyen.vercel.app/top/chapter</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+<url>
+  <loc>https://vtruyen.vercel.app/top/follow</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+<url>
+  <loc>https://vtruyen.vercel.app/top/comment</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+<url>
+  <loc>https://vtruyen.vercel.app/recent-update-comics</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+<url>
+  <loc>https://vtruyen.vercel.app/trending-comics</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+<url>
+  <loc>https://vtruyen.vercel.app/completed-comics</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+<url>
+  <loc>https://vtruyen.vercel.app/boy-comics</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+<url>
+  <loc>https://vtruyen.vercel.app/girl-comics</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+<url>
+  <loc>https://vtruyen.vercel.app/history</loc>
+  <lastmod>2023-09-06T23:46:53+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+</urlset>

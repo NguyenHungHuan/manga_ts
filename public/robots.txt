@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Host 
+Host: https://vtruyen.vercel.app
+
+# Sitemaps
+Sitemap: https://vtruyen.vercel.app/sitemap.xml
