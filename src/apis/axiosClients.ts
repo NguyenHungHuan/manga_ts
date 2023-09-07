@@ -1,13 +1,11 @@
 import axios from 'axios'
 
 export const axiosClients = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-  timeout: 10000
+  baseURL: import.meta.env.VITE_API_URL
 })
 
 export const axiosClients2 = axios.create({
-  baseURL: import.meta.env.VITE_API_URL_2,
-  timeout: 10000
+  baseURL: import.meta.env.VITE_API_URL_2
 })
 
 axiosClients.interceptors.request.use(

@@ -21,7 +21,7 @@ const Navbar = () => {
     >
       <nav
         className={classNames('container min-h-[56px]', {
-          'px-4 xl:px-0': isHome,
+          'p-4 lg:py-0 xl:p-0': isHome,
           'p-3 bg-white dark:bg-gray-900 border-t-[3px] border-primary': !isHome
         })}
       >
