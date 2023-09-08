@@ -1,15 +1,35 @@
 {
+  "name": "VTruyen",
+  "short_name": "VTruyen",
+  "description": "Web đọc truyện tranh online lớn nhất được cập nhật liên tục mỗi ngày - Cùng tham gia đọc truyện và thảo luận với hơn 10 triệu thành viên 🎉 tại VTruyen ❤️💛💚",
+  "author": "VTruyen - NguyenHungHuan",
   "theme_color": "#fff",
   "background_color": "#fff",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "VTruyen",
-  "short_name": "VTruyen",
-  "description": "Web đọc truyện tranh online lớn nhất được cập nhật liên tục mỗi ngày - Cùng tham gia đọc truyện và thảo luận với hơn 10 triệu thành viên 🎉 tại VTruyen ❤️💛💚",
+  "browser_action": {
+    "default_title": "VTruyen"
+  },
   "icons": [
     {
-      "src": "/logo.png",
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
