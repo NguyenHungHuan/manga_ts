@@ -1,5 +1,4 @@
 import { comics } from '@/types/data'
-import { formatCurrency } from '@/utils/formatNumber'
 import PATH from '@/utils/path'
 import { Fragment, useState } from 'react'
 import { Link, createSearchParams } from 'react-router-dom'
@@ -104,12 +103,20 @@ const SlidePreviewComics = ({ data }: Props) => {
                               {item.last_chapter.name}
                             </Link>
                           </p>
-                          <span className='text-base mt-1 block text-gray-400'>
-                            Lượt xem:{' '}
-                            <strong className='text-black dark:text-white font-normal lowercase'>
-                              {formatCurrency(item.total_views)}
-                            </strong>
-                          </span>
+                          <p className='text-base mt-1 block text-gray-400'>
+                            <span>
+                              Lượt xem:{' '}
+                              <strong className='text-black dark:text-white font-normal'>
+                                {item.total_views}
+                              </strong>
+                            </span>
+                            <span className='ml-2'>
+                              Theo dõi:{' '}
+                              <strong className='text-black dark:text-white font-normal'>
+                                {item.followers}
+                              </strong>
+                            </span>
+                          </p>
                           <div className='flex gap-[6px] items-center mt-2'>
                             {item.genres.slice(0, 5).map((genre) => {
                               return genre.id !== undefined ? (

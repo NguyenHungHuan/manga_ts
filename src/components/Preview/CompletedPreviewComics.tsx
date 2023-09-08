@@ -2,7 +2,6 @@ import { comics } from '@/types/data'
 import PATH from '@/utils/path'
 import { Link, createSearchParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { formatCurrency } from '@/utils/formatNumber'
 import imgError from '../../../public/img-error.webp'
 import { useMediaQuery } from 'react-responsive'
 import { ListPreviewComics } from '.'
@@ -64,8 +63,14 @@ const CompletedPreviewComics = ({ data }: Props) => {
                     </p>
                     <span className='text-sm block text-gray-400'>
                       Lượt xem:{' '}
-                      <strong className='text-black dark:text-white font-normal lowercase'>
-                        {formatCurrency(data[currentIndex].total_views)}
+                      <strong className='text-black dark:text-white font-normal'>
+                        {data[currentIndex].total_views}
+                      </strong>
+                    </span>
+                    <span className='text-sm block text-gray-400'>
+                      Theo dõi:{' '}
+                      <strong className='text-black dark:text-white font-normal'>
+                        {data[currentIndex].followers}
                       </strong>
                     </span>
                   </div>

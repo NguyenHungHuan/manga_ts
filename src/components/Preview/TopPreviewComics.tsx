@@ -1,6 +1,5 @@
 import comicApis from '@/apis/comicApis'
 import { comics } from '@/types/data'
-import { formatNumberSocial } from '@/utils/formatNumber'
 import PATH from '@/utils/path'
 import { useQuery } from 'react-query'
 import { Link, createSearchParams } from 'react-router-dom'
@@ -35,7 +34,7 @@ const TopPreviewComics = () => {
   const dataDailyComics = useMemo(() => dataDaily?.data.comics, [dataDaily])
   const dataWeeklyComics = useMemo(() => dataWeekly?.data.comics, [dataWeekly])
   const dataMonthlyComics = useMemo(() => dataMonthly?.data.comics, [dataMonthly])
-
+  
   return (
     <>
       <div className='flex sm:hidden items-end'>
@@ -221,7 +220,7 @@ const renderDataTopComics = (data: comics[]) => {
                 {item.title}
               </Link>
               <p className='line-clamp-1 text-gray-400 leading-5 text-sm ml-[1px]'>
-                {formatNumberSocial(item.total_views)} {' lượt xem'}
+                {item.total_views} {' lượt xem'}
               </p>
             </div>
           </div>
