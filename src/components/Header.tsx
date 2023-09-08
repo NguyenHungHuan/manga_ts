@@ -38,7 +38,16 @@ const Header = () => {
     <div className='bg-white text-black dark:bg-gray-900 dark:text-white shadow dark:border-b dark:border-gray-700'>
       <div className='container px-4 xl:px-0 h-[74px] flex items-center justify-between'>
         <div className='flex items-center'>
-          <Link to={PATH.home}>
+          <Link
+            to={PATH.home}
+            title='VTruyen'
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              })
+            }
+          >
             <h1 title='Web đọc truyện Việt Nam' className='font-bold text-3xl text-primary'>
               VTruyện
             </h1>
@@ -48,6 +57,12 @@ const Header = () => {
             <li className='hidden lg:block'>
               <Link
                 title='Trang chủ VTruyen'
+                onClick={() =>
+                  window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                  })
+                }
                 to={PATH.home}
                 className={`hover:text-primary text-lg capitalize ${
                   useMatch(PATH.home) && ' text-primary'

@@ -12,7 +12,7 @@ import { axiosClients } from './axiosClients'
 
 export type paramOption = {
   type?: string
-  status?: 'all' | 'completed' | 'ongoing' | string
+  status?: 'all' | 'completed' | 'updating' | string
   page?: string
   q?: string
 }

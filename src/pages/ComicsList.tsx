@@ -109,15 +109,15 @@ const ComicsList = () => {
                       'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline',
                       {
                         'bg-primary text-white hover:no-underline':
-                          queryConfig.status === 'ongoing',
-                        'bg-transparent text-primary': queryConfig.status !== 'ongoing'
+                          queryConfig.status === 'updating',
+                        'bg-transparent text-primary': queryConfig.status !== 'updating'
                       }
                     )}
                     to={{
                       search: createSearchParams({
                         ...queryConfig,
                         page: '1',
-                        status: 'ongoing'
+                        status: 'updating'
                       }).toString()
                     }}
                   >

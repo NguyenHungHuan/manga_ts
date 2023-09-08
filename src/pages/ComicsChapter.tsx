@@ -331,6 +331,12 @@ const Breadcrumb = (id: string, idChapter: string, dataChapter: comicSingleChapt
   return (
     <div className='hidden sm:flex items-center gap-1 my-4 dark:text-white'>
       <Link
+        onClick={() =>
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          })
+        }
         title='Trang chủ'
         to={PATH.home}
         className='hidden lg:flex items-center hover:text-primary text-lg'
