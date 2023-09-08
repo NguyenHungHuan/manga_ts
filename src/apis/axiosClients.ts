@@ -1,11 +1,22 @@
 import axios from 'axios'
 
-export const axiosClients = axios.create({
-  baseURL: import.meta.env.VITE_API_URL
-})
+// export const axiosClients = axios.create({
+//   baseURL: 'https://comics-api.vercel.app',
+//   headers: {
+//     'Content-Type': 'application/json',
+//     Accept: 'application/json'
+//   },
+//   responseType: 'json'
+// })
+// 
 
-export const axiosClients2 = axios.create({
-  baseURL: import.meta.env.VITE_API_URL_2
+export const axiosClients = axios.create({
+  baseURL: import.meta.env.VITE_API_URL_2,
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json'
+  },
+  responseType: 'json'
 })
 
 axiosClients.interceptors.request.use(

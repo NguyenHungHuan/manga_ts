@@ -55,7 +55,7 @@ const CardItem = ({ data }: Props) => {
               </p>
               <p className='text-sm text-gray-400 line-clamp-2 h-10'>{short_description}</p>
               <Link
-              title='Đọc ngay chương mới nhất'
+                title='Đọc ngay chương mới nhất'
                 to={`${PATH.chapters}/${id}/${last_chapter.id}`}
                 className='text-white text-sm bg-primary w-full h-[30px] mt-[10px] uppercase font-semibold flex items-center justify-center rounded text-center'
               >

@@ -44,7 +44,7 @@ const Banner = () => {
           pagination={{ el: '.swiper-pagination', clickable: true }}
         >
           <SwiperSlide>
-            <Link to={`${PATH.comics}/one-piece`} title='One Piece'>
+            <Link to={`${PATH.comics}/dao-hai-tac`} title='One Piece'>
               <div
                 className='bg-no-repeat bg-cover w-full h-[260px] md:h-[380px] bg-top md:bg-center'
                 style={{
@@ -54,7 +54,10 @@ const Banner = () => {
             </Link>
           </SwiperSlide>
           <SwiperSlide>
-            <Link to={`${PATH.comics}/jujutsu-kaisen-chu-thuat-hoi-chien`} title='Jujutsu Kaisen - Chú Thuật Hồi Chiến'>
+            <Link
+              to={`${PATH.comics}/chu-thuat-hoi-chien`}
+              title='Jujutsu Kaisen - Chú Thuật Hồi Chiến'
+            >
               <div
                 className='bg-no-repeat bg-cover w-full h-[260px] md:h-[380px] bg-bottom md:bg-center'
                 style={{
@@ -81,8 +84,11 @@ const Banner = () => {
       </div>
       <div className='flex-shrink-0 hidden md:grid grid-cols-6 gap-[10px] flex-1'>
         <div className='col-span-6 flex lg:flex-row flex-col items-center gap-[10px]'>
-          <Link to={`${PATH.comics}/onepunch-man`} title='Onepunch Man' 
-            className='w-full h-[185px] overflow-hidden'>
+          <Link
+            to={`${PATH.comics}/anh-hung-onepunch`}
+            title='Onepunch Man'
+            className='w-full h-[185px] overflow-hidden'
+          >
             <p
               className='bg-no-repeat bg-cover w-full h-full bg-center'
               style={{
@@ -91,7 +97,8 @@ const Banner = () => {
             />
           </Link>
           <Link
-            to={`${PATH.comics}/mashle-magic-and-muscles`} title='Mashle: Magic And Muscles'
+            to={`${PATH.comics}/mashle-muscles-and-magic`}
+            title='Mashle: Magic And Muscles'
             className='w-full h-[185px] overflow-hidden'
           >
             <p
@@ -104,8 +111,8 @@ const Banner = () => {
         </div>
         <div className='col-span-6 items-center gap-[10px] md:hidden lg:flex'>
           <Link
-          title='REINCARNATED AS AN ARISTOCRAT WITH AN APPRAISAL SKILL'
-            to={`${PATH.comics}/reincarnated-as-an-aristocrat-with-an-appraisal-skill`}
+            title='REINCARNATED AS AN ARISTOCRAT WITH AN APPRAISAL SKILL'
+            to={`${PATH.comics}/tai-sinh-thanh-quy-toc-voi-ki-nang-appraisal`}
             className='w-[221px] h-[185px] overflow-hidden'
           >
             <p
@@ -116,7 +123,7 @@ const Banner = () => {
             />
           </Link>
           <Link
-          title='Tôi Muốn Nhìn Thấy Dáng Vẻ Xấu Hổ Của Cậu'
+            title='Tôi Muốn Nhìn Thấy Dáng Vẻ Xấu Hổ Của Cậu'
             to={`${PATH.comics}/toi-muon-nhin-thay-dang-ve-xau-ho-cua-cau`}
             className='w-[221px] h-[185px] overflow-hidden'
           >
@@ -128,7 +135,7 @@ const Banner = () => {
             />
           </Link>
           <Link
-          title='Kỹ Năng Vô Dụng [Auto Mode] Bỗng Dưng Thức Tỉnh ~ Hả, Tổ Đội Trinh Sát Mấy Người, Chẳng Phải Đã Nói'
+            title='Kỹ Năng Vô Dụng [Auto Mode] Bỗng Dưng Thức Tỉnh ~ Hả, Tổ Đội Trinh Sát Mấy Người, Chẳng Phải Đã Nói'
             to={`${PATH.comics}/ky-nang-vo-dung-auto-mode-bong-dung-thuc-tinh-ha-to-doi-trinh-sat-may-nguoi-chang-phai-da-noi`}
             className='w-[221px] h-[185px] overflow-hidden'
           >

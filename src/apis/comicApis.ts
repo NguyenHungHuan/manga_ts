@@ -8,7 +8,7 @@ import {
   dataGenres,
 } from '@/types/data'
 import PATH from '@/utils/path'
-import { axiosClients, axiosClients2 } from './axiosClients'
+import { axiosClients } from './axiosClients'
 
 export type paramOption = {
   type?: string
@@ -51,7 +51,7 @@ const comicApis = {
   },
   getComicComments(id: string, params?: { page: number }) {
     const url = `${PATH.comics}/${id}${PATH.comments}`
-    return axiosClients2.get<comicsComment>(url, { params })
+    return axiosClients.get<comicsComment>(url, { params })
   },
   getComicChapter(id: string, chapterId: string) {
     const url = `${PATH.comics}/${id}${PATH.chapters}/${chapterId}`

@@ -88,7 +88,7 @@ const ComicsChapter = () => {
               <div className='flex flex-1 sm:flex-none items-center justify-between gap-4 sm:gap-2 my-4'>
                 <div className='flex items-center gap-2'>
                   <button
-                  title='Tập trước'
+                    title='Tập trước'
                     onClick={() => handleChangeEpisode('prev')}
                     className={classNames(
                       'flex items-center justify-center gap-1 px-3 h-8 border dark:border-gray-500 rounded-md leading-3 active:scale-95',
@@ -174,7 +174,7 @@ const ComicsChapter = () => {
                     </div>
                   </button>
                   <button
-                  title='Tập sau'
+                    title='Tập sau'
                     onClick={() => handleChangeEpisode('next')}
                     className={classNames(
                       'flex items-center justify-center gap-1 px-3 h-8 border dark:border-gray-500 rounded-md leading-3 active:scale-95',
@@ -211,19 +211,29 @@ const ComicsChapter = () => {
       </div>
       <div className='bg-[#111]' onMouseDown={() => setOpenList(false)}>
         <div className='container max-w-4xl'>
-          <div className='flex flex-col min-h-screen'>
+          <div className='flex flex-col min-h-screen h-full'>
             {!isFetching &&
               dataChapter &&
               dataChapter.images.length > 0 &&
-              dataChapter.images.map((item) => (
-                <img
-                  src={item.src}
-                  loading='lazy'
-                  key={item.page}
-                  alt={`Page ${item.page.toString()}`}
-                  className='w-full'
-                />
-              ))}
+              dataChapter.images.map((item, index) =>
+                index >= 4 ? (
+                  <img
+                    src={item.src}
+                    loading='lazy'
+                    key={item.page}
+                    alt={`Page ${item.page.toString()}`}
+                    className='min-h-[35px] h-auto max-w-full w-auto relative text-white'
+                  />
+                ) : (
+                  <img
+                    src={item.src}
+                    key={item.page}
+                    alt={`Page ${item.page.toString()}`}
+                    className='min-h-[35px] h-auto max-w-full w-auto relative text-white'
+                    loading='eager'
+                  />
+                )
+              )}
             {!isFetching && dataChapter && dataChapter.images.length <= 0 && (
               <h2 className='text-3xl text-white flex-1 flex items-center justify-center'>
                 Không tìm thấy chương
