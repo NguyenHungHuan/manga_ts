@@ -215,25 +215,15 @@ const ComicsChapter = () => {
             {!isFetching &&
               dataChapter &&
               dataChapter.images.length > 0 &&
-              dataChapter.images.map((item, index) =>
-                index >= 4 ? (
-                  <img
-                    src={item.src}
-                    loading='lazy'
-                    key={item.page}
-                    alt={`Page ${item.page.toString()}`}
-                    className='min-h-[35px] h-auto max-w-full w-auto relative text-white'
-                  />
-                ) : (
-                  <img
-                    src={item.src}
-                    key={item.page}
-                    alt={`Page ${item.page.toString()}`}
-                    className='min-h-[35px] h-auto max-w-full w-auto relative text-white'
-                    loading='eager'
-                  />
-                )
-              )}
+              dataChapter.images.map((item) => (
+                <img
+                  loading='lazy'
+                  src={item.src}
+                  key={item.page}
+                  alt={`Page ${item.page.toString()}`}
+                  className='min-h-[200px] h-auto w-full bg-[rgba(255,255,255,0.8)] object-center'
+                />
+              ))}
             {!isFetching && dataChapter && dataChapter.images.length <= 0 && (
               <h2 className='text-3xl text-white flex-1 flex items-center justify-center'>
                 Không tìm thấy chương
