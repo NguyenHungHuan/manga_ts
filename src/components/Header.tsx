@@ -4,8 +4,10 @@ import { useEffect, useMemo, useState } from 'react'
 import iconSearch from '../../public/icon_search.webp'
 import classNames from 'classnames'
 import { SearchBar } from '.'
+import { useQueryConfig } from '@/hooks'
 
 const Header = () => {
+  const queryConfig = useQueryConfig()
   const { pathname } = useLocation()
   const isMatchTop = useMemo(() => pathname.includes('/top'), [pathname])
   const [OpenTheme, setOpenTheme] = useState<boolean>(false)
@@ -17,7 +19,7 @@ const Header = () => {
 
   useEffect(() => {
     setOpenNav(false)
-  }, [pathname])
+  }, [pathname, queryConfig.q])
 
   const handleChangeTheme = (type: 'light' | 'dark') => {
     if (type === 'light') {
@@ -415,7 +417,7 @@ const Header = () => {
           <div className='flex items-center justify-center mt-4 gap-4'>
             <Link
               to={PATH.history}
-              className='flex flex-col items-center px-2 py-1 rounded-md hover:text-primary'
+              className='flex flex-col items-center px-3 py-1 rounded-md hover:text-primary'
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -438,7 +440,7 @@ const Header = () => {
                   handleChangeTheme('light')
                   setOpenNav(false)
                 }}
-                className='active:scale-90 rounded-md py-1 px-2'
+                className='active:scale-90 rounded-md py-1 px-3'
               >
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -461,7 +463,7 @@ const Header = () => {
                   handleChangeTheme('dark')
                   setOpenNav(false)
                 }}
-                className='active:scale-90 rounded-md py-1 px-2'
+                className='active:scale-90 rounded-md py-1 px-3'
               >
                 <svg
                   xmlns='http://www.w3.org/2000/svg'

@@ -66,7 +66,7 @@ const ComicsChapter = () => {
 
   useEffect(() => {
     document.getElementById(idChapter as string)?.scrollIntoView({ block: 'center' })
-  }, [idChapter])
+  }, [dataChapter])
 
   useScrollTop([idChapter])
 
@@ -157,10 +157,9 @@ const ComicsChapter = () => {
                       </h5>
                       <ul className='overflow-auto text-sm h-max max-h-64 font-normal'>
                         {dataChapter.chapters.map((item) => (
-                          <li key={item.id}>
+                          <li key={item.id} id={item.id.toString()}>
                             <Link
                               title={item.name}
-                              id={item.id.toString()}
                               to={`${PATH.chapters}/${id}/${item.id}`}
                               className={`py-2 block truncate px-4 duration-100 hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.1)] ${
                                 item.id === Number(idChapter) ? 'text-primary font-bold' : ''
@@ -215,15 +214,25 @@ const ComicsChapter = () => {
             {!isFetching &&
               dataChapter &&
               dataChapter.images.length > 0 &&
-              dataChapter.images.map((item) => (
-                <img
-                  loading='lazy'
-                  src={item.src}
-                  key={item.page}
-                  alt={`Page ${item.page.toString()}`}
-                  className='min-h-[200px] h-auto w-full bg-[rgba(255,255,255,0.8)] object-center'
-                />
-              ))}
+              dataChapter.images.map((item, index) =>
+                index >= 3 ? (
+                  <img
+                    loading='lazy'
+                    src={item.src}
+                    key={item.page}
+                    alt={`Page ${item.page.toString()}`}
+                    className='min-h-[200px] h-auto w-full bg-[rgba(255,255,255,0.8)] object-center'
+                  />
+                ) : (
+                  <img
+                    loading='eager'
+                    src={item.src}
+                    key={item.page}
+                    alt={`Page ${item.page.toString()}`}
+                    className='min-h-[200px] h-auto w-full bg-[rgba(255,255,255,0.8)] object-center'
+                  />
+                )
+              )}
             {!isFetching && dataChapter && dataChapter.images.length <= 0 && (
               <h2 className='text-3xl text-white flex-1 flex items-center justify-center'>
                 Không tìm thấy chương

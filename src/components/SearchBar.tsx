@@ -48,7 +48,13 @@ const SearchBar = () => {
           <div className='h-full flex items-center justify-center'>
             <form
               className='z-10 relative flex items-center dark:text-white w-[320px] sm:w-auto'
-              onSubmit={(e) => handleSearch(e)}
+              onSubmit={(e) => {
+                handleSearch(e)
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+                })
+              }}
             >
               <div className='flex-shrink-0 bg-white py-4 pl-[18px] pr-[14px] dark:bg-gray-900 hidden sm:block'>
                 <p
@@ -67,7 +73,10 @@ const SearchBar = () => {
                 placeholder='Tìm kiếm...'
                 className='h-[36px] sm:h-[50px] leading-[50px] pr-4 pl-4 sm:pl-0 w-full sm:w-[320px] lg:w-[420px] outline-none dark:bg-gray-900'
               />
-              <button title='Tìm Kiếm' className='text-white capitalize flex items-center justify-center bg-gray-700 sm:bg-gradient h-[36px] sm:h-[50px] w-[50px] sm:w-[100px] lg:w-[140px]'>
+              <button
+                title='Tìm Kiếm'
+                className='text-white capitalize flex items-center justify-center bg-gray-700 sm:bg-gradient h-[36px] sm:h-[50px] w-[50px] sm:w-[100px] lg:w-[140px]'
+              >
                 <span className='sm:inline-block hidden'>Tìm Kiếm</span>
                 <p
                   className='bg-cover bg-no-repeat w-[18px] h-[18px] inline-block sm:hidden'
