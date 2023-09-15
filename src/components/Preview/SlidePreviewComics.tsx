@@ -6,7 +6,7 @@ import 'swiper/css'
 import { EffectCoverflow } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { CardItem } from '..'
-import imgError from '../../../public/img-error.webp'
+import imgError from '/img-error.webp'
 import { useMediaQuery } from 'react-responsive'
 import { ListPreviewComics } from '.'
 interface Props {

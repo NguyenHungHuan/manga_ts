@@ -2,7 +2,7 @@ import { comics } from '@/types/data'
 import PATH from '@/utils/path'
 import { Link, createSearchParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import imgError from '../../../public/img-error.webp'
+import imgError from '/img-error.webp'
 import { useMediaQuery } from 'react-responsive'
 import { ListPreviewComics } from '.'
 interface Props {

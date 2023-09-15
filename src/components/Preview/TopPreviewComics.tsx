@@ -4,8 +4,8 @@ import PATH from '@/utils/path'
 import { useQuery } from 'react-query'
 import { Link, createSearchParams } from 'react-router-dom'
 import { useMemo } from 'react'
-import imgError from '../../../public/img-error.webp'
-import iconTop from '../../../public/icon-top.webp'
+import imgError from '/img-error.webp'
+import iconTop from '/icon-top.webp'
 import { useMediaQuery } from 'react-responsive'
 
 const TopPreviewComics = () => {

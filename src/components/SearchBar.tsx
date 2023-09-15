@@ -1,11 +1,11 @@
-import iconSearch from '../../public/icon_search.webp'
+import iconSearch from '/icon_search.webp'
 import { SuggestComics } from '.'
 import { useState } from 'react'
 import { useQuery } from 'react-query'
 import comicApis from '@/apis/comicApis'
 import PATH from '@/utils/path'
 import { createSearchParams, useNavigate } from 'react-router-dom'
-import imgLoading from '../../public/loading.gif'
+import imgLoading from '/loading.gif'
 
 const SearchBar = () => {
   const [valueForm, setValueForm] = useState<string>('')
@@ -42,7 +42,7 @@ const SearchBar = () => {
   return (
     <div className='w-full'>
       <div
-        className={`bg-no-repeat bg-cover h-[100px] sm:bg-[url('/public/search-bg.webp')] sm:dark:relative sm:dark:after:content-[""] sm:dark:after:absolute sm:dark:after:inset-0 sm:dark:after:bg-gray-900/80`}
+        className={`bg-no-repeat bg-cover h-[100px] sm:bg-[url('/search-bg.webp')] sm:dark:relative sm:dark:after:content-[""] sm:dark:after:absolute sm:dark:after:inset-0 sm:dark:after:bg-gray-900/80`}
       >
         <div className='container h-full'>
           <div className='h-full flex items-center justify-center'>

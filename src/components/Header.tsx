@@ -1,7 +1,7 @@
 import { Link, NavLink, createSearchParams, useLocation, useMatch } from 'react-router-dom'
 import PATH from '@/utils/path'
 import { useEffect, useMemo, useState } from 'react'
-import iconSearch from '../../public/icon_search.webp'
+import iconSearch from '/icon_search.webp'
 import classNames from 'classnames'
 import { SearchBar } from '.'
 import { useQueryConfig } from '@/hooks'
