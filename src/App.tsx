@@ -16,14 +16,14 @@ const History = lazy(() => import('./pages/History'))
 function App() {
   useEffect(() => {
     initLocalDb()
+    document.body.classList.add('dark:bg-gray-900')
     if (!localStorage.theme) {
       localStorage.setItem('theme', 'dark')
-      document.body.classList.add('dark:bg-gray-900')
+      document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.add(localStorage.theme as string)
-      document.body.classList.add('dark:bg-gray-900')
     }
-  }, [localStorage.theme])
+  }, [])
 
   const router = createBrowserRouter([
     {
