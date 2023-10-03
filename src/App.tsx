@@ -17,7 +17,8 @@ function App() {
   useEffect(() => {
     initLocalDb()
     if (!localStorage.theme) {
-      localStorage.setItem('theme', 'light')
+      localStorage.setItem('theme', 'dark')
+      document.body.classList.add('dark:bg-gray-900')
     } else {
       document.documentElement.classList.add(localStorage.theme as string)
       document.body.classList.add('dark:bg-gray-900')
@@ -172,7 +173,7 @@ function App() {
         <Suspense fallback={<LoadingPage />}>
           <Download />
         </Suspense>
-      ),
+      )
     },
     {
       element: <MainLayout />,
