@@ -23,7 +23,7 @@ function App() {
       document.documentElement.classList.add(localStorage.theme as string)
       document.body.classList.add('dark:bg-gray-900')
     }
-  }, [])
+  }, [localStorage.theme])
 
   const router = createBrowserRouter([
     {
