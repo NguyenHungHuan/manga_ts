@@ -211,8 +211,7 @@ const ComicsChapter = () => {
       <div className='bg-[#111]' onMouseDown={() => setOpenList(false)}>
         <div className='container max-w-4xl'>
           <div className='flex flex-col min-h-screen h-full'>
-            {!isFetching &&
-              dataChapter &&
+            {dataChapter &&
               dataChapter.images.length > 0 &&
               dataChapter.images.map((item, index) =>
                 index >= 3 ? (
@@ -221,6 +220,7 @@ const ComicsChapter = () => {
                     src={item.src}
                     key={item.page}
                     alt={`Page ${item.page.toString()}`}
+                    referrerPolicy='origin'
                     className='min-h-[200px] h-auto w-full bg-[rgba(255,255,255,0.8)] object-center'
                   />
                 ) : (
@@ -229,6 +229,7 @@ const ComicsChapter = () => {
                     src={item.src}
                     key={item.page}
                     alt={`Page ${item.page.toString()}`}
+                    referrerPolicy='origin'
                     className='min-h-[200px] h-auto w-full bg-[rgba(255,255,255,0.8)] object-center'
                   />
                 )
@@ -238,7 +239,7 @@ const ComicsChapter = () => {
                 Không tìm thấy chương
               </h2>
             )}
-            {isFetching &&
+            {!dataChapter &&
               Array(10)
                 .fill(0)
                 .map((_, i) => <span key={i} className='aspect-[2/3] bg-zinc-700 animate-pulse' />)}
