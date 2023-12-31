@@ -10,7 +10,7 @@ The website uses the popular responsive design, which can give you the same expe
 
 ## Official Link
 
-https://vtruyen.onrender.com/
+https://vtruyen.vercel.app/
 
 Api: https://github.com/pth-1641/NComics
 
